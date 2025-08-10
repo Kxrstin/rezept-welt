@@ -12,6 +12,6 @@ public class MainPageController {
 
     @GetMapping("/add/rezept")
     public String addRezept() {
-        return "main_page";
+        return "add_rezept";
     }
 }

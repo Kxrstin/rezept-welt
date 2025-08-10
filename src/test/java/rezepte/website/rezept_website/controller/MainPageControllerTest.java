@@ -24,7 +24,6 @@ public class MainPageControllerTest {
                 .andExpect(view().name("main_page"));
     }
 
-    // TODO: Fixen
     @Test
     @DisplayName("Die AddRezept Seite ist unter /add/rezept erreichbar.")
     void test_add_rezept() throws Exception{

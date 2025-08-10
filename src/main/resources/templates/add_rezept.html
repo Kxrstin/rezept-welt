@@ -1,0 +1,35 @@
+<html lang="de">
+    <head>
+        <title>Rezept hinzufügen | Rezept-Welt</title>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/png" th:href="@{../img/recipebook_icon.png}" href="../static/img/recipebook_icon.png">
+        <link rel="stylesheet" th:href="@{../css/main_page.css}" href="../static/css/main_page.css">
+    </head>
+    <body>
+        <h1>Rezept hinzufügen</h1>
+        <div>
+            <form method="post" action="/" enctype="multipart/form-data">
+                <label for="idkategorie">Kategorie</label>
+                <input type="text" id="idkategorie" name="kategorie"><br>
+
+                <label for="idunterkategorie">Unterkategorie</label>
+                <input type="text" id="idunterkategorie" name="unterkategorie"><br>
+
+                <label for="idname">Name</label>
+                <input type="text" id="idname" name="name"><br>
+
+                <label for="idzutaten">Zutaten</label>
+                <input type="text" id="idzutaten" name="zutaten"><br>
+
+                <label for="idzubereitung">Zubereitung</label>
+                <input type="text" id="idzubereitung" name="zubereitung"><br>
+
+                <label for="idbild">Bild hochladen</label>
+                <input type="file" id="idbild" name="bild" accept="image/*"><br>
+
+                <button type="submit">Hinzufügen</button>
+            </form>
+
+        </div>
+    </body>
+</html>
