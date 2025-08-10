@@ -1,0 +1,124 @@
+/* Header */
+h1 {
+    font-size: 38px;
+    font-style: italic;
+    color: #272626;
+    text-align: center;
+    margin-top: 15px;
+}
+
+h2 {
+    font-size: 30px;
+    color: #494848;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+/* Images */
+.rezeptbild {
+    width: 150px;
+    height: auto;
+    float: right;
+}
+
+.speisenbild {
+    width: 100px;
+    height: auto;
+    float: right;
+}
+
+.speisenbild_left {
+    width: 100px;
+    height: auto;
+    float: left;
+}
+
+/* Body */
+body {
+    font-family: sans-serif;
+    background-color: lavender;
+}
+
+.beschreibung {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.add_rezept {
+    display: block;
+    margin: 40px auto;
+    align-items: center;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add_rezept:hover {
+    background-color: #483d8b;
+    transform: scale(1.05);
+}
+
+.add_rezept::before {
+    content: "+";
+    font-weight: bold;
+    font-size: 26px;
+    color: #1e2429;
+    margin-right: 25px;
+}
+
+.get_speise {
+    display: block;
+    align-items: center;
+    gap: 10px;
+    width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.get_speise {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 250px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.speisen_link {
+    font-size: 20px;
+    color: #3f364a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.speisen_link:hover {
+    color: #6a5acd;
+    border-bottom-color: #6a5acd;
+}
+
