@@ -10,16 +10,4 @@ import java.util.List;
 
 @Service
 public class RezeptService {
-
-    public void addRezept(List<RezeptForm> rezepte,
-                          Kategorie kategorie,
-                          String name,
-                          String zutaten,
-                          String zubereitung,
-                          MultipartFile bild) throws IOException {
-        RezeptForm rezept = new RezeptForm(kategorie, name, zutaten, zubereitung);
-        if (!bild.isEmpty()) rezept.setBild(bild.getBytes());
-
-        rezepte.add(rezept);
-    }
 }

@@ -58,3 +58,16 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #5555f6;
 }
+
+.danger {
+    color: #9c4d4d;
+    font-size: 15px;
+}
+
+.link_in_middle {
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+    padding-top: 20px;
+    text-align: center;
+}

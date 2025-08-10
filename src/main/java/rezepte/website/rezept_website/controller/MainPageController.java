@@ -1,7 +1,9 @@
 package rezepte.website.rezept_website.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,19 +35,23 @@ public class MainPageController {
 
     @GetMapping("/add/rezept")
     public String addRezeptAnzeigen(Model model) {
+        model.addAttribute("rezeptForm", new RezeptForm());
         model.addAttribute("kategorien", Kategorie.values());
         return "add_rezept";
     }
 
     @PostMapping("/add/rezept")
-    public String addRezept(@RequestParam Kategorie kategorie,
-                            @RequestParam String name,
-                            @RequestParam String zutaten,
-                            @RequestParam String zubereitung,
-                            @RequestParam MultipartFile bild,
-                            RedirectAttributes redirectAttributes) throws IOException {
+    public String addRezept(@Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes,
+                            Model model) {
 
-        service.addRezept(rezepte, kategorie, name, zutaten, zubereitung, bild);
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("rezeptForm", model.getAttribute("rezeptForm"));
+            model.addAttribute("kategorien", Kategorie.values());
+            return "add_rezept";
+        }
+        rezepte.add(rezept);
         redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/";
     }

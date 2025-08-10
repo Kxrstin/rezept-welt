@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import rezepte.website.rezept_website.service.RezeptService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -43,5 +44,13 @@ public class MainPageControllerTest {
         mvc.perform(get("/?success=true"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("main_page"));
+    }
+
+    @Test
+    @DisplayName("Beim Verstoß gegen die Validierung (NotBlank, etc.) soll man zur gleichen Seite zurückgeleitet werden")
+    void test_validation() throws Exception{
+        mvc.perform(post("/add/rezept"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("add_rezept"));
     }
 }

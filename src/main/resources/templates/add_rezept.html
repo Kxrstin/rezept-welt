@@ -8,7 +8,7 @@
     <body>
         <h1>Rezept hinzufügen</h1>
         <div>
-            <form method="post" action="/add/rezept" enctype="multipart/form-data">
+            <form th:object="${rezeptForm}" method="post" action="/add/rezept" enctype="multipart/form-data">
                 <label for="idkategorie">Kategorie</label>
                 <select name="kategorie" id="idkategorie" required>
                     <option value="" disabled selected>Bitte wählen</option>
@@ -16,22 +16,27 @@
                             th:value="${kat}"
                             th:text="${kat}"></option>
                 </select>
+                <small class="danger" th:if="${#fields.hasErrors('kategorie')}" th:errors="*{kategorie}">Name Error</small>
 
                 <label for="idname">Name</label>
-                <input type="text" id="idname" name="name"><br>
+                <input th:value="*{name}" type="text" id="idname"><br>
+                <small class="danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
 
                 <label for="idzutaten">Zutaten</label>
-                <input type="text" id="idzutaten" name="zutaten"><br>
+                <input th:value="*{zutaten}" type="text" id="idzutaten"><br>
+                <small class="danger" th:if="${#fields.hasErrors('zutaten')}" th:errors="*{zutaten}">Name Error</small>
 
                 <label for="idzubereitung">Zubereitung</label>
-                <input type="text" id="idzubereitung" name="zubereitung"><br>
+                <input th:value="*{zubereitung}" type="text" id="idzubereitung"><br>
+                <small class="danger" th:if="${#fields.hasErrors('zubereitung')}" th:errors="*{zubereitung}">Name Error</small>
 
                 <label for="idbild">Bild hochladen</label>
-                <input type="file" id="idbild" name="bild" accept="image/*"><br>
+                <input th:value="*{bild}" type="file" id="idbild" accept="image/*"><br>
+                <small class="danger" th:if="${#fields.hasErrors('bild')}" th:errors="*{bild}">Name Error</small>
 
                 <button type="submit">Hinzufügen</button>
             </form>
-
+            <a class="link_in_middle" href="/" th:href="@{/}">Zurück</a>
         </div>
     </body>
 </html>
