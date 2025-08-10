@@ -3,10 +3,6 @@ package rezepte.website.rezept_website.controller.formulare;
 public class RezeptForm {
     private Kategorie kategorie;
 
-    private UnterkategorieVor vor;
-    private UnterkategorieHaupt haupt;
-    private UnterkategorieNach nach;
-
     private String name;
     private String zutaten;
     private String zubereitung;
@@ -16,19 +12,23 @@ public class RezeptForm {
     public RezeptForm() {}
 
     public RezeptForm(Kategorie kategorie,
-                  UnterkategorieVor vor,
-                  UnterkategorieHaupt haupt,
-                  UnterkategorieNach nach,
+                      String name,
+                      String zutaten,
+                      String zubereitung) {
+
+        this.kategorie = kategorie;
+        this.name = name;
+        this.zutaten = zutaten;
+        this.zubereitung = zubereitung;
+    }
+
+    public RezeptForm(Kategorie kategorie,
                   String name,
                   String zutaten,
                   String zubereitung,
                   byte[] bild) {
 
         this.kategorie = kategorie;
-        if(kategorie == Kategorie.VORSPEISE) this.vor = vor;
-        if(kategorie == Kategorie.VORSPEISE) this.haupt = haupt;
-        if(kategorie == Kategorie.VORSPEISE) this.nach = nach;
-
         this.name = name;
         this.zutaten = zutaten;
         this.zubereitung = zubereitung;
@@ -59,36 +59,12 @@ public class RezeptForm {
         return zutaten;
     }
 
-    public UnterkategorieHaupt getHaupt() {
-        return haupt;
-    }
-
-    public UnterkategorieNach getNach() {
-        return nach;
-    }
-
-    public UnterkategorieVor getVor() {
-        return vor;
-    }
-
     public void setBild(byte[] bild) {
         this.bild = bild;
     }
 
-    public void setHaupt(UnterkategorieHaupt haupt) {
-        this.haupt = haupt;
-    }
-
     public void setKategorie(Kategorie kategorie) {
         this.kategorie = kategorie;
-    }
-
-    public void setNach(UnterkategorieNach nach) {
-        this.nach = nach;
-    }
-
-    public void setVor(UnterkategorieVor vor) {
-        this.vor = vor;
     }
 
     public void setZubereitung(String zubereitung) {
@@ -97,5 +73,12 @@ public class RezeptForm {
 
     public void setZutaten(String zutaten) {
         this.zutaten = zutaten;
+    }
+
+    public String getBildAlsBase64() {
+        if (bild != null && bild.length > 0) {
+            return java.util.Base64.getEncoder().encodeToString(bild);
+        }
+        return null;
     }
 }

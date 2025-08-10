@@ -3,17 +3,19 @@
         <title>Rezept hinzufügen | Rezept-Welt</title>
         <meta charset="UTF-8">
         <link rel="icon" type="image/png" th:href="@{../img/recipebook_icon.png}" href="../static/img/recipebook_icon.png">
-        <link rel="stylesheet" th:href="@{../css/main_page.css}" href="../static/css/main_page.css">
+        <link rel="stylesheet" th:href="@{../css/add_rezept_page.css}" href="../static/css/add_rezept_page.css">
     </head>
     <body>
         <h1>Rezept hinzufügen</h1>
         <div>
-            <form method="post" action="/" enctype="multipart/form-data">
+            <form method="post" action="/add/rezept" enctype="multipart/form-data">
                 <label for="idkategorie">Kategorie</label>
-                <input type="text" id="idkategorie" name="kategorie"><br>
-
-                <label for="idunterkategorie">Unterkategorie</label>
-                <input type="text" id="idunterkategorie" name="unterkategorie"><br>
+                <select name="kategorie" id="idkategorie" required>
+                    <option value="" disabled selected>Bitte wählen</option>
+                    <option th:each="kat : ${kategorien}"
+                            th:value="${kat}"
+                            th:text="${kat}"></option>
+                </select>
 
                 <label for="idname">Name</label>
                 <input type="text" id="idname" name="name"><br>
