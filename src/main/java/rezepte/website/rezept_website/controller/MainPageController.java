@@ -3,10 +3,11 @@ package rezepte.website.rezept_website.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.model.IModel;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
@@ -18,8 +19,12 @@ import java.util.List;
 @Controller
 public class MainPageController {
 
-    private List<RezeptForm> rezepte = new LinkedList<>();
-    private RezeptService service = new RezeptService();
+    final private List<RezeptForm> rezepte = new LinkedList<>();
+    final private RezeptService service;
+
+    public MainPageController(RezeptService s) {
+        service = s;
+    }
 
     @GetMapping("/")
     public String mainPage() {
@@ -37,9 +42,11 @@ public class MainPageController {
                             @RequestParam String name,
                             @RequestParam String zutaten,
                             @RequestParam String zubereitung,
-                            @RequestParam MultipartFile bild) throws IOException {
+                            @RequestParam MultipartFile bild,
+                            RedirectAttributes redirectAttributes) throws IOException {
 
         service.addRezept(rezepte, kategorie, name, zutaten, zubereitung, bild);
+        redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/";
     }
 }

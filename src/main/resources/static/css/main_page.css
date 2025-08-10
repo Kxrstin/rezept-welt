@@ -122,3 +122,15 @@ body {
     border-bottom-color: #6a5acd;
 }
 
+.success {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 17px;
+    line-height: 1.6;
+    background-color: #b1d3a2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
