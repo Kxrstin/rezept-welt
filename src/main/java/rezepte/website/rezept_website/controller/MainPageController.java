@@ -9,4 +9,9 @@ public class MainPageController {
     public String mainPage() {
         return "main_page";
     }
+
+    @GetMapping("/add/rezept")
+    public String addRezept() {
+        return "main_page";
+    }
 }
