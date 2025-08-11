@@ -22,7 +22,7 @@
                 <input th:value="*{name}" type="text" id="idname"><br>
                 <small class="danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
 
-                <label for="idzutaten">Zutaten</label>
+                <label for="idzutaten">Zutaten (kommagetrennt, z.B.: "Zucker, Eier, Mehl, ..."</label>
                 <input th:value="*{zutaten}" type="text" id="idzutaten"><br>
                 <small class="danger" th:if="${#fields.hasErrors('zutaten')}" th:errors="*{zutaten}">Name Error</small>
 
