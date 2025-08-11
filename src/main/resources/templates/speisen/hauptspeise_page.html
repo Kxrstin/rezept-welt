@@ -3,30 +3,29 @@
     <title> Hauptspeisen | Rezept-Welt</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" th:href="@{img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
-    <link rel="stylesheet" th:href="@{css/main_page.css}" href="../../static/css/main_page.css">
+    <link rel="stylesheet" th:href="@{css/hauptspeise.css}" href="../../static/css/hauptspeise.css">
 </head>
 
 <body>
 <h1>Hauptspeisen</h1>
 <div th:remove="all-but-first">
-    <div class="beschreibung">
-        <p th:each="r : ${hauptspeisen}"
-           th:text="${r.name}">
+    <div class="speise" th:each="r : ${hauptspeisen}">
+        <a class="link" th:text="${r.name}" th:href="@{#}" href="#">
             Rezept 1
-            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
-        </p>
+            <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </a>
     </div>
-    <div class="beschreibung">
-        <p>
+    <div class="speise">
+        <a class="link" href="#">
             Burger
-            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
-        </p>
+            <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </a>
     </div>
-    <div class="beschreibung">
-        <p>
+    <div class="speise">
+        <a class="link" href="#">
             Pasta
-            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
-        </p>
+            <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </a>
     </div>
 </div>
 </body>

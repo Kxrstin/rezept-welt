@@ -1,0 +1,55 @@
+/* Header */
+h1 {
+    font-size: 38px;
+    font-style: italic;
+    color: #272626;
+    text-align: center;
+    margin-top: 15px;
+}
+
+h2 {
+    font-size: 30px;
+    color: #494848;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Images */
+.bild {
+    width: 150px;
+    height: auto;
+    float: right;
+}
+
+/* Body */
+body {
+    font-family: sans-serif;
+    background-color: #f6d9de;
+}
+
+.speise {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 250px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.link {
+    font-size: 20px;
+    color: #c58c92;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.link:hover {
+    color: #594143;
+
+}
