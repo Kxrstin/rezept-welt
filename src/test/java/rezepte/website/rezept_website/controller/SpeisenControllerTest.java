@@ -4,10 +4,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import rezepte.website.rezept_website.controller.formulare.Kategorie;
+import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
 
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -20,28 +27,56 @@ public class SpeisenControllerTest {
     @MockitoBean
     RezeptService service;
 
+    final private MockMultipartFile file = new MockMultipartFile("bild", "", "application/octet-stream", new byte[0]);
+    final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "", "Salz, ...", "Zunächst ...", file);
+
+
     @Test
     @DisplayName("Beim aufrufen des 'Vorspeise'-Links wird die Vorspeisenseite gezeigt")
     void test_vorspeise() throws Exception {
-        mvc.perform(get("/vorspeise"))
+        demoRezept.setKategorie(Kategorie.VORSPEISE);
+        demoRezept.setName("Gurkensalat");
+        when(service.getVorspeisen()).thenReturn(List.of(demoRezept));
+
+        String result = mvc.perform(get("/vorspeise"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("speisen/vorspeise_page"));
+                .andExpect(view().name("speisen/vorspeise_page"))
+                .andReturn()
+                .getResponse().getContentAsString();
+
+        assertThat(result).contains("Gurkensalat");
     }
 
 
     @Test
     @DisplayName("Beim aufrufen des Hauptspeise'-Links wird die Hauptspeisenseite gezeigt")
     void test_hauptspeise() throws Exception {
-        mvc.perform(get("/hauptspeise"))
+        demoRezept.setKategorie(Kategorie.HAUPTSPEISE);
+        demoRezept.setName("Spagetti Bolognese");
+        when(service.getHauptspeisen()).thenReturn(List.of(demoRezept));
+
+        String result = mvc.perform(get("/hauptspeise"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("speisen/hauptspeise_page"));
+                .andExpect(view().name("speisen/hauptspeise_page"))
+                .andReturn()
+                .getResponse().getContentAsString();
+
+        assertThat(result).contains("Spagetti Bolognese");
     }
 
     @Test
     @DisplayName("Beim aufrufen des 'Nachspeise'-Links wird die Nachspeisenseite gezeigt")
     void test_nachspeise() throws Exception {
-        mvc.perform(get("/nachspeise"))
+        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setName("Eiscreme");
+        when(service.getNachspeisen()).thenReturn(List.of(demoRezept));
+
+        String result = mvc.perform(get("/nachspeise"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("speisen/nachspeise_page"));
+                .andExpect(view().name("speisen/nachspeise_page"))
+                .andReturn()
+                .getResponse().getContentAsString();
+
+        assertThat(result).contains("Eiscreme");
     }
 }

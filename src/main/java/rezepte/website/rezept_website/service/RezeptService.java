@@ -19,19 +19,19 @@ public class RezeptService {
     public List<RezeptForm> getVorspeisen() {
         return rezepte.stream()
                 .filter(a -> a.getKategorie() == Kategorie.VORSPEISE)
-                .toList();
+                .sorted().toList();
     }
 
     public List<RezeptForm> getHauptspeisen() {
         return rezepte.stream()
                 .filter(a -> a.getKategorie() == Kategorie.HAUPTSPEISE)
-                .toList();
+                .sorted().toList();
     }
 
     public List<RezeptForm> getNachspeisen() {
         return rezepte.stream()
                 .filter(a -> a.getKategorie() == Kategorie.NACHSPEISE)
-                .toList();
+                .sorted().toList();
     }
 
     public boolean removeRezept(RezeptForm rezept) {

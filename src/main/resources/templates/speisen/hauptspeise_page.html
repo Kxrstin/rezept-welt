@@ -8,11 +8,26 @@
 
 <body>
 <h1>Hauptspeisen</h1>
-<div class="beschreibung">
-    <p>
-        Hier entsteht in Kürze eine Liste der Hauptspeisen
-        <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
-    </p>
+<div th:remove="all-but-first">
+    <div class="beschreibung">
+        <p th:each="r : ${hauptspeisen}"
+           th:text="${r.name}">
+            Rezept 1
+            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </p>
+    </div>
+    <div class="beschreibung">
+        <p>
+            Burger
+            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </p>
+    </div>
+    <div class="beschreibung">
+        <p>
+            Pasta
+            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </p>
+    </div>
 </div>
 </body>
 </html>

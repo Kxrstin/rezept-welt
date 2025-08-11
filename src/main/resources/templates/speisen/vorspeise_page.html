@@ -8,11 +8,26 @@
 
 <body>
 <h1>Vorspeisen</h1>
-<div class="beschreibung">
-    <p>
-        Hier entsteht in Kürze eine Liste der Vorspeisen
+<div th:remove="all-but-first">
+    <div class="beschreibung">
+    <p th:each="r : ${vorspeisen}"
+        th:text="${r.name}">
+        Rezept 1
         <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
     </p>
+    </div>
+    <div class="beschreibung">
+        <p>
+            Caesar Salat
+            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </p>
+    </div>
+    <div class="beschreibung">
+        <p>
+            Gurken Salat
+            <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+        </p>
+    </div>
 </div>
 </body>
 </html>
