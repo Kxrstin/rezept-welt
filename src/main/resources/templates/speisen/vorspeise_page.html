@@ -3,11 +3,12 @@
     <title> Vorspeisen | Rezept-Welt</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" th:href="@{img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
-    <link rel="stylesheet" th:href="@{css/vorspeise.css}" href="../../static/css/vorspeise.css">
+    <link rel="stylesheet" th:href="@{/css/vorspeise.css}" href="../../static/css/vorspeise.css">
 </head>
 
 <body>
 <h1>Vorspeisen</h1>
+<div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
 <div th:remove="all-but-first">
     <div class="speise" th:each="r : ${vorspeisen}">
         <a class="link" th:text="${r.name}" th:href="@{#}" href="#">

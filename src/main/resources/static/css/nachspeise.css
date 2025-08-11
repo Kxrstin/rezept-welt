@@ -51,5 +51,28 @@ body {
 
 .link:hover {
     color: #11436c;
+    font-size: 21px;
+}
 
+
+.link_in_middle {
+    font-size: 20px;
+    color: #3c83ba;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    display: inline-block;;
+}
+
+.link_in_middle:hover {
+    color: #11436c;
+    font-size: 21px;
+}
+
+.speise:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

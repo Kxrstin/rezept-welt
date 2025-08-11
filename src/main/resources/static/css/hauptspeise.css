@@ -24,7 +24,7 @@ h2 {
 /* Body */
 body {
     font-family: sans-serif;
-    background-color: #f6d9de;
+    background-color: #f8e8f7;
 }
 
 .speise {
@@ -41,7 +41,7 @@ body {
 
 .link {
     font-size: 20px;
-    color: #c58c92;
+    color: #936192;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -50,6 +50,28 @@ body {
 }
 
 .link:hover {
-    color: #594143;
+    color: #5e355b;
+    font-size: 21px;
+}
 
+.link_in_middle {
+    font-size: 20px;
+    color: #936192;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    display: inline-block;;
+}
+
+.link_in_middle:hover {
+    color: #431f40;
+    font-size: 21px;
+}
+
+.speise:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

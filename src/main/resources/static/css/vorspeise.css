@@ -24,7 +24,7 @@ h2 {
 /* Body */
 body {
     font-family: sans-serif;
-    background-color: #d6ece1;
+    background-color: #d1e6de;
 }
 
 .speise {
@@ -51,5 +51,27 @@ body {
 
 .link:hover {
     color: #323733;
+    font-size: 21px;
+}
 
+.link_in_middle {
+    font-size: 20px;
+    color: #4b815b;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    display: inline-block;;
+}
+
+.link_in_middle:hover {
+    color: #323733;
+    font-size: 21px;
+}
+
+.speise:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

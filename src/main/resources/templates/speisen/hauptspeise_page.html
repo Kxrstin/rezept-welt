@@ -3,11 +3,12 @@
     <title> Hauptspeisen | Rezept-Welt</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" th:href="@{img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
-    <link rel="stylesheet" th:href="@{css/hauptspeise.css}" href="../../static/css/hauptspeise.css">
+    <link rel="stylesheet" th:href="@{/css/hauptspeise.css}" href="../../static/css/hauptspeise.css">
 </head>
 
 <body>
 <h1>Hauptspeisen</h1>
+<div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
 <div th:remove="all-but-first">
     <div class="speise" th:each="r : ${hauptspeisen}">
         <a class="link" th:text="${r.name}" th:href="@{#}" href="#">
