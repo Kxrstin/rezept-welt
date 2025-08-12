@@ -7,10 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
+
+import java.io.IOException;
 
 @Controller
 public class MainPageController {
@@ -36,13 +40,15 @@ public class MainPageController {
     public String addRezept(@Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,
-                            Model model) {
+                            @RequestParam("bild") MultipartFile bild,
+                            Model model) throws IOException {
 
         if(bindingResult.hasErrors()) {
-            model.addAttribute("rezeptForm", model.getAttribute("rezeptForm"));
+            model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
             return "add_rezept";
         }
+        rezept.setBild(bild);
         service.addRezept(rezept);
         redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/";

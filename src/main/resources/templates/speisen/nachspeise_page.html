@@ -11,19 +11,20 @@
 <div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
 
 <div th:remove="all-but-first">
-    <div class="speise" th:each="r : ${nachspeisen}">
+    <div class="rezept-karte" th:each="r : ${nachspeisen}">
+        <img class="bild" th:if="${r.base64Bild != null}" th:src="${r.base64Bild}" alt="Bild der Nachspeise">
+        <img th:unless="${r.base64Bild != null}" th:src="@{/img/placeholder.png}" alt="Kein Bild">
         <a class="link" th:text="${r.name}" th:href="@{#}" href="#">
-            Rezept 1
-            <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
-        </a>
+        Rezept 1
+    </a>
     </div>
-    <div class="speise">
+    <div class="rezept-karte">
         <a class="link" href="#">
             Eiscreme
             <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
         </a>
     </div>
-    <div class="speise">
+    <div class="rezept-karte">
         <a class="link" href="#">
             Schwarzwälderkirschtorte
             <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">

@@ -8,7 +8,7 @@
     <body>
         <h1>Rezept hinzufügen</h1>
         <div>
-            <form th:object="${rezeptForm}" method="post" action="/add/rezept" enctype="multipart/form-data">
+            <form th:object="${rezeptForm}" method="post" th:action="@{/add/rezept}" enctype="multipart/form-data">
                 <label for="idkategorie">Kategorie</label>
                 <select th:field="*{kategorie}" id="idkategorie" required>
                     <option value="" disabled selected>Bitte wählen</option>
