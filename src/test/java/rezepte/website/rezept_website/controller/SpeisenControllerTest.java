@@ -79,4 +79,23 @@ public class SpeisenControllerTest {
 
         assertThat(result).contains("Eiscreme");
     }
+
+    @Test
+    @DisplayName("Beim aufrufen des 'Zubereitung'-Links wird die Zubereitung gezeigt")
+    void test_zubereitung() throws Exception {
+        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setName("Eiscreme");
+        demoRezept.setId(0);
+        when(service.getZubereitung(0)).thenReturn(demoRezept);
+
+        String result = mvc.perform(get("/get/zubereitung/0"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("speisen/zubereitung"))
+                .andReturn()
+                .getResponse().getContentAsString();
+
+        assertThat(result).contains("Zunächst ...");
+        assertThat(result).contains("Eiscreme");
+        assertThat(result).contains("Salz");
+    }
 }

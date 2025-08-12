@@ -32,14 +32,18 @@ public class RezeptForm {
                   String name,
                   String zutaten,
                   String zubereitung,
-                  MultipartFile bild) throws IOException {
+                  MultipartFile bild) {
 
         this.kategorie = kategorie;
         this.name = name;
         this.zutaten = zutaten;
         this.zubereitung = zubereitung;
         this.bild = bild;
-        base64Bild = base64Bild(bild);
+        try {
+            base64Bild = base64Bild(bild);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getName() {

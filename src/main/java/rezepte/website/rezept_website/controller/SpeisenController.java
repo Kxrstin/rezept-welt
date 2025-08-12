@@ -37,6 +37,6 @@ public class SpeisenController {
     public String getZubereitung(Model model, @PathVariable int id) {
         if(service.getZubereitung(id) == null) return "redirect:/";
         model.addAttribute("rezeptForm", service.getZubereitung(id));
-        return "/speisen/zubereitung";
+        return "speisen/zubereitung";
     }
 }

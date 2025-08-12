@@ -12,6 +12,8 @@ import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
 
+import java.io.IOException;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
