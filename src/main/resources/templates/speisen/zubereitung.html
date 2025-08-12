@@ -1,0 +1,25 @@
+<html lang="de">
+<head>
+    <title> Zubereitung | Rezept-Welt</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" th:href="@{img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
+    <link rel="stylesheet" th:href="@{/css/zubereitung.css}" href="../../static/css/zubereitung.css">
+</head>
+
+<body>
+    <h1 th:text="${rezeptForm.name}"></h1>
+    <div class="beschreibung"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
+
+    <div class="beschreibung">
+        <p class="rezept_text" th:text="${rezeptForm.getZutatenListe()}">Salz<br>Zucker</p>
+    </div>
+    <div class="beschreibung">
+        <img class="speisenbild" th:if="${rezeptForm.base64Bild != null}" th:src="${rezeptForm.base64Bild}" alt="Bild der Hauptspeise">
+        <!--TODO-->
+        <img th:unless="${rezeptForm.base64Bild != null}" th:src="@{/img/placeholder.png}" alt="Kein Bild">
+    </div>
+    <div class="beschreibung">
+        <p th:text="${rezeptForm.zubereitung}"> </p>
+    </div>
+</body>
+</html>

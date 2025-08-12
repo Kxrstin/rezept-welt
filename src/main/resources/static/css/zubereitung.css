@@ -1,0 +1,37 @@
+h1 {
+    font-size: 38px;
+    font-style: italic;
+    color: #272626;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.speisenbild {
+    width: 100px;
+    height: auto;
+    float: right;
+}
+
+/* Body */
+body {
+    font-family: sans-serif;
+    background-color: lavender;
+}
+
+.beschreibung {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.rezept_text {
+    white-space: pre-line;
+}

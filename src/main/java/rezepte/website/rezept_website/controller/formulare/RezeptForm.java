@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.Base64;
 
 public class RezeptForm {
+
+    private int id;
+
     @NotNull(message="Bitte wählen Sie eine Kategorie")
     private Kategorie kategorie;
 
@@ -95,5 +98,22 @@ public class RezeptForm {
 
     public void setZutaten(String zutaten) {
         this.zutaten = zutaten;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getZutatenListe() {
+        StringBuilder result = new StringBuilder();
+        String[] zutaten = this.zutaten.split(", ");
+        for (String s: zutaten) {
+            result.append(s).append('\n');
+        }
+        return result.toString();
     }
 }
