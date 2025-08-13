@@ -14,10 +14,11 @@ import rezepte.website.rezept_website.service.RezeptService;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 public class SpeisenControllerTest {
@@ -81,21 +82,45 @@ public class SpeisenControllerTest {
     }
 
     @Test
-    @DisplayName("Beim aufrufen des 'Zubereitung'-Links wird die Zubereitung gezeigt")
-    void test_zubereitung() throws Exception {
+    @DisplayName("Beim aufrufen des 'Remove'-Links wird die Remove Page gezeigt")
+    void test_remove_page() throws Exception {
         demoRezept.setKategorie(Kategorie.NACHSPEISE);
         demoRezept.setName("Eiscreme");
         demoRezept.setId(0);
         when(service.getZubereitung(0)).thenReturn(demoRezept);
 
-        String result = mvc.perform(get("/get/zubereitung/0"))
+        mvc.perform(get("/get/zubereitung/0/remove"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("speisen/zubereitung"))
-                .andReturn()
-                .getResponse().getContentAsString();
+                .andExpect(view().name("change/remove"));
+    }
 
-        assertThat(result).contains("Zunächst ...");
-        assertThat(result).contains("Eiscreme");
-        assertThat(result).contains("Salz");
+    @Test
+    @DisplayName("Beim aufrufen des 'Remove'-Buttons wird die Main Page gezeigt und das Rezept ist gelöscht")
+    void test_remove() throws Exception {
+        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setName("Eiscreme");
+        demoRezept.setId(0);
+        when(service.getZubereitung(0)).thenReturn(demoRezept);
+
+        mvc.perform(post("/get/zubereitung/0/remove"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"))
+                .andReturn().getResponse().getContentAsString();
+
+        verify(service).removeRezept(0);
+    }
+
+
+    @Test
+    @DisplayName("Beim aufrufen des 'Edit'-Links wird die Edit Page gezeigt")
+    void test_edit_page() throws Exception {
+        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setName("Eiscreme");
+        demoRezept.setId(0);
+        when(service.getZubereitung(0)).thenReturn(demoRezept);
+
+        mvc.perform(get("/get/zubereitung/0/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("change/edit"));
     }
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Löschen | Rezept-Welt</title>
+    <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
+    <link rel="stylesheet" th:href="@{/css/change/remove.css}" href="../../static/css/change/remove.css">
+</head>
+<body>
+    <main>
+        <h1>Rezept löschen</h1>
+        <p>Sind Sie sicher, dass Sie das folgende Rezept löschen möchten?:</p><br>
+        <p class="name" th:text="${rezeptForm.name}">Schwarzwälderkirschtorte</p>
+        <form method="post">
+            <button type="submit">Rezept endgültig löschen</button>
+        </form>
+    </main>
+</body>
+</html>

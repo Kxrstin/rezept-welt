@@ -19,7 +19,7 @@
 
         <section class="essens-bild">
             <img class="speisenbild" th:if="${rezeptForm.base64Bild != null}" th:src="${rezeptForm.base64Bild}" alt="Bild der Hauptspeise">
-            <!--TODO-->
+            <!-- -----------------TODO------------------------->
             <img th:unless="${rezeptForm.base64Bild != null}" th:src="@{/img/placeholder.png}" alt="Kein Bild">
         </section>
     </main>
@@ -28,6 +28,10 @@
             <h3>Zubereitung:</h3>
             <p class="zubereitung" th:text="${rezeptForm.zubereitung}">Zuerst macht man ...</p>
         </section>
+        <nav class="links">
+            <a th:href="@{/get/zubereitung/{id}/remove(id = ${rezeptForm.id})}" class="link_in_middle">Löschen</a>
+            <a th:href="@{/get/zubereitung/{id}/edit(id = ${rezeptForm.id})}" class="link_in_middle">Bearbeiten</a>
+        </nav>
     </footer>
 </body>
 </html>

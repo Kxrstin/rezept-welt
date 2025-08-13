@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.service.RezeptService;
 
 @Controller
@@ -34,9 +36,33 @@ public class SpeisenController {
     }
 
     @GetMapping("/get/zubereitung/{id}")
-    public String getZubereitung(Model model, @PathVariable int id) {
-        if(service.getZubereitung(id) == null) return "redirect:/";
+    public String remove_page(Model model, @PathVariable int id) {
+        if (service.getZubereitung(id) == null) return "redirect:/";
         model.addAttribute("rezeptForm", service.getZubereitung(id));
         return "speisen/zubereitung";
+    }
+
+    @GetMapping("/get/zubereitung/{id}/remove")
+    public String zubereitung(Model model, @PathVariable int id) {
+        if (service.getZubereitung(id) == null) return "redirect:/";
+        model.addAttribute("rezeptForm", service.getZubereitung(id));
+        return "change/remove";
+    }
+
+    @PostMapping("/get/zubereitung/{id}/remove")
+    public String remove(RedirectAttributes redirectAttributes, @PathVariable int id) {
+        if(service.getZubereitung(id) == null) return "redirect:/";
+        service.removeRezept(0);
+        redirectAttributes.addFlashAttribute("success_remove", true);
+        return "redirect:/";
+    }
+
+    @GetMapping("/get/zubereitung/{id}/edit")
+    public String edit_page(Model model, @PathVariable int id) {
+        if(service.getZubereitung(id) == null) return "redirect:/";
+        //model.addAttribute("rezeptForm", service.getZubereitung(id));
+
+        // TODO succes edit
+        return "change/edit";
     }
 }
