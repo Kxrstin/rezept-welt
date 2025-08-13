@@ -116,7 +116,7 @@ public class RezeptForm {
         StringBuilder result = new StringBuilder();
         String[] zutaten = this.zutaten.split(", ");
         for (String s: zutaten) {
-            result.append(s).append('\n');
+            result.append("- ").append(s).append('\n');
         }
         return result.toString();
     }
