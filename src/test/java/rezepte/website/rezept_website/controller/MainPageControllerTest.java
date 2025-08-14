@@ -12,7 +12,6 @@ import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
 
-import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -20,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 @WebMvcTest(MainPageController.class)
 public class MainPageControllerTest {
@@ -31,7 +29,8 @@ public class MainPageControllerTest {
     @MockitoBean
     RezeptService service;
 
-    final private MockMultipartFile file = new MockMultipartFile("bild", "", "application/octet-stream", new byte[0]);
+    final private MockMultipartFile file =
+            new MockMultipartFile("bild", "demo.txt", "text/plain", "Hello World".getBytes());
     final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "Salat", "Salz, ...", "Zunächst ...", file);
 
     @Test
@@ -61,7 +60,8 @@ public class MainPageControllerTest {
     @Test
     @DisplayName("Beim Verstoß gegen die Validierung (NotBlank, etc.) soll man zur gleichen Seite zurückgeleitet werden")
     void test_validation() throws Exception{
-        mvc.perform(post("/add/rezept"))
+        mvc.perform(multipart("/add/rezept")
+                        .file(file))
                 .andExpect(status().isOk())
                 .andExpect(view().name("add_rezept"));
     }

@@ -19,8 +19,7 @@
 
         <section class="essens-bild">
             <img class="speisenbild" th:if="${rezeptForm.base64Bild != null}" th:src="${rezeptForm.base64Bild}" alt="Bild der Hauptspeise">
-            <!-- -----------------TODO------------------------->
-            <img th:unless="${rezeptForm.base64Bild != null}" th:src="@{/img/placeholder.png}" alt="Kein Bild">
+            <img class="speisenbild" th:unless="${rezeptForm.base64Bild != null}" th:src="@{/img/placeholder.png}" src="../../static/img/placeholder.png" alt="Kein Bild">
         </section>
     </main>
     <footer>

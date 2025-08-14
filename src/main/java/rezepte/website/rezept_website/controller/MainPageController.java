@@ -43,7 +43,7 @@ public class MainPageController {
                             @RequestParam("bild") MultipartFile bild,
                             Model model) throws IOException {
 
-        if(bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors() || bild.isEmpty()) {
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
             return "add_rezept";

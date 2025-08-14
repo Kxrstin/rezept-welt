@@ -14,10 +14,10 @@ import rezepte.website.rezept_website.service.RezeptService;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
@@ -28,8 +28,10 @@ public class SpeisenControllerTest {
     @MockitoBean
     RezeptService service;
 
-    final private MockMultipartFile file = new MockMultipartFile("bild", "", "application/octet-stream", new byte[0]);
+    final private MockMultipartFile file =
+            new MockMultipartFile("bild", "demo.txt", "text/plain", "Hello World".getBytes());
     final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "", "Salz, ...", "Zunächst ...", file);
+    final private RezeptForm demoRezept2 = new RezeptForm(Kategorie.NACHSPEISE, "Dessert", "Zucker, ...", "Erstmal ...", file);
 
 
     @Test
@@ -112,7 +114,7 @@ public class SpeisenControllerTest {
 
 
     @Test
-    @DisplayName("Beim aufrufen des 'Edit'-Links wird die Edit Page gezeigt")
+    @DisplayName("Beim aufrufen des 'Edit'-Links wird die Add Rezept Page gezeigt")
     void test_edit_page() throws Exception {
         demoRezept.setKategorie(Kategorie.NACHSPEISE);
         demoRezept.setName("Eiscreme");
@@ -121,6 +123,26 @@ public class SpeisenControllerTest {
 
         mvc.perform(get("/get/zubereitung/0/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("change/edit"));
+                .andExpect(view().name("add_rezept"));
+    }
+
+    @Test
+    @DisplayName("Beim aufrufen des 'Edit'-Buttons wird die Main Page gezeigt und das Rezept ist verändert")
+    void test_edit() throws Exception {
+        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setName("Eiscreme");
+        demoRezept.setId(0);
+        when(service.getZubereitung(0)).thenReturn(demoRezept);
+
+        mvc.perform(multipart("/get/zubereitung/0/edit")
+                        .file(file)
+                        .param("kategorie", demoRezept2.getKategorie().name())
+                        .param("name", demoRezept2.getName())
+                        .param("zutaten", demoRezept2.getZutaten())
+                        .param("zubereitung", demoRezept2.getZubereitung()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"));
+
+        verify(service).edit(eq(0), any());
     }
 }

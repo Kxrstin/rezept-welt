@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,14 +41,24 @@ public class RezeptService {
                 .toList();
     }
 
-    public boolean removeRezept(int id) {
+    public void removeRezept(int id) {
         Optional<RezeptForm> r = rezepte.stream().filter(e -> e.getId() == id).findFirst();
-        if(r.isPresent()) return rezepte.remove(r.get());
-        return false;
+        r.ifPresent(rezepte::remove);
     }
 
     public RezeptForm getZubereitung(int id) {
         Optional<RezeptForm> opt = rezepte.stream().filter(e -> e.getId() == id).findFirst();
         return opt.orElse(null);
+    }
+
+    public void edit(int id, RezeptForm rezeptForm) throws IOException {
+        RezeptForm old = getZubereitung(id);
+
+        old.setName(rezeptForm.getName());
+        old.setKategorie(rezeptForm.getKategorie());
+        old.setName(rezeptForm.getName());
+        old.setZubereitung(rezeptForm.getZubereitung());
+        old.setZutaten(rezeptForm.getZutaten());
+        old.setBild(rezeptForm.getBild());
     }
 }
