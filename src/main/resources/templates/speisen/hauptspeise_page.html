@@ -12,7 +12,6 @@
 
 <div th:remove="all-but-first">
     <div class="rezept-karte" th:each="r : ${hauptspeisen}">
-        <img class="bild" th:if="${r.base64Bild != null}" th:src="${r.base64Bild}" alt="Bild der Hauptspeise">
         <img class="speisenbild" th:if="${r.base64Bild != null}" th:src="${r.base64Bild}" alt="Bild der Hauptspeise">
         <a class="link" th:text="${r.name}" th:href="@{/get/zubereitung/{id}(id = ${r.id})}" href="/get/zubereitung">
         Rezept 1

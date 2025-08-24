@@ -14,11 +14,11 @@ import java.util.Optional;
 @Service
 public class RezeptService {
     final private List<RezeptForm> rezepte = new LinkedList<>();
-    private int id = 0;
+    private int current_id = 0;
 
     public void addRezept(RezeptForm rezept) {
-        rezept.setId(id);
-        id++;
+        rezept.setId(current_id);
+        current_id++;
         rezepte.add(rezept);
     }
 
@@ -53,7 +53,7 @@ public class RezeptService {
 
     public void edit(int id, RezeptForm rezeptForm) throws IOException {
         RezeptForm old = getZubereitung(id);
-
+        if(old == null) return;
         old.setName(rezeptForm.getName());
         old.setKategorie(rezeptForm.getKategorie());
         old.setName(rezeptForm.getName());
