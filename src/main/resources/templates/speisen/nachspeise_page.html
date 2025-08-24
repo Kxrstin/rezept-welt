@@ -2,33 +2,39 @@
 <head>
     <title> Nachspeisen | Rezept-Welt</title>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" th:href="@{img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
+    <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
     <link rel="stylesheet" th:href="@{/css/nachspeise.css}" href="../../static/css/nachspeise.css">
+    <link rel="stylesheet" th:href="@{/css/filter.css}" href="../../static/css/filter.css">
 </head>
+    <body>
+    <h1>Nachspeisen</h1>
+    <div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
 
-<body>
-<h1>Nachspeisen</h1>
-<div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
+    <form class="filter" method="get" th:action="@{/nachspeise/filter}">
+        <label for="filterId">Titel filtern</label>
+        <input placeholder="z.B. Torte, Kuchen, ..." id="filterId" type="text" name="filter">
+        <button type="submit">Suchen</button>
+    </form>
 
-<div th:remove="all-but-first">
-    <div class="rezept-karte" th:each="r : ${nachspeisen}">
-        <img class="speisenbild" th:if="${r.base64Bild != null}" th:src="${r.base64Bild}" alt="Bild der Nachspeise">
-        <a class="link" th:text="${r.name}" th:href="@{/get/zubereitung/{id}(id = ${r.id})}" href="/get/zubereitung">
-        Rezept 1
-    </a>
-    </div>
-    <div class="rezept-karte">
-        <a class="link" href="#">
-            Eiscreme
-            <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+    <div th:remove="all-but-first">
+        <div class="rezept-karte" th:each="r : ${nachspeisen}">
+            <img class="speisenbild" th:if="${r.base64Bild != null}" th:src="${r.base64Bild}" alt="Bild der Nachspeise">
+            <a class="link" th:text="${r.name}" th:href="@{/get/zubereitung/{id}(id = ${r.id})}" href="/get/zubereitung">
+            Rezept 1
         </a>
+        </div>
+        <div class="rezept-karte">
+            <a class="link" href="#">
+                <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+                Eiscreme
+            </a>
+        </div>
+        <div class="rezept-karte">
+            <a class="link" href="#">
+                <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+                Schwarzwälderkirschtorte
+            </a>
+        </div>
     </div>
-    <div class="rezept-karte">
-        <a class="link" href="#">
-            Schwarzwälderkirschtorte
-            <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
-        </a>
-    </div>
-</div>
 </body>
 </html>

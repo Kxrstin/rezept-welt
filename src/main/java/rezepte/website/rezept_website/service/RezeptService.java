@@ -41,6 +41,12 @@ public class RezeptService {
                 .toList();
     }
 
+    private List<RezeptForm> getFilteredSpeise(Kategorie k, String filter) {
+        return getSpeise(k).stream()
+                .filter(s -> s.getName().toLowerCase().contains(filter.toLowerCase()))
+                .toList();
+    }
+
     public void removeRezept(int id) {
         Optional<RezeptForm> r = rezepte.stream().filter(e -> e.getId() == id).findFirst();
         r.ifPresent(rezepte::remove);
@@ -60,5 +66,17 @@ public class RezeptService {
         old.setZubereitung(rezeptForm.getZubereitung());
         old.setZutaten(rezeptForm.getZutaten());
         old.setBild(rezeptForm.getBild());
+    }
+
+    public List<RezeptForm> getFilteredVorspeisen(String filter) {
+        return getFilteredSpeise(Kategorie.VORSPEISE, filter);
+    }
+
+    public List<RezeptForm> getFilteredHauptspeisen(String filter) {
+        return getFilteredSpeise(Kategorie.HAUPTSPEISE, filter);
+    }
+
+    public List<RezeptForm> getFilteredNachspeisen(String filter) {
+        return getFilteredSpeise(Kategorie.NACHSPEISE, filter);
     }
 }

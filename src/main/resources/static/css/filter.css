@@ -1,0 +1,46 @@
+.filter {
+    display: flex;
+    align-items: center;
+    margin: 2rem auto;
+    gap: 0.5rem;
+    background: #f8f8f8;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: fit-content;
+}
+
+.filter label {
+    font-size: 0.9rem;
+    color: #555;
+    white-space: nowrap;
+}
+
+.filter input {
+    border: none;
+    outline: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    flex: 1;
+    min-width: 200px;
+    font-size: 1rem;
+}
+
+.filter input::placeholder {
+    color: #aaa;
+}
+
+.filter button {
+    background: #4CAF50;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.filter button:hover {
+    background: #43a047;
+}

@@ -145,4 +145,52 @@ public class SpeisenControllerTest {
 
         verify(service).edit(eq(0), any());
     }
+
+    @Test
+    @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Vorspeisen")
+    void test_filter_vorspeise() throws Exception {
+        demoRezept.setKategorie(Kategorie.VORSPEISE);
+        demoRezept.setName("Caesarsalat");
+        demoRezept.setId(0);
+        when(service.getFilteredVorspeisen("Salat")).thenReturn(List.of(demoRezept));
+
+        String result = mvc.perform(get("/vorspeise/filter?filter=Salat"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("speisen/vorspeise_page"))
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(result).contains("Caesarsalat");
+    }
+
+    @Test
+    @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Nachspeisen")
+    void test_filter_nachspeise() throws Exception {
+        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setName("Eiscreme");
+        demoRezept.setId(0);
+        when(service.getFilteredNachspeisen("Creme")).thenReturn(List.of(demoRezept));
+
+        String result = mvc.perform(get("/nachspeise/filter?filter=Creme"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("speisen/nachspeise_page"))
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(result).contains("Eiscreme");
+    }
+
+    @Test
+    @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Hauptspeisen")
+    void test_filter_hauptspeise() throws Exception {
+        demoRezept.setKategorie(Kategorie.HAUPTSPEISE);
+        demoRezept.setName("Spicy Burger");
+        demoRezept.setId(0);
+        when(service.getFilteredHauptspeisen("Burger")).thenReturn(List.of(demoRezept));
+
+        String result = mvc.perform(get("/hauptspeise/filter?filter=Burger"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("speisen/hauptspeise_page"))
+                .andReturn().getResponse().getContentAsString();
+
+        assertThat(result).contains("Spicy Burger");
+    }
 }

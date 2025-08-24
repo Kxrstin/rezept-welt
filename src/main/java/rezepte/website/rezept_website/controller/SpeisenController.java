@@ -89,4 +89,21 @@ public class SpeisenController {
         return "redirect:/";
     }
 
+    @GetMapping("/vorspeise/filter")
+    public String filtered_vorspeisen(@RequestParam String filter, Model model) {
+        model.addAttribute("vorspeisen", service.getFilteredVorspeisen(filter));
+        return "speisen/vorspeise_page";
+    }
+
+    @GetMapping("/hauptspeise/filter")
+    public String filtered_hauptspeisen(@RequestParam String filter, Model model) {
+        model.addAttribute("hauptspeisen", service.getFilteredHauptspeisen(filter));
+        return "speisen/hauptspeise_page";
+    }
+
+    @GetMapping("/nachspeise/filter")
+    public String filtered_nachspeisen(@RequestParam String filter, Model model) {
+        model.addAttribute("nachspeisen", service.getFilteredNachspeisen(filter));
+        return "speisen/nachspeise_page";
+    }
 }
