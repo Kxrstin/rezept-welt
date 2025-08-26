@@ -32,7 +32,7 @@
                 <small class="danger" th:if="${#fields.hasErrors('zubereitung')}" th:errors="*{zubereitung}">Name Error</small>
 
                 <label for="idbild">Bild hochladen</label>
-                <input th:field="*{bild}" type="file" id="idbild" accept="image/*"><br>
+                <input th:field="*{bildMultiPart}" type="file" id="idbild" accept="image/*"><br>
                 <small class="danger" th:if="${#fields.hasErrors('bild')}" th:errors="*{bild}">Name Error</small>
 
                 <button type="submit">Hinzufügen</button>
@@ -65,7 +65,7 @@
                 <small class="danger" th:if="${#fields.hasErrors('zubereitung')}" th:errors="*{zubereitung}">Name Error</small>
 
                 <label for="idbild2">Bild hochladen</label>
-                <input th:field="*{bild}" type="file" id="idbild2" accept="image/*"><br>
+                <input th:field="*{bildMultiPart}" type="file" id="idbild2" accept="image/*"><br>
                 <small class="danger" th:if="${#fields.hasErrors('bild')}" th:errors="*{bild}">Name Error</small>
 
                 <button type="submit">Verändern</button>

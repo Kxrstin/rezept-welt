@@ -1,6 +1,7 @@
 package rezepte.website.rezept_website.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ public class SpeisenController {
 
     final private RezeptService service;
 
+    @Autowired
     public SpeisenController(RezeptService s) {
         service = s;
     }
@@ -74,7 +76,6 @@ public class SpeisenController {
     @PostMapping("/get/zubereitung/{id}/edit")
     public String edit(RedirectAttributes redirectAttributes, @PathVariable int id, @Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
                        BindingResult bindingResult,
-                       @RequestParam("bild") MultipartFile bild,
                        Model model) throws IOException {
 
         if(bindingResult.hasErrors()) {
@@ -82,7 +83,6 @@ public class SpeisenController {
             model.addAttribute("kategorien", Kategorie.values());
             return "add_rezept";
         }
-        rezept.setBild(bild);
         if(service.getZubereitung(id) == null) return "redirect:/";
         service.edit(id, rezept);
         redirectAttributes.addFlashAttribute("success_edit", true);

@@ -2,6 +2,10 @@ package rezepte.website.rezept_website.controller.formulare;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.annotation.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -9,6 +13,7 @@ import java.util.Base64;
 
 public class RezeptForm {
 
+    @Id
     private int id;
 
     @NotNull(message="Bitte wählen Sie eine Kategorie")
@@ -22,8 +27,12 @@ public class RezeptForm {
     private String zubereitung;
 
     @NotNull(message="Bitte wählen Sie ein Bild")
-    private MultipartFile bild;
+    @Transient
+    private MultipartFile bildMultiPart;
 
+    private byte[] bild;
+
+    @Transient
     private String base64Bild;
 
     public RezeptForm() {}
@@ -38,12 +47,27 @@ public class RezeptForm {
         this.name = name;
         this.zutaten = zutaten;
         this.zubereitung = zubereitung;
-        this.bild = bild;
+        this.bildMultiPart = bild;
         try {
             base64Bild = base64Bild(bild);
+            this.bild = bild.getBytes();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @PersistenceCreator
+    public RezeptForm(Kategorie kategorie,
+                      String name,
+                      String zutaten,
+                      String zubereitung,
+                      byte[] bild) {
+
+        this.kategorie = kategorie;
+        this.name = name;
+        this.zutaten = zutaten;
+        this.zubereitung = zubereitung;
+        setBild(bild);
     }
 
     public String getName() {
@@ -54,8 +78,8 @@ public class RezeptForm {
         this.name = name;
     }
 
-    public MultipartFile getBild() {
-        return bild;
+    public MultipartFile getBildMultiPart() {
+        return bildMultiPart;
     }
 
     private String base64Bild(MultipartFile file) throws IOException {
@@ -87,9 +111,26 @@ public class RezeptForm {
         return zutaten;
     }
 
-    public void setBild(MultipartFile bild) throws IOException {
+    public void setBildMultiPart(MultipartFile bildMultiPart) throws IOException {
+        this.bildMultiPart = bildMultiPart;
+        base64Bild = base64Bild(bildMultiPart);
+        bild = bildMultiPart.getBytes();
+    }
+
+    public void setBild(byte[] bild) {
         this.bild = bild;
-        base64Bild = base64Bild(bild);
+
+        if (bild != null && bild.length > 0) {
+            String encoded = Base64.getEncoder().encodeToString(bild);
+            this.base64Bild = "data:;base64," + encoded;
+        } else {
+            this.base64Bild = null;
+        }
+    }
+
+
+    public byte[] getBild() {
+        return bild;
     }
 
     public void setKategorie(Kategorie kategorie) {
