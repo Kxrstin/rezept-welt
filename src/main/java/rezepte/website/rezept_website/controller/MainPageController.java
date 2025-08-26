@@ -33,6 +33,7 @@ public class MainPageController {
     public String addRezeptAnzeigen(Model model) {
         model.addAttribute("rezeptForm", new RezeptForm());
         model.addAttribute("kategorien", Kategorie.values());
+        model.addAttribute("edit", false);
         return "add_rezept";
     }
 

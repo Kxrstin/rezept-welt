@@ -57,7 +57,7 @@ public class SpeisenController {
     @PostMapping("/get/zubereitung/{id}/remove")
     public String remove(RedirectAttributes redirectAttributes, @PathVariable int id) {
         if(service.getZubereitung(id) == null) return "redirect:/";
-        service.removeRezept(0);
+        service.removeRezept(id);
         redirectAttributes.addFlashAttribute("success_remove", true);
         return "redirect:/";
     }
@@ -84,7 +84,7 @@ public class SpeisenController {
         }
         rezept.setBild(bild);
         if(service.getZubereitung(id) == null) return "redirect:/";
-        service.edit(0, rezept);
+        service.edit(id, rezept);
         redirectAttributes.addFlashAttribute("success_edit", true);
         return "redirect:/";
     }

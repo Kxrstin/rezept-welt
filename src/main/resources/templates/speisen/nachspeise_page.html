@@ -17,9 +17,9 @@
     </form>
 
     <div th:remove="all-but-first">
-        <div class="rezept-karte" th:each="r : ${nachspeisen}">
+        <div class="rezept-karte" th:each="r : ${nachspeisen}" th:if="${r != null}">
             <img class="speisenbild" th:if="${r.base64Bild != null}" th:src="${r.base64Bild}" alt="Bild der Nachspeise">
-            <a class="link" th:text="${r.name}" th:href="@{/get/zubereitung/{id}(id = ${r.id})}" href="/get/zubereitung">
+            <a class="link" th:text="${r.name}" th:href="@{/get/zubereitung/{id}(id = ${r.id})}">
             Rezept 1
         </a>
         </div>

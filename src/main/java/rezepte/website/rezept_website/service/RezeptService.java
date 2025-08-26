@@ -5,10 +5,7 @@ import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -35,16 +32,19 @@ public class RezeptService {
     }
 
     private List<RezeptForm> getSpeise(Kategorie k) {
-        return rezepte.stream()
+        List<RezeptForm> r = rezepte.stream()
                 .filter(a -> a.getKategorie() == k)
                 .sorted(Comparator.comparing(RezeptForm::getName))
                 .toList();
+        return r.isEmpty() ? Collections.emptyList() : r;
     }
 
     private List<RezeptForm> getFilteredSpeise(Kategorie k, String filter) {
-        return getSpeise(k).stream()
+        List<RezeptForm> r = getSpeise(k).stream()
                 .filter(s -> s.getName().toLowerCase().contains(filter.toLowerCase()))
                 .toList();
+
+        return r.isEmpty() ? Collections.emptyList() : r;
     }
 
     public void removeRezept(int id) {
