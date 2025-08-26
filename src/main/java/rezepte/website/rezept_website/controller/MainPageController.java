@@ -25,7 +25,7 @@ public class MainPageController {
     }
 
     @GetMapping("/")
-    public String mainPage() {
+    public String mainPage(Model model) {
         return "main_page";
     }
 
@@ -40,18 +40,15 @@ public class MainPageController {
     @PostMapping("/add/rezept")
     public String addRezept(@Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
                             BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes,
-                            @RequestParam("bild") MultipartFile bild,
-                            Model model) throws IOException {
+                            Model model) {
 
-        if(bindingResult.hasErrors() || bild.isEmpty()) {
+        if(bindingResult.hasErrors() || rezept.getBild().isEmpty()) {
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
             return "add_rezept";
         }
-        rezept.setBild(bild);
         service.addRezept(rezept);
-        redirectAttributes.addFlashAttribute("success", true);
-        return "redirect:/";
+
+        return "redirect:/?success=true";
     }
 }

@@ -2,15 +2,15 @@
     <head>
         <title> Rezept-Welt</title>
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}" href="../static/img/recipebook_icon.png">
-        <link rel="stylesheet" th:href="@{css/main_page.css}" href="../static/css/main_page.css">
+        <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}">
+        <link rel="stylesheet" th:href="@{css/main_page.css}">
     </head>
 
     <body>
         <h1>Ihre persönliche Rezeptwelt</h1>
         <div class="beschreibung">
             <p>
-                <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" src="../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+                <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" alt="Rezeptbuch Logo">
                 Hier können Sie ihre Rezepte verwalten und ihrer Kreativität freien Lauf lassen,
                 um ihre Rezepte von überall aus nutzen zu können. Hier können Sie in den
                 Hauptkategorien Vor-, Haupt- und Nachspeise eine der vielen Unterkategorien wählen,
@@ -38,16 +38,16 @@
 
 
         <div class="get_speise">
-            <a class="speisen_link" th:href="@{/vorspeise}" href="/vorspeise">Vorspeisen</a>
-            <img class="speisenbild" th:src="@{img/vorspeise.png}" src="../static/img/vorspeise.png" alt="Zeichnung von einem Salat auf einem Teller">
+            <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
+            <img class="speisenbild" th:src="@{img/vorspeise.png}" alt="Zeichnung von einem Salat auf einem Teller">
         </div>
         <div class="get_speise">
-            <img class="speisenbild_left" th:src="@{img/hauptspeise.png}" src="../static/img/hauptspeise.png" alt="Zeichnung eines Burgers.">
-            <a class="speisen_link" th:href="@{/hauptspeise}" href="/hauptspeise">Hauptspeisen</a>
+            <img class="speisenbild_left" th:src="@{img/hauptspeise.png}" alt="Zeichnung eines Burgers.">
+            <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
         </div>
         <div class="get_speise">
-            <a class="speisen_link" th:href="@{/nachspeise}" href="/nachspeise">Nachspeisen</a>
-            <img class="speisenbild" th:src="@{img/nachspeise.png}" src="../static/img/nachspeise.png" alt="Zeichnung eines Blaubeer-Pancake Stapels">
+            <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
+            <img class="speisenbild" th:src="@{img/nachspeise.png}" alt="Zeichnung eines Blaubeer-Pancake Stapels">
         </div>
     </body>
 </html>

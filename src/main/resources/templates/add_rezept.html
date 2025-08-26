@@ -2,8 +2,8 @@
     <head>
         <title>Rezept hinzufügen | Rezept-Welt</title>
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}" href="../static/img/recipebook_icon.png">
-        <link rel="stylesheet" th:href="@{/css/add_rezept_page.css}" href="../static/css/add_rezept_page.css">
+        <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}">
+        <link rel="stylesheet" th:href="@{/css/add_rezept_page.css}">
     </head>
     <body>
         <p th:if="${edit}">Rezept ändern</p>
@@ -38,7 +38,7 @@
                 <button type="submit">Hinzufügen</button>
             </form>
 
-            <a class="link_in_middle" href="/" th:href="@{/}">Zurück</a>
+            <a class="link_in_middle" th:href="@{/}">Zurück</a>
         </div>
 
         <div th:if="${edit}">
@@ -71,7 +71,7 @@
                 <button type="submit">Verändern</button>
             </form>
 
-            <a class="link_in_middle" href="/" th:href="@{/}">Zurück</a>
+            <a class="link_in_middle" th:href="@{/}">Zurück</a>
         </div>
     </body>
 </html>
