@@ -3,6 +3,7 @@ package rezepte.website.rezept_website.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -29,7 +30,7 @@ public class SpeisenControllerTest {
     RezeptService service;
 
     final private MockMultipartFile file =
-            new MockMultipartFile("bild", "demo.txt", "text/plain", "Hello World".getBytes());
+            new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
     final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "", "Salz, ...", "Zunächst ...", file);
     final private RezeptForm demoRezept2 = new RezeptForm(Kategorie.NACHSPEISE, "Dessert", "Zucker, ...", "Erstmal ...", file);
 

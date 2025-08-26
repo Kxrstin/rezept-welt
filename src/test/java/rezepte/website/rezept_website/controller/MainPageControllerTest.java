@@ -30,7 +30,7 @@ public class MainPageControllerTest {
     RezeptService service;
 
     final private MockMultipartFile file =
-            new MockMultipartFile("bild", "demo.txt", "text/plain", "Hello World".getBytes());
+            new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
     final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "Salat", "Salz, ...", "Zunächst ...", file);
 
     @Test
