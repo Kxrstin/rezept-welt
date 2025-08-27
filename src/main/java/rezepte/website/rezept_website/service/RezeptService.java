@@ -12,9 +12,7 @@ import java.util.*;
 
 @Service
 public class RezeptService {
-
     final private RezeptRepository repo;
-    private int current_id = 0;
 
     @Autowired
     public RezeptService(RezeptRepository repo) {
@@ -29,7 +27,7 @@ public class RezeptService {
         } catch (IOException e) {
             throw new RuntimeException("Bild konnte nicht gespeichert werden", e);
         }
-        rezept.setId(current_id++);
+        rezept.setId(null);
         repo.save(rezept);
     }
 

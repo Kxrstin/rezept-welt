@@ -14,7 +14,7 @@ import java.util.Base64;
 public class RezeptForm {
 
     @Id
-    private int id;
+    private Integer id;
 
     @NotNull(message="Bitte wählen Sie eine Kategorie")
     private Kategorie kategorie;
@@ -42,7 +42,6 @@ public class RezeptForm {
                   String zutaten,
                   String zubereitung,
                   MultipartFile multipartFile) {
-
         this.kategorie = kategorie;
         this.name = name;
         this.zutaten = zutaten;
@@ -57,12 +56,12 @@ public class RezeptForm {
     }
 
     @PersistenceCreator
-    public RezeptForm(Kategorie kategorie,
+    public RezeptForm(Integer id, Kategorie kategorie,
                       String name,
                       String zutaten,
                       String zubereitung,
                       byte[] bild) {
-
+        this.id = id;
         this.kategorie = kategorie;
         this.name = name;
         this.zutaten = zutaten;
@@ -145,11 +144,11 @@ public class RezeptForm {
         this.zutaten = zutaten;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

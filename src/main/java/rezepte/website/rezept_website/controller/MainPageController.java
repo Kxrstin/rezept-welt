@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
@@ -37,7 +38,8 @@ public class MainPageController {
     @PostMapping("/add/rezept")
     public String addRezept(@Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
                             BindingResult bindingResult,
-                            Model model) {
+                            Model model,
+                            RedirectAttributes redirectAttributes) {
 
         if(bindingResult.hasErrors() || rezept.getBildMultiPart().isEmpty()) {
             model.addAttribute("rezeptForm", rezept);
@@ -45,7 +47,8 @@ public class MainPageController {
             return "add_rezept";
         }
         service.addRezept(rezept);
+        redirectAttributes.addFlashAttribute("success", true);
 
-        return "redirect:/?success=true";
+        return "redirect:/";
     }
 }
