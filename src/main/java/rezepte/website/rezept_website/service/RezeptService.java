@@ -19,7 +19,7 @@ public class RezeptService {
         this.repo = repo;
     }
 
-    public void addRezept(RezeptForm rezept) {
+    public RezeptForm addRezept(RezeptForm rezept) {
         try {
             if (rezept.getBildMultiPart() != null && !rezept.getBildMultiPart().isEmpty()) {
                 rezept.setBild(rezept.getBildMultiPart().getBytes());
@@ -28,7 +28,7 @@ public class RezeptService {
             throw new RuntimeException("Bild konnte nicht gespeichert werden", e);
         }
         rezept.setId(null);
-        repo.save(rezept);
+        return repo.save(rezept);
     }
 
 
