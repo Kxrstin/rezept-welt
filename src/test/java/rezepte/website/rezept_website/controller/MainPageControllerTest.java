@@ -31,7 +31,7 @@ public class MainPageControllerTest {
 
     final private MockMultipartFile file =
             new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
-    final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "Salat", "Salz, ...", "Zunächst ...", file);
+    final private RezeptForm demoRezept = new RezeptForm(Kategorie.Vorspeise, "Salat", "Salz, ...", "Zunächst ...", file);
 
     @Test
     @DisplayName("Die Startseite ist unter / erreichbar.")

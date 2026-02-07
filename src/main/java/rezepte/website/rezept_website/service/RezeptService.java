@@ -33,15 +33,15 @@ public class RezeptService {
 
 
     public List<RezeptForm> getVorspeisen() {
-        return getSpeise(Kategorie.VORSPEISE);
+        return getSpeise(Kategorie.Vorspeise);
     }
 
     public List<RezeptForm> getHauptspeisen() {
-        return getSpeise(Kategorie.HAUPTSPEISE);
+        return getSpeise(Kategorie.Hauptspeise);
     }
 
     public List<RezeptForm> getNachspeisen() {
-        return getSpeise(Kategorie.NACHSPEISE);
+        return getSpeise(Kategorie.Nachspeise);
     }
 
     private List<RezeptForm> getSpeise(Kategorie k) {
@@ -84,14 +84,14 @@ public class RezeptService {
     }
 
     public List<RezeptForm> getFilteredVorspeisen(String filter) {
-        return getFilteredSpeise(Kategorie.VORSPEISE, filter);
+        return getFilteredSpeise(Kategorie.Vorspeise, filter);
     }
 
     public List<RezeptForm> getFilteredHauptspeisen(String filter) {
-        return getFilteredSpeise(Kategorie.HAUPTSPEISE, filter);
+        return getFilteredSpeise(Kategorie.Hauptspeise, filter);
     }
 
     public List<RezeptForm> getFilteredNachspeisen(String filter) {
-        return getFilteredSpeise(Kategorie.NACHSPEISE, filter);
+        return getFilteredSpeise(Kategorie.Nachspeise, filter);
     }
 }

@@ -2,4 +2,4 @@ spring:
   datasource:
     password: ${DB_PASS}
     username: ${DB_USER}
-    url: ${DB_URL}
+    url: jdbc:postgresql://localhost:5432/KxrstinDatenbank

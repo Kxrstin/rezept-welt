@@ -3,7 +3,6 @@ package rezepte.website.rezept_website.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -31,14 +30,14 @@ public class SpeisenControllerTest {
 
     final private MockMultipartFile file =
             new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
-    final private RezeptForm demoRezept = new RezeptForm(Kategorie.VORSPEISE, "", "Salz, ...", "Zunächst ...", file);
-    final private RezeptForm demoRezept2 = new RezeptForm(Kategorie.NACHSPEISE, "Dessert", "Zucker, ...", "Erstmal ...", file);
+    final private RezeptForm demoRezept = new RezeptForm(Kategorie.Vorspeise, "", "Salz, ...", "Zunächst ...", file);
+    final private RezeptForm demoRezept2 = new RezeptForm(Kategorie.Nachspeise, "Dessert", "Zucker, ...", "Erstmal ...", file);
 
 
     @Test
     @DisplayName("Beim aufrufen des 'Vorspeise'-Links wird die Vorspeisenseite gezeigt")
     void test_vorspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.VORSPEISE);
+        demoRezept.setKategorie(Kategorie.Vorspeise);
         demoRezept.setName("Gurkensalat");
         when(service.getVorspeisen()).thenReturn(List.of(demoRezept));
 
@@ -55,7 +54,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Beim aufrufen des Hauptspeise'-Links wird die Hauptspeisenseite gezeigt")
     void test_hauptspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.HAUPTSPEISE);
+        demoRezept.setKategorie(Kategorie.Hauptspeise);
         demoRezept.setName("Spagetti Bolognese");
         when(service.getHauptspeisen()).thenReturn(List.of(demoRezept));
 
@@ -71,7 +70,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Beim aufrufen des 'Nachspeise'-Links wird die Nachspeisenseite gezeigt")
     void test_nachspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setKategorie(Kategorie.Nachspeise);
         demoRezept.setName("Eiscreme");
         when(service.getNachspeisen()).thenReturn(List.of(demoRezept));
 
@@ -87,7 +86,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Beim aufrufen des 'Remove'-Links wird die Remove Page gezeigt")
     void test_remove_page() throws Exception {
-        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setKategorie(Kategorie.Nachspeise);
         demoRezept.setName("Eiscreme");
         demoRezept.setId(0);
         when(service.getZubereitung(0)).thenReturn(demoRezept);
@@ -100,7 +99,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Beim aufrufen des 'Remove'-Buttons wird die Main Page gezeigt und das Rezept ist gelöscht")
     void test_remove() throws Exception {
-        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setKategorie(Kategorie.Nachspeise);
         demoRezept.setName("Eiscreme");
         demoRezept.setId(0);
         when(service.getZubereitung(0)).thenReturn(demoRezept);
@@ -117,7 +116,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Beim aufrufen des 'Edit'-Links wird die Add Rezept Page gezeigt")
     void test_edit_page() throws Exception {
-        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setKategorie(Kategorie.Nachspeise);
         demoRezept.setName("Eiscreme");
         demoRezept.setId(0);
         when(service.getZubereitung(0)).thenReturn(demoRezept);
@@ -130,7 +129,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Beim aufrufen des 'Edit'-Buttons wird die Main Page gezeigt und das Rezept ist verändert")
     void test_edit() throws Exception {
-        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setKategorie(Kategorie.Nachspeise);
         demoRezept.setName("Eiscreme");
         demoRezept.setId(0);
         when(service.getZubereitung(0)).thenReturn(demoRezept);
@@ -150,7 +149,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Vorspeisen")
     void test_filter_vorspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.VORSPEISE);
+        demoRezept.setKategorie(Kategorie.Vorspeise);
         demoRezept.setName("Caesarsalat");
         demoRezept.setId(0);
         when(service.getFilteredVorspeisen("Salat")).thenReturn(List.of(demoRezept));
@@ -166,7 +165,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Nachspeisen")
     void test_filter_nachspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.NACHSPEISE);
+        demoRezept.setKategorie(Kategorie.Nachspeise);
         demoRezept.setName("Eiscreme");
         demoRezept.setId(0);
         when(service.getFilteredNachspeisen("Creme")).thenReturn(List.of(demoRezept));
@@ -182,7 +181,7 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Hauptspeisen")
     void test_filter_hauptspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.HAUPTSPEISE);
+        demoRezept.setKategorie(Kategorie.Hauptspeise);
         demoRezept.setName("Spicy Burger");
         demoRezept.setId(0);
         when(service.getFilteredHauptspeisen("Burger")).thenReturn(List.of(demoRezept));

@@ -26,9 +26,9 @@ public class RezeptServiceTest {
 
     final private MockMultipartFile file =
             new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
-    final private RezeptForm salat_rezept = new RezeptForm(Kategorie.VORSPEISE, "Caesar Salat", "Salz, Gurke, Tomate, ...", "Zunächst ...", file);
-    final private RezeptForm burger_rezept = new RezeptForm(Kategorie.HAUPTSPEISE, "Spicy Burger", "Patties, Buns, Tomate, ...", "Erstmal ...", file);
-    final private RezeptForm torte_rezept = new RezeptForm(Kategorie.NACHSPEISE, "Erdbeertorte", "Erdbeeren, Mehl, Zucker, ...", "Zuallererst ...", file);
+    final private RezeptForm salat_rezept = new RezeptForm(Kategorie.Vorspeise, "Caesar Salat", "Salz, Gurke, Tomate, ...", "Zunächst ...", file);
+    final private RezeptForm burger_rezept = new RezeptForm(Kategorie.Hauptspeise, "Spicy Burger", "Patties, Buns, Tomate, ...", "Erstmal ...", file);
+    final private RezeptForm torte_rezept = new RezeptForm(Kategorie.Nachspeise, "Erdbeertorte", "Erdbeeren, Mehl, Zucker, ...", "Zuallererst ...", file);
 
     @Test
     @DisplayName("RezeptService fügt Rezepte erfolgreich hinzu")
