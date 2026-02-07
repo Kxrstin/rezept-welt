@@ -9,8 +9,8 @@ Der Fokus dieses Projektes liegt auf der testgetriebenen Entwicklung einer Full-
 Follow these steps to start the project in your local environment (e.g., WSL or Linux). 
 
 ### 1. Requirements 
-* **Java 20** (JDK)
-* * **Docker & Docker Desktop**
+* **Java 21** (JDK)
+* **Docker & Docker Desktop**
     
 ### 2. Start Docker 
 Start the PostgreSQL database via Docker Compose: 
@@ -34,7 +34,7 @@ Once the startup process is complete, you can access the application at:
 
 ## Tech Stack 
 ### Backend
-- Java 20
+- Java 21
 - Spring Boot
 - JDBC
 - Flyway
