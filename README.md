@@ -1,7 +1,7 @@
 # Rezept Welt
 ## Full-stack web application to manage your own recipe ideas.
 
-The focus of this project is on the test-driven development of a full-stack web application with database connectivity.
+Rezept Welt brings structure to cooking ideas. Users can add their own recipes with ingredients, categories, preparation instructions, and images, and later search and filter them to quickly find exactly what they are looking for — whether by name, ingredients, or category.
 
 --- 
 
