@@ -25,13 +25,13 @@ h2 {
 .speisenbild {
     width: 100px;
     height: auto;
-    float: right;
+    transition: transform 0.3s ease;
 }
 
 .speisenbild_left {
     width: 100px;
     height: auto;
-    float: left;
+    transition: transform 0.3s ease;
 }
 
 /* Body */
@@ -84,18 +84,6 @@ body {
 }
 
 .get_speise {
-    display: block;
-    align-items: center;
-    gap: 10px;
-    width: 500px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.get_speise {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -105,6 +93,22 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.get_speise.reverse {
+    flex-direction: row-reverse;
+}
+
+.get_speise {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.get_speise:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
 }
 
 .speisen_link {
@@ -120,6 +124,10 @@ body {
 .speisen_link:hover {
     color: #6a5acd;
     border-bottom-color: #6a5acd;
+}
+
+.get_speise:hover .speisenbild {
+    transform: scale(1.1) rotate(-2deg);
 }
 
 .success {
