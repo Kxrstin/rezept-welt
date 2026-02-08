@@ -15,6 +15,7 @@ Follow these steps to start the project in your local environment (e.g., WSL or 
 ### 2. Start Docker 
 Start the PostgreSQL database via Docker Compose: 
 ```bash
+export $(cat .env.example | xargs)
 docker compose up -d
 ```
 ### 3. Start application 
