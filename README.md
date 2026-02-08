@@ -1,11 +1,11 @@
 # Rezept Welt
-## Full-stack Webanwendung zur Verwaltung eigener Rezeptideen.
+## Full-stack web application to manage your own recipe ideas.
 
-Der Fokus dieses Projektes liegt auf der testgetriebenen Entwicklung einer Full-Stack Webanwendung mit Datenbankanbindung.
+The focus of this project is on the test-driven development of a full-stack web application with database connectivity.
 
 --- 
 
-## Setup und Ausführung
+## Get started
 Follow these steps to start the project in your local environment (e.g., WSL or Linux). 
 
 ### 1. Requirements 
@@ -14,14 +14,19 @@ Follow these steps to start the project in your local environment (e.g., WSL or 
     
 ### 2. Start Docker 
 Start the PostgreSQL database via Docker Compose: 
-* docker compose up -d
-
+```bash
+docker compose up -d
+```
 ### 3. Start application 
 Start the application with the Gradle wrapper: 
-* ./gradlew bootRun
+```bash
+./gradlew bootRun
+```
 
 Once the startup process is complete, you can access the application at: 
-* http://localhost:8080
+```bash
+http://localhost:8080
+```
 
 --- 
 
@@ -55,5 +60,15 @@ Test-driven development and structuring of Java applications and Design of web-b
 
 --- 
 
-### Images
+## Images
+
+This project uses graphics from external providers. The rights belong to the respective authors:
+
+* **Logo (Rezept Welt)**: [Flaticon.com](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Frecipe-book_1397179&ved=0CBUQjRxqFwoTCIjSzaDPypIDFQAAAAAdAAAAABAQ&opi=89978449)
+* **Appetizer**: Created via [Design.com]([https://www.design.com/maker/logo/creative-document-file-17357?text=ExamByte&isVariation=True](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fdoodlewash.com%2Feating-leaves-again%2F&ved=0CBUQjRxqFwoTCODJocW8ypIDFQAAAAAdAAAAABAP&opi=89978449))
+* **Main course**: [Pinterest](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F2814818500241359%2F&ved=0CBUQjRxqFwoTCOCOudPOypIDFQAAAAAdAAAAABAQ&opi=89978449)
+* **Dessert**: [Vecteezy]([https://www.vecteezy.com/vector-art/28579407-red-cross-wrong-symbol-incorrect-sign-error-in-circle](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F2814818500241359%2F&ved=0CBUQjRxqFwoTCOCOudPOypIDFQAAAAAdAAAAABAQ&opi=89978449))
+
+
+
 
