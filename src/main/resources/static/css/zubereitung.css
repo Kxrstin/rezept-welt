@@ -81,3 +81,22 @@ footer {
     justify-content: center;
     margin: 1rem 0;
 }
+
+.zutat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkbox-input {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.checkbox-input:checked + .rezept_text {
+    text-decoration: line-through;
+    color: #888;
+    opacity: 0.6;
+}

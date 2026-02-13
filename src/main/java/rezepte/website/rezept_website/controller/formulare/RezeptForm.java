@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 public class RezeptForm {
 
@@ -152,12 +153,7 @@ public class RezeptForm {
         this.id = id;
     }
 
-    public String getZutatenListe() {
-        StringBuilder result = new StringBuilder();
-        String[] zutaten = this.zutaten.split(", ");
-        for (String s: zutaten) {
-            result.append("- ").append(s).append('\n');
-        }
-        return result.toString();
+    public String[] getZutatenListe() {
+        return this.zutaten.split(", ");
     }
 }

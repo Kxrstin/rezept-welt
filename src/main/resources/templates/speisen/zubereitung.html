@@ -14,7 +14,14 @@
     <main class="recipe-container">
         <h2>Zutaten:</h2>
         <section class="zutaten">
-            <p class="rezept_text" th:text="${rezeptForm.getZutatenListe()}">- Salz<br>- Zucker</p>
+            <div th:each="zutat, iterStat : ${rezeptForm.getZutatenListe()}" class="zutat-item">
+                <input type="checkbox" th:id="${'zutat-' + iterStat.index}" class="checkbox-input">
+                <label th:for="${'zutat-' + iterStat.index}"
+                       th:text="${zutat}"
+                       class="rezept_text">
+                    - Beispielzutat
+                </label>
+            </div>
         </section>
 
         <section class="essens-bild">
