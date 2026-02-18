@@ -53,11 +53,12 @@ public class RezeptService {
     }
 
     private List<RezeptForm> getFilteredSpeise(Kategorie k, String filter) {
-        List<RezeptForm> r = getSpeise(k).stream()
-                .filter(s -> s.getName().toLowerCase().contains(filter.toLowerCase()))
-                .toList();
+        List<RezeptForm> filteredRecipes = new ArrayList<>();
 
-        return r.isEmpty() ? Collections.emptyList() : r;
+        filteredRecipes.addAll(filterRecipeName(getSpeise(k), filter));
+        filteredRecipes.addAll(filteredRecipeZutaten(getSpeise(k), filter));
+
+        return filteredRecipes.isEmpty() ? Collections.emptyList() : filteredRecipes;
     }
 
     public void removeRezept(int id) {
@@ -93,5 +94,23 @@ public class RezeptService {
 
     public List<RezeptForm> getFilteredNachspeisen(String filter) {
         return getFilteredSpeise(Kategorie.Nachspeise, filter);
+    }
+
+    private List<RezeptForm> filterRecipeName(List<RezeptForm> rezepte, String filter) {
+        return rezepte.stream()
+                .filter(s -> s.getName().toLowerCase().contains(filter.toLowerCase()))
+                .toList();
+    }
+
+    private List<RezeptForm> filteredRecipeZutaten(List<RezeptForm> rezepte, String filter) {
+        String[] zutaten = filter.split("[^a-zA-ZäöüÄÖÜ0-9]+");
+
+        return rezepte.stream()
+                .filter(rezept -> {
+                    String alleZutaten = rezept.getZutaten().toLowerCase();
+                    return Arrays.stream(zutaten)
+                            .allMatch(zutat -> alleZutaten.contains(zutat.toLowerCase()));
+                })
+                .toList();
     }
 }

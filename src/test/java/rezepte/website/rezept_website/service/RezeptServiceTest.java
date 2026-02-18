@@ -123,6 +123,39 @@ public class RezeptServiceTest {
         assertThat(rezeptNew.getBild()).isEqualTo(demoFile2().getBytes());
     }
 
+    @Test
+    @DisplayName("Filtert die Rezeptnamen korrekt")
+    void test_filter_name() throws IOException {
+        List<RezeptForm> rezepte = nachspeisen();
+        for(int i = 0; i < 3; i++)
+            service.addRezept(rezepte.get(i));
+
+        List<RezeptForm> nachspeisen = service.getFilteredNachspeisen("Zitronen-Joghurt-Creme");
+
+        List<String> recipeName = List.of(
+                "Zitronen-Joghurt-Creme"
+        );
+        assertThat(containsRecipe(nachspeisen, recipeName)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("Gibt alle Rezepte mit den gefilterten Zutaten aus")
+    void test_filter_zutaten() throws IOException {
+        List<RezeptForm> rezepte = nachspeisen();
+        for(int i = 0; i < 3; i++)
+            service.addRezept(rezepte.get(i));
+
+        List<RezeptForm> nachspeisen = service.getFilteredNachspeisen("Zucker Milch");
+
+        List<String> recipeName = List.of(
+                "Zitronen-Joghurt-Creme",
+                "Vanille-Milchreis mit Zimt"
+        );
+        assertThat(containsRecipe(nachspeisen, recipeName)).isEqualTo(2);
+        assertThat(containsRecipe(nachspeisen, List.of("Schoko-Bananen-Pfannkuchen")))
+                .isEqualTo(0);
+    }
+
 
     long containsRecipe(List<RezeptForm> rezepte, List<String> recipe) {
         long counter = 0;
@@ -130,7 +163,6 @@ public class RezeptServiceTest {
             counter += rezepte.stream()
                     .filter(r -> r.getName().equals(recipeName))
                     .count();
-            System.out.println(counter + " " + recipeName);
         }
         return counter;
     }

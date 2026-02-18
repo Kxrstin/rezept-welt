@@ -85,7 +85,7 @@ public class TestRezeptData {
         hauptspeisen.add(new RezeptForm(
                 Kategorie.Hauptspeise,
                 "Chili con Carne klassisch",
-                "500g Rinderhackfleisch, 1 Dose Kidneybohnen, 1 Dose Mais, 1 Dose Tomaten, Zwiebel, Knoblauch, Chili, Kreuzkümmel",
+                "500g Rinderhackfleisch, 1 Dose Kidneybohnen, 1 Dose Mais, 1 Dose Tomaten, Zwiebel, Knoblauch, Salz, Chili, Kreuzkümmel",
                 "Hackfleisch krümelig anbraten, Zwiebel und Knoblauch hinzufügen...",
                 demoFile()
         ));
@@ -105,7 +105,7 @@ public class TestRezeptData {
         nachspeisen.add(new RezeptForm(
                 Kategorie.Nachspeise,
                 "Zitronen-Joghurt-Creme",
-                "500g griechischer Joghurt, 2 Zitronen, 80g Zucker, Vanillezucker",
+                "500g griechischer Joghurt, 2 Zitronen, 80g Zucker, Vanillezucker,, Milch",
                 "Joghurt mit Zucker, Vanille und Zitronensaft glatt rühren. Mindestens 1 Stunde kalt stellen...",
                 demoFile()
         ));
