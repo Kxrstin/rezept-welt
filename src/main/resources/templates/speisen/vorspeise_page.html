@@ -11,8 +11,8 @@
     <div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
 
     <form class="filter" method="get" th:action="@{/vorspeise/filter}">
-        <label for="filterId">Titel filtern</label>
-        <input placeholder="z.B. Salat, Suppe, ..." id="filterId" type="text" name="filter">
+        <label for="filterId">Titel oder Zutaten filtern</label>
+        <input placeholder="z.B. Salat, Olivenöl, ..." id="filterId" type="text" name="filter">
         <button type="submit">Suchen</button>
     </form>
 
