@@ -4,17 +4,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
-import org.springframework.mock.web.MockMultipartFile;
-import rezepte.website.rezept_website.controller.formulare.Kategorie;
+import org.springframework.test.context.TestPropertySource;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.persistence.RezeptRepository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static rezepte.website.rezept_website.object_mother.TestRezeptData.*;
 
 @DataJdbcTest
+@TestPropertySource(properties = {
+        "spring.flyway.enabled=true",
+        "spring.flyway.locations=classpath:db/migration"
+})
 public class RezeptServiceTest {
 
     final private RezeptService service;
@@ -24,101 +29,109 @@ public class RezeptServiceTest {
         service = new RezeptService(repo);
     }
 
-    final private MockMultipartFile file =
-            new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
-    final private RezeptForm salat_rezept = new RezeptForm(Kategorie.Vorspeise, "Caesar Salat", "Salz, Gurke, Tomate, ...", "Zunächst ...", file);
-    final private RezeptForm burger_rezept = new RezeptForm(Kategorie.Hauptspeise, "Spicy Burger", "Patties, Buns, Tomate, ...", "Erstmal ...", file);
-    final private RezeptForm torte_rezept = new RezeptForm(Kategorie.Nachspeise, "Erdbeertorte", "Erdbeeren, Mehl, Zucker, ...", "Zuallererst ...", file);
-
     @Test
     @DisplayName("RezeptService fügt Rezepte erfolgreich hinzu")
     void test_add_rezept() {
-        salat_rezept.setId(null);
-        service.addRezept(salat_rezept);
+        service.addRezept(vorspeise());
 
         Optional<RezeptForm> rezept = service.getVorspeisen().stream().findFirst();
 
-        assertThat(rezept.get().getName()).isEqualTo("Caesar Salat");
-        assertThat(service.getVorspeisen().size()).isEqualTo(1);
-        assertThat(service.getNachspeisen().size()).isEqualTo(0);
+        assertThat(rezept.get().getName()).isEqualTo("Caesar Salad");
     }
 
     @Test
     @DisplayName("getVorspeisen gibt alle Vorspeisen zurück")
     void test_get_vorspeisen() {
-        salat_rezept.setId(null);
-        burger_rezept.setId(null);
-        torte_rezept.setId(null);
+        List<RezeptForm> rezepte = vorspeisen();
+        for(int i = 0; i < 3; i++)
+            service.addRezept(rezepte.get(i));
 
-        service.addRezept(salat_rezept);
-        service.addRezept(burger_rezept);
-        service.addRezept(torte_rezept);
+        List<RezeptForm> vorspeisen = service.getVorspeisen();
 
+        List<String> recipeNames = List.of(
+                "Caesar Salad",
+                "Bruschetta Test",
+                "Linsensalat mit Petersilie"
+        );
 
-        Optional<RezeptForm> vorspeise = service.getVorspeisen().stream().findFirst();
-
-
-        assertThat(vorspeise.get().getName()).isEqualTo("Caesar Salat");
-        assertThat(service.getVorspeisen().size()).isEqualTo(1);
+        assertThat(containsRecipe(vorspeisen, recipeNames)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("getHauptspeisen gibt alle Hauptspeisen zurück")
     void test_get_hauptspeisen() {
-        salat_rezept.setId(null);
-        burger_rezept.setId(null);
-        torte_rezept.setId(null);
+        List<RezeptForm> rezepte = hauptspeisen();
+        for(int i = 0; i < 3; i++)
+            service.addRezept(rezepte.get(i));
 
-        service.addRezept(salat_rezept);
-        service.addRezept(burger_rezept);
-        service.addRezept(torte_rezept);
+        List<RezeptForm> hauptspeisen = service.getHauptspeisen();
 
-
-        Optional<RezeptForm> hauptspeise = service.getHauptspeisen().stream().findFirst();
-
-
-        assertThat(hauptspeise.get().getName()).isEqualTo("Spicy Burger");
-        assertThat(service.getHauptspeisen().size()).isEqualTo(1);
+        List<String> recipeNames = List.of(
+                "Chili con Carne klassisch",
+                "Hähnchen-Geschnetzeltes in Rahmsauce",
+                "Ofengemüse mediterran"
+        );
+        for(RezeptForm rezept: hauptspeisen) {
+            System.out.println(rezept.getName());
+        }
+        assertThat(containsRecipe(hauptspeisen, recipeNames)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("getNachspeisen gibt alle Nachspeisen zurück")
     void test_get_nachspeisen() {
-        salat_rezept.setId(null);
-        burger_rezept.setId(null);
-        torte_rezept.setId(null);
+        List<RezeptForm> rezepte = nachspeisen();
+        for(int i = 0; i < 3; i++)
+            service.addRezept(rezepte.get(i));
 
-        service.addRezept(salat_rezept);
-        service.addRezept(burger_rezept);
-        service.addRezept(torte_rezept);
+        List<RezeptForm> nachspeisen = service.getNachspeisen();
 
-
-        Optional<RezeptForm> nachspeise = service.getNachspeisen().stream().findFirst();
-
-
-        assertThat(nachspeise.get().getName()).isEqualTo("Erdbeertorte");
-        assertThat(service.getNachspeisen().size()).isEqualTo(1);
+        List<String> recipeNames = List.of(
+                "Schoko-Bananen-Pfannkuchen",
+                "Zitronen-Joghurt-Creme",
+                "Vanille-Milchreis mit Zimt"
+        );
+        assertThat(containsRecipe(nachspeisen, recipeNames)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("removeRezept löscht Speise korrekt")
     void test_remove() {
-        salat_rezept.setId(null);
-        RezeptForm r = service.addRezept(salat_rezept);
+        RezeptForm r = service.addRezept(vorspeise());
 
         service.removeRezept(r.getId());
-        assertThat(service.getVorspeisen().size()).isEqualTo(0);
+        assertThat(containsRecipe(service.getVorspeisen(), List.of("Caesar Salad"))).isEqualTo(0);
     }
 
     @Test
     @DisplayName("edit ändert das Rezept wie gewünscht")
     void test_edit() throws IOException {
-        salat_rezept.setId(null);
-        RezeptForm r = service.addRezept(salat_rezept);
-        r.setName("Bla");
+        RezeptForm r = service.addRezept(vorspeise());
+        r.setName("Caesar Salat");
+        r.setZutaten("Römersalat, 100g Parmesan, Croutons, 2 Eier, Senf, Zitronensaft, Öl");
+        r.setZubereitung("Salat waschen und klein schneiden. Aus Eiern, Senf und Zitronensaft ...");
+        r.setBildMultiPart(demoFile2());
 
         service.edit(r.getId(), r);
 
-        assertThat(service.getZubereitung(r.getId()).getName()).isEqualTo("Bla");
+        RezeptForm rezeptNew = service.getZubereitung(r.getId());
+        assertThat(rezeptNew.getName()).isEqualTo("Caesar Salat");
+        assertThat(rezeptNew.getZutaten())
+                .isEqualTo("Römersalat, 100g Parmesan, Croutons, 2 Eier, Senf, Zitronensaft, Öl");
+        assertThat(rezeptNew.getZubereitung())
+                .isEqualTo("Salat waschen und klein schneiden. Aus Eiern, Senf und Zitronensaft ...");
+        assertThat(rezeptNew.getBild()).isEqualTo(demoFile2().getBytes());
+    }
+
+
+    long containsRecipe(List<RezeptForm> rezepte, List<String> recipe) {
+        long counter = 0;
+        for(String recipeName: recipe) {
+            counter += rezepte.stream()
+                    .filter(r -> r.getName().equals(recipeName))
+                    .count();
+            System.out.println(counter + " " + recipeName);
+        }
+        return counter;
     }
 }

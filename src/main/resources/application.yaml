@@ -3,3 +3,9 @@ spring:
     password: ${DB_PASS}
     username: ${DB_USER}
     url: jdbc:postgresql://localhost:5432/KxrstinDatenbank
+
+
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/testdata

@@ -4,11 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import rezepte.website.rezept_website.controller.formulare.Kategorie;
-import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
 
 import java.util.List;
@@ -19,6 +16,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static rezepte.website.rezept_website.object_mother.TestRezeptData.*;
 
 @WebMvcTest
 public class SpeisenControllerTest {
@@ -28,18 +26,10 @@ public class SpeisenControllerTest {
     @MockitoBean
     RezeptService service;
 
-    final private MockMultipartFile file =
-            new MockMultipartFile("bildMultiPart", "demo.txt", "text/plain", "Hello World".getBytes());
-    final private RezeptForm demoRezept = new RezeptForm(Kategorie.Vorspeise, "", "Salz, ...", "Zunächst ...", file);
-    final private RezeptForm demoRezept2 = new RezeptForm(Kategorie.Nachspeise, "Dessert", "Zucker, ...", "Erstmal ...", file);
-
-
     @Test
-    @DisplayName("Beim aufrufen des 'Vorspeise'-Links wird die Vorspeisenseite gezeigt")
+    @DisplayName("Beim Aufrufen des 'Vorspeise'-Links wird die Vorspeisenseite gezeigt")
     void test_vorspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.Vorspeise);
-        demoRezept.setName("Gurkensalat");
-        when(service.getVorspeisen()).thenReturn(List.of(demoRezept));
+        when(service.getVorspeisen()).thenReturn(List.of(vorspeise()));
 
         String result = mvc.perform(get("/vorspeise"))
                 .andExpect(status().isOk())
@@ -47,16 +37,14 @@ public class SpeisenControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        assertThat(result).contains("Gurkensalat");
+        assertThat(result).contains("Caesar Salad");
     }
 
 
     @Test
-    @DisplayName("Beim aufrufen des Hauptspeise'-Links wird die Hauptspeisenseite gezeigt")
+    @DisplayName("Beim Aufrufen des Hauptspeise'-Links wird die Hauptspeisenseite gezeigt")
     void test_hauptspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.Hauptspeise);
-        demoRezept.setName("Spagetti Bolognese");
-        when(service.getHauptspeisen()).thenReturn(List.of(demoRezept));
+        when(service.getHauptspeisen()).thenReturn(List.of(hauptspeise()));
 
         String result = mvc.perform(get("/hauptspeise"))
                 .andExpect(status().isOk())
@@ -64,15 +52,13 @@ public class SpeisenControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        assertThat(result).contains("Spagetti Bolognese");
+        assertThat(result).contains("Ofengemüse mediterran");
     }
 
     @Test
-    @DisplayName("Beim aufrufen des 'Nachspeise'-Links wird die Nachspeisenseite gezeigt")
+    @DisplayName("Beim Aufrufen des 'Nachspeise'-Links wird die Nachspeisenseite gezeigt")
     void test_nachspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.Nachspeise);
-        demoRezept.setName("Eiscreme");
-        when(service.getNachspeisen()).thenReturn(List.of(demoRezept));
+        when(service.getNachspeisen()).thenReturn(List.of(nachspeise()));
 
         String result = mvc.perform(get("/nachspeise"))
                 .andExpect(status().isOk())
@@ -80,16 +66,13 @@ public class SpeisenControllerTest {
                 .andReturn()
                 .getResponse().getContentAsString();
 
-        assertThat(result).contains("Eiscreme");
+        assertThat(result).contains("Schoko-Bananen-Pfannkuchen");
     }
 
     @Test
-    @DisplayName("Beim aufrufen des 'Remove'-Links wird die Remove Page gezeigt")
+    @DisplayName("Beim Aufrufen des 'Remove'-Links wird die Remove Page gezeigt")
     void test_remove_page() throws Exception {
-        demoRezept.setKategorie(Kategorie.Nachspeise);
-        demoRezept.setName("Eiscreme");
-        demoRezept.setId(0);
-        when(service.getZubereitung(0)).thenReturn(demoRezept);
+        when(service.getZubereitung(0)).thenReturn(vorspeise());
 
         mvc.perform(get("/get/zubereitung/0/remove"))
                 .andExpect(status().isOk())
@@ -97,12 +80,9 @@ public class SpeisenControllerTest {
     }
 
     @Test
-    @DisplayName("Beim aufrufen des 'Remove'-Buttons wird die Main Page gezeigt und das Rezept ist gelöscht")
+    @DisplayName("Beim Aufrufen des 'Remove'-Buttons wird die Main Page gezeigt und das Rezept ist gelöscht")
     void test_remove() throws Exception {
-        demoRezept.setKategorie(Kategorie.Nachspeise);
-        demoRezept.setName("Eiscreme");
-        demoRezept.setId(0);
-        when(service.getZubereitung(0)).thenReturn(demoRezept);
+        when(service.getZubereitung(0)).thenReturn(vorspeise());
 
         mvc.perform(post("/get/zubereitung/0/remove"))
                 .andExpect(status().is3xxRedirection())
@@ -114,12 +94,9 @@ public class SpeisenControllerTest {
 
 
     @Test
-    @DisplayName("Beim aufrufen des 'Edit'-Links wird die Add Rezept Page gezeigt")
+    @DisplayName("Beim Aufrufen des 'Edit'-Links wird die Add Rezept Page gezeigt")
     void test_edit_page() throws Exception {
-        demoRezept.setKategorie(Kategorie.Nachspeise);
-        demoRezept.setName("Eiscreme");
-        demoRezept.setId(0);
-        when(service.getZubereitung(0)).thenReturn(demoRezept);
+        when(service.getZubereitung(0)).thenReturn(nachspeise());
 
         mvc.perform(get("/get/zubereitung/0/edit"))
                 .andExpect(status().isOk())
@@ -127,19 +104,16 @@ public class SpeisenControllerTest {
     }
 
     @Test
-    @DisplayName("Beim aufrufen des 'Edit'-Buttons wird die Main Page gezeigt und das Rezept ist verändert")
+    @DisplayName("Beim Aufrufen des 'Edit'-Buttons wird die Main Page gezeigt und das Rezept ist verändert")
     void test_edit() throws Exception {
-        demoRezept.setKategorie(Kategorie.Nachspeise);
-        demoRezept.setName("Eiscreme");
-        demoRezept.setId(0);
-        when(service.getZubereitung(0)).thenReturn(demoRezept);
+        when(service.getZubereitung(0)).thenReturn(nachspeise());
 
         mvc.perform(multipart("/get/zubereitung/0/edit")
-                        .file(file)
-                        .param("kategorie", demoRezept2.getKategorie().name())
-                        .param("name", demoRezept2.getName())
-                        .param("zutaten", demoRezept2.getZutaten())
-                        .param("zubereitung", demoRezept2.getZubereitung()))
+                        .file(demoFile())
+                        .param("kategorie", nachspeise().getKategorie().name())
+                        .param("name", nachspeise().getName())
+                        .param("zutaten", nachspeise().getZutaten())
+                        .param("zubereitung", nachspeise().getZubereitung()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
 
@@ -149,48 +123,39 @@ public class SpeisenControllerTest {
     @Test
     @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Vorspeisen")
     void test_filter_vorspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.Vorspeise);
-        demoRezept.setName("Caesarsalat");
-        demoRezept.setId(0);
-        when(service.getFilteredVorspeisen("Salat")).thenReturn(List.of(demoRezept));
+        when(service.getFilteredVorspeisen("Caesar")).thenReturn(List.of(vorspeise()));
 
-        String result = mvc.perform(get("/vorspeise/filter?filter=Salat"))
+        String result = mvc.perform(get("/vorspeise/filter?filter=Caesar"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("speisen/vorspeise_page"))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(result).contains("Caesarsalat");
+        assertThat(result).contains("Caesar Salad");
     }
 
     @Test
     @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Nachspeisen")
     void test_filter_nachspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.Nachspeise);
-        demoRezept.setName("Eiscreme");
-        demoRezept.setId(0);
-        when(service.getFilteredNachspeisen("Creme")).thenReturn(List.of(demoRezept));
+        when(service.getFilteredNachspeisen("Schoko")).thenReturn(List.of(nachspeise()));
 
-        String result = mvc.perform(get("/nachspeise/filter?filter=Creme"))
+        String result = mvc.perform(get("/nachspeise/filter?filter=Schoko"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("speisen/nachspeise_page"))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(result).contains("Eiscreme");
+        assertThat(result).contains("Schoko-Bananen-Pfannkuchen");
     }
 
     @Test
     @DisplayName("Die Suchfunktion zeigt das gewünschte Rezept der Hauptspeisen")
     void test_filter_hauptspeise() throws Exception {
-        demoRezept.setKategorie(Kategorie.Hauptspeise);
-        demoRezept.setName("Spicy Burger");
-        demoRezept.setId(0);
-        when(service.getFilteredHauptspeisen("Burger")).thenReturn(List.of(demoRezept));
+        when(service.getFilteredHauptspeisen("Ofengemüse")).thenReturn(List.of(hauptspeise()));
 
-        String result = mvc.perform(get("/hauptspeise/filter?filter=Burger"))
+        String result = mvc.perform(get("/hauptspeise/filter?filter=Ofengemüse"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("speisen/hauptspeise_page"))
                 .andReturn().getResponse().getContentAsString();
 
-        assertThat(result).contains("Spicy Burger");
+        assertThat(result).contains("Ofengemüse mediterran");
     }
 }
