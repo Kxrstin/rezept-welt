@@ -129,7 +129,6 @@ body {
 .get_speise:hover .speisenbild {
     transform: scale(1.1) rotate(-2deg);
 }
-
 .success {
     display: flex;
     align-items: center;
