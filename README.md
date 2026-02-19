@@ -29,6 +29,35 @@ Once the startup process is complete, you can access the application at:
 http://localhost:8080
 ```
 
+---
+
+## Demo & Screenshots
+
+<table>
+  <tr>
+    <td align="center"><b>Startseite & Kategorien</b></td>
+    <td align="center"><b>Rezept-Suche & Filter</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/mainPage.png" width="450px" alt="Main Page View"></td>
+    <td><img src="screenshots/search_filter.gif" width="450px" alt="Filter Functionality"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Zufalls-Inspiration</b></td>
+    <td align="center"><b>Rezepte hinzufügen</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/random_feature.gif" width="450px" alt="Random Recipe Generator"></td>
+    <td><img src="screenshots/add_recipe.gif" width="450px" alt="Add Recipe Workflow"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Rezepte ändern</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/change_recipe.gif" width="450px" alt="Change Recipe Workflow"></td>
+  </tr> 
+</table>
+
 --- 
 
 ## Features 
