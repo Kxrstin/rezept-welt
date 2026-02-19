@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RezeptRepository extends CrudRepository<RezeptForm, Integer> {
     List<RezeptForm> findAll();
+
+    RezeptForm findRezeptFormByName(String name);
 }

@@ -54,9 +54,13 @@ public class RezeptService {
 
     private List<RezeptForm> getFilteredSpeise(Kategorie k, String filter) {
         List<RezeptForm> filteredRecipes = new ArrayList<>();
-
         filteredRecipes.addAll(filterRecipeName(getSpeise(k), filter));
-        filteredRecipes.addAll(filteredRecipeZutaten(getSpeise(k), filter));
+
+        // Um Duplikate zu vermeiden
+        filteredRecipes.addAll(
+                filteredRecipeZutaten(getSpeise(k), filter).stream()
+                        .filter(rezept -> !filteredRecipes.contains(rezept))
+                        .toList());
 
         return filteredRecipes.isEmpty() ? Collections.emptyList() : filteredRecipes;
     }
