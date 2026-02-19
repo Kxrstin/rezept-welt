@@ -155,4 +155,11 @@ public class RezeptForm {
     public String[] getZutatenListe() {
         return this.zutaten.split(", ");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(o.getClass() != RezeptForm.class) return false;
+        return ((RezeptForm) o).getName().equals(this.getName());
+    }
 }
