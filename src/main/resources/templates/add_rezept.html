@@ -2,8 +2,8 @@
     <head>
         <title>Rezept hinzufügen | Rezept-Welt</title>
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}">
-        <link rel="stylesheet" th:href="@{/css/add_rezept_page.css}">
+        <link rel="icon" type="image/png" href="../static/img/recipebook_icon.png" th:href="@{/img/recipebook_icon.png}">
+        <link rel="stylesheet" href="../static/css/add_rezept_page.css" th:href="@{/css/add_rezept_page.css}">
     </head>
     <body>
         <p th:if="${edit}">Rezept ändern</p>
@@ -20,15 +20,15 @@
                 <small class="danger" th:if="${#fields.hasErrors('kategorie')}" th:errors="*{kategorie}">Name Error</small>
 
                 <label for="idname">Name</label>
-                <input th:field="*{name}" type="text" id="idname"><br>
+                <input class="input-text" th:field="*{name}" type="text" id="idname"><br>
                 <small class="danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
 
                 <label for="idzutaten">Zutaten (kommagetrennt, z.B.: "Zucker, Eier, Mehl, ...")</label>
-                <input th:field="*{zutaten}" type="text" id="idzutaten"><br>
+                <input class="input-text" th:field="*{zutaten}" type="text" id="idzutaten"><br>
                 <small class="danger" th:if="${#fields.hasErrors('zutaten')}" th:errors="*{zutaten}">Name Error</small>
 
                 <label for="idzubereitung">Zubereitung</label>
-                <textarea th:field="*{zubereitung}" id="idzubereitung"></textarea><br>
+                <textarea class="input-text" th:field="*{zubereitung}" id="idzubereitung"></textarea><br>
                 <small class="danger" th:if="${#fields.hasErrors('zubereitung')}" th:errors="*{zubereitung}">Name Error</small>
 
                 <label for="idbild">Bild hochladen</label>
@@ -53,15 +53,15 @@
                 <small class="danger" th:if="${#fields.hasErrors('kategorie')}" th:errors="*{kategorie}">Name Error</small>
 
                 <label for="idname2">Name</label>
-                <input th:field="*{name}" type="text" id="idname2"><br>
+                <input class="input-text" th:field="*{name}" type="text" id="idname2"><br>
                 <small class="danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
 
                 <label for="idzutaten2">Zutaten (kommagetrennt, z.B.: "Zucker, Eier, Mehl, ...")</label>
-                <input th:field="*{zutaten}" type="text" id="idzutaten2"><br>
+                <input class="input-text"  th:field="*{zutaten}" type="text" id="idzutaten2"><br>
                 <small class="danger" th:if="${#fields.hasErrors('zutaten')}" th:errors="*{zutaten}">Name Error</small>
 
                 <label for="idzubereitung2">Zubereitung</label>
-                <textarea th:field="*{zubereitung}" id="idzubereitung2"></textarea><br>
+                <textarea class="input-text"  th:field="*{zubereitung}" id="idzubereitung2"></textarea><br>
                 <small class="danger" th:if="${#fields.hasErrors('zubereitung')}" th:errors="*{zubereitung}">Name Error</small>
 
                 <label for="idbild2">Bild hochladen</label>

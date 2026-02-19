@@ -73,9 +73,6 @@ button[type="submit"]:hover {
     text-align: center;
 }
 
-input[type="text"],
-select,
-input[type="file"],
 textarea {
     padding: 10px 12px;
     font-size: 1rem;
@@ -84,5 +81,10 @@ textarea {
     transition: border-color 0.3s ease;
     width: 100%;
     box-sizing: border-box;
-    resize: vertical; /* nur Höhe veränderbar */
+    resize: vertical;
+}
+
+input.input-text,
+textarea.input-text {
+    font-family: sans-serif;
 }
