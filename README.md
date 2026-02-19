@@ -35,23 +35,23 @@ http://localhost:8080
 
 <table>
   <tr>
-    <td align="center"><b>Startseite & Kategorien</b></td>
+    <td align="center"><b>Main page & Categories</b></td>
   </tr>
   <tr>
     <td><img src="screenshots/mainPage.png" width="550px" alt="Main Page View"></td>
    
   </tr>
   <tr>
-    <td align="center"><b>Zufalls-Inspiration</b></td>
-    <td align="center"><b>Rezepte hinzufügen</b></td>
+    <td align="center"><b>Random-Inspiration</b></td>
+    <td align="center"><b>Add recipes</b></td>
   </tr>
   <tr>
     <td><img src="screenshots/random_feature.gif" width="350px" alt="Random Recipe Generator"></td>
     <td><img src="screenshots/add_recipe.gif" width="350px" alt="Add Recipe Workflow"></td>
   </tr>
   <tr>
-    <td align="center"><b>Rezepte ändern</b></td>
-    <td align="center"><b>Rezept-Suche & Filter</b></td>
+    <td align="center"><b>Change recipes</b></td>
+    <td align="center"><b>Search and filter recipes</b></td>
   </tr>
   <tr>
     <td><img src="screenshots/change_recipe.gif" width="350px" alt="Change Recipe Workflow"></td>
