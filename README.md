@@ -1,7 +1,7 @@
 # Rezept Welt
 ## Full-stack web application to manage your own recipe ideas.
 
-Rezept Welt brings structure to cooking ideas. Users can add their own recipes with ingredients, categories, preparation instructions, and images, and later search and filter them to quickly find exactly what they are looking for — whether by name, ingredients, or category.
+Rezept Welt brings structure to cooking ideas. Users can add their own recipes with ingredients, categories, preparation instructions, and images, and later search and filter them to quickly find exactly what they are looking for — whether by name or ingredients.
 
 --- 
 
@@ -62,10 +62,20 @@ http://localhost:8080
 --- 
 
 ## Features 
-- Server-side rendered frontend with Thymeleaf
-- SQL-based persistence with explicit JDBC access
-- Database versioning and migrations with Flyway
+### User Features
+- Recipe Management: Create, view, and organize your favorite recipes.
+- Categorization: Recipes are sorted into Starters, Main Courses, and Desserts for quick access.
+- Smart Search: Real-time filtering to find specific recipes by name or ingredients.
+- Random Recipe Generator: Get inspired! Use the category-specific random buttons to pick your next meal.
+- Visual Appeal: Upload and display images for every recipe.
 
+### Technical Highlights
+- Clean Code: Focused on readability, maintainability, and SOLID principles.
+- Persistence: Robust data handling using Spring Data JDBC and PostgreSQL.
+- Database Migrations: Version-controlled database schema using Flyway.
+- Responsive Design: A fully responsive web interface (Thymeleaf & CSS).
+- Testing Culture: Unit tests (JUnit 5, AssertJ) to ensure high code quality.
+  
 ---
 
 ## Tech Stack 
@@ -75,6 +85,7 @@ http://localhost:8080
 - JDBC
 - Flyway
 - Gradle
+- JUnit
 
 ### Frontend 
 - Thymeleaf
@@ -87,7 +98,11 @@ http://localhost:8080
 --- 
 
 ### What I learned 
-Test-driven development and structuring of Java applications and Design of web-based services and their integration into server-side user interfaces Management of relational databases and migrations. 
+- I had an idea that I implemented independently and in a test-driven manner. In doing so, I consolidated the knowledge I had gained during my studies and practiced solving problems.
+- Database Migrations: I implemented Flyway to manage database schema changes version by version, avoiding the "it works on my machine" problem with manual SQL scripts.
+- Binary Data (BLOBs): Dealing with BYTEA in PostgreSQL taught me how to efficiently handle image uploads and convert binary data to Base64 for display in the frontend.
+- Testing Strategies: By using Spring Profiles (@Profile("!test")), I learned how to isolate production code (like data loaders) from the test environment to ensure reliable and repeatable tests.
+- Thymeleaf Templating: I deepened my knowledge of how to pass complex objects from a Spring controller to a dynamic HTML view and handle conditional rendering.
 
 --- 
 
