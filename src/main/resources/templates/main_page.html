@@ -2,21 +2,24 @@
     <head>
         <title> Rezept-Welt</title>
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}">
-        <link rel="stylesheet" th:href="@{css/main_page.css}">
+        <link rel="icon" type="image/png" href="../img/recipebook_icon.png" th:href="@{/img/recipebook_icon.png}">
+        <link rel="stylesheet" href="../static/css/main_page.css" th:href="@{css/main_page.css}">
     </head>
 
     <body>
-        <h1>Ihre persönliche Rezeptwelt</h1>
+        <h1>Willkommen in deiner digitalen Rezeptwelt!</h1>
         <div class="beschreibung">
             <p>
-                <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" alt="Rezeptbuch Logo">
-                Willkommen in deiner digitalen Rezeptwelt!
                 Verwalte deine Lieblingsgerichte ganz einfach von überall. Ob Vorspeise, Hauptgang oder Dessert – hier kannst du Rezepte suchen,
                 bearbeiten oder neu kreieren. Du hast die volle Kontrolle über deine Sammlung. Und wenn dir mal die Inspiration fehlt:
                 Lass dich von unserem Zufallsgenerator überraschen!
             </p>
+            <img class="rezeptbild" src="../img/recipebook_icon.png" th:src="@{img/recipebook_icon.png}" alt="Rezeptbuch Logo">
         </div>
+
+        <form method="get" action="/add/rezept">
+            <button class="add_rezept" type="submit">Neues Rezept hinzufügen</button>
+        </form>
 
         <div class="success" th:if="${success}">
             <p>Sie haben erfolgreich ein Rezept hinzugefügt.</p>
@@ -31,24 +34,20 @@
             <p th:text="${error_message}">Es gab einen Fehler mein Hochladen des Bildes.</p>
         </div>
 
-        <form method="get" action="/add/rezept">
-            <button class="add_rezept" type="submit">Neues Rezept hinzufügen</button>
-        </form>
-
         <div class="speisen-container">
             <div class="get_speise">
                 <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
-                <img class="speisenbild" th:src="@{img/vorspeise.png}" alt="Vorspeise">
+                <img class="speisenbild" src="../img/vorspeise.png" th:src="@{img/vorspeise.png}" alt="Vorspeise">
             </div>
 
             <div class="get_speise">
                 <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
-                <img class="speisenbild" th:src="@{img/hauptspeise.png}" alt="Hauptspeise">
+                <img class="speisenbild" src="../img/hauptspeise.png" th:src="@{img/hauptspeise.png}" alt="Hauptspeise">
             </div>
 
             <div class="get_speise">
                 <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
-                <img class="speisenbild" th:src="@{img/nachspeise.png}" alt="Nachspeise">
+                <img class="speisenbild" src="../img/nachspeise.png" th:src="@{img/nachspeise.png}" alt="Nachspeise">
             </div>
         </div>
 
