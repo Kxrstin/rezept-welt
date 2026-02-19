@@ -36,25 +36,26 @@ http://localhost:8080
 <table>
   <tr>
     <td align="center"><b>Startseite & Kategorien</b></td>
-    <td align="center"><b>Rezept-Suche & Filter</b></td>
   </tr>
   <tr>
-    <td><img src="screenshots/mainPage.png" width="450px" alt="Main Page View"></td>
-    <td><img src="screenshots/search_filter.gif" width="450px" alt="Filter Functionality"></td>
+    <td><img src="screenshots/mainPage.png" width="550px" alt="Main Page View"></td>
+   
   </tr>
   <tr>
     <td align="center"><b>Zufalls-Inspiration</b></td>
     <td align="center"><b>Rezepte hinzufügen</b></td>
   </tr>
   <tr>
-    <td><img src="screenshots/random_feature.gif" width="450px" alt="Random Recipe Generator"></td>
-    <td><img src="screenshots/add_recipe.gif" width="450px" alt="Add Recipe Workflow"></td>
+    <td><img src="screenshots/random_feature.gif" width="350px" alt="Random Recipe Generator"></td>
+    <td><img src="screenshots/add_recipe.gif" width="350px" alt="Add Recipe Workflow"></td>
   </tr>
   <tr>
     <td align="center"><b>Rezepte ändern</b></td>
+    <td align="center"><b>Rezept-Suche & Filter</b></td>
   </tr>
   <tr>
-    <td><img src="screenshots/change_recipe.gif" width="450px" alt="Change Recipe Workflow"></td>
+    <td><img src="screenshots/change_recipe.gif" width="350px" alt="Change Recipe Workflow"></td>
+    <td><img src="screenshots/search_filter.gif" width="350px" alt="Filter Functionality"></td>
   </tr> 
 </table>
 
@@ -98,7 +99,9 @@ This project uses graphics from external providers. The rights belong to the res
 * **Appetizer**: Created via [Doodlewash.com](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fdoodlewash.com%2Feating-leaves-again%2F&ved=0CBUQjRxqFwoTCODJocW8ypIDFQAAAAAdAAAAABAP&opi=89978449)
 * **Main course**: [Pinterest](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F2814818500241359%2F&ved=0CBUQjRxqFwoTCOCOudPOypIDFQAAAAAdAAAAABAQ&opi=89978449)
 * **Dessert**: [Pinterest](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F2814818500241359%2F&ved=0CBUQjRxqFwoTCOCOudPOypIDFQAAAAAdAAAAABAQ&opi=89978449)
-
-
-
+* **Guacamole**: [Eat.de](https://eat.de/wp-content/uploads/2025/09/puking-pumpkin-halloween-nachos-8389.jpg)
+* **Salad**: [Eat.de](https://eat.de/wp-content/uploads/2023/04/caesar-salad-0369.jpg)
+* **Vanillepudding**: [Giallozafferano.de](https://www.google.com/imgres?q=vanillepudding&imgurl=https%3A%2F%2Fwww.giallozafferano.de%2Fimages%2F112-11286%2Fvanilla-pudding_1200x800.jpg&imgrefurl=https%3A%2F%2Fwww.giallozafferano.de%2Frezepte%2Fvanilla-pudding.html&docid=2BXIqCJv3cTuFM&tbnid=u-HisKfnYsKddM&vet=12ahUKEwjMy8T3iOaSAxUq9bsIHV2hALkQnPAOegQITxAB..i&w=1200&h=800&hcb=2&ved=2ahUKEwjMy8T3iOaSAxUq9bsIHV2hALkQnPAOegQITxAB)
+* **Salmon**: [Essen-wissen.de](https://www.google.com/imgres?q=gebratenes%20lachsfilte&imgurl=https%3A%2F%2Fessen-wissen.de%2Fwp-content%2Fuploads%2F2021%2F10%2Flachs-kartoffelbrei-adobestock-143854337-2-scaled.jpeg&imgrefurl=https%3A%2F%2Fessen-wissen.de%2Frezept%2Fgebratener-lachs-mit-pastinakenpueree-und-meerrettichschaum%2F&docid=Wk8cIPzP3OJnQM&tbnid=C6y35Ha293w8gM&vet=12ahUKEwi926nVieaSAxXT87sIHSeSDcYQnPAOegQIKBAB..i&w=2560&h=1440&hcb=2&ved=2ahUKEwi926nVieaSAxXT87sIHSeSDcYQnPAOegQIKBAB)
+* **Linsensalat**: [Feat.de](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Feat.de%2Frezept%2Forientalischer-linsensalat%2F&ved=0CBYQjRxqFwoTCMCg-ezy5ZIDFQAAAAAdAAAAABAI&opi=89978449)
 
