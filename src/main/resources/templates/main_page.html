@@ -11,11 +11,10 @@
         <div class="beschreibung">
             <p>
                 <img class="rezeptbild" th:src="@{img/recipebook_icon.png}" alt="Rezeptbuch Logo">
-                Hier können Sie ihre Rezepte verwalten und ihrer Kreativität freien Lauf lassen,
-                um ihre Rezepte von überall aus nutzen zu können. Die Hauptkategorien sind Vor-, Haupt- und Nachspeise
-                und diese beinhalten zahlreiche leckere Rezepte! Sie können Rezepte jederzeit suchen, nach Ihrem belieben
-                überarbeiten, hinzufügen und löschen. So haben Sie die Kontrolle über die Rezepte und eine übersichtliche
-                Darstellung dieser.
+                Willkommen in deiner digitalen Rezeptwelt!
+                Verwalte deine Lieblingsgerichte ganz einfach von überall. Ob Vorspeise, Hauptgang oder Dessert – hier kannst du Rezepte suchen,
+                bearbeiten oder neu kreieren. Du hast die volle Kontrolle über deine Sammlung. Und wenn dir mal die Inspiration fehlt:
+                Lass dich von unserem Zufallsgenerator überraschen!
             </p>
         </div>
 
@@ -36,18 +35,30 @@
             <button class="add_rezept" type="submit">Neues Rezept hinzufügen</button>
         </form>
 
+        <div class="speisen-container">
+            <div class="get_speise">
+                <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
+                <img class="speisenbild" th:src="@{img/vorspeise.png}" alt="Vorspeise">
+            </div>
 
-        <div class="get_speise">
-            <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
-            <img class="speisenbild" th:src="@{img/vorspeise.png}" alt="Zeichnung von einem Salat auf einem Teller">
+            <div class="get_speise">
+                <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
+                <img class="speisenbild" th:src="@{img/hauptspeise.png}" alt="Hauptspeise">
+            </div>
+
+            <div class="get_speise">
+                <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
+                <img class="speisenbild" th:src="@{img/nachspeise.png}" alt="Nachspeise">
+            </div>
         </div>
-        <div class="get_speise reverse">
-            <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
-            <img class="speisenbild" th:src="@{img/hauptspeise.png}" alt="Zeichnung eines Burgers.">
-        </div>
-        <div class="get_speise">
-            <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
-            <img class="speisenbild" th:src="@{img/nachspeise.png}" alt="Zeichnung eines Blaubeer-Pancake Stapels">
+
+        <div class="random-section">
+            <h2>Keine Idee? Probier's mal hiermit!</h2>
+            <div class="random-buttons">
+                <a class="btn-random vorspeise" th:href="@{/rezept/random/Vorspeise}">Zufällige Vorspeise</a>
+                <a class="btn-random hauptspeise" th:href="@{/rezept/random/Hauptspeise}">Zufällige Hauptspeise</a>
+                <a class="btn-random nachspeise" th:href="@{/rezept/random/Nachspeise}">Zufällige Nachspeise</a>
+            </div>
         </div>
     </body>
 </html>

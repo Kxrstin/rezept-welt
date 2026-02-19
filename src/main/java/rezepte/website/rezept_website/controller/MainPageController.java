@@ -51,4 +51,22 @@ public class MainPageController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/rezept/random/Vorspeise")
+    public String getRandomVorspeise() {
+        long randomId = service.getRandomVorspeiseId();
+        return "redirect:/get/zubereitung/" + randomId;
+    }
+
+    @GetMapping("/rezept/random/Hauptspeise")
+    public String getRandomHauptspeise() {
+        long randomId = service.getRandomHauptspeiseId();
+        return "redirect:/get/zubereitung/" + randomId;
+    }
+
+    @GetMapping("/rezept/random/Nachspeise")
+    public String getRandomNachspeise() {
+        long randomId = service.getRandomNachspeiseId();
+        return "redirect:/get/zubereitung/" + randomId;
+    }
 }

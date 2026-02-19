@@ -22,18 +22,6 @@ h2 {
     float: right;
 }
 
-.speisenbild {
-    width: 100px;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.speisenbild_left {
-    width: 100px;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
 /* Body */
 body {
     font-family: sans-serif;
@@ -83,23 +71,38 @@ body {
     margin-right: 25px;
 }
 
-.get_speise {
+
+.speisen-container {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    width: 250px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
 }
 
-.get_speise.reverse {
-    flex-direction: row-reverse;
+.get_speise {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.get_speise:hover {
+    transform: scale(1.05);
+}
+
+.speisenbild {
+    width: 70%;
+    height: auto;
+    max-height: 140px;
+    max-width: 180px;
+    margin-top: 15px;
 }
 
 .get_speise {
@@ -129,6 +132,7 @@ body {
 .get_speise:hover .speisenbild {
     transform: scale(1.1) rotate(-2deg);
 }
+
 .success {
     display: flex;
     align-items: center;
@@ -153,4 +157,45 @@ body {
     background-color: #d5969f;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.random-section {
+    text-align: center;
+    margin: 40px 0;
+    padding: 20px;
+    background-color: lavender;
+    border-radius: 15px;
+}
+
+.random-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-random {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #3f364a;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-random:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    color: #6a5acd;
+    border-bottom-color: #6a5acd;
+}
+
+.vorspeise {
+    background-color: #97c697;
+}
+.hauptspeise {
+    background-color: #d3c393;
+}
+.nachspeise {
+    background-color: #ceabdf;
 }

@@ -69,7 +69,6 @@ public class MainPageControllerTest {
     @Test
     @DisplayName("Rezepte werden erfolgreich hinzugefügt")
     void test_add() throws Exception {
-
         mvc.perform(multipart("/add/rezept")
                 .file(file)
                 .param("kategorie", demoRezept.getKategorie().name())

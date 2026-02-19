@@ -113,4 +113,22 @@ public class RezeptService {
                 })
                 .toList();
     }
+
+    public long getRandomVorspeiseId() {
+        return getRandomSpeiseId(Kategorie.Vorspeise);
+    }
+
+    public long getRandomHauptspeiseId() {
+        return getRandomSpeiseId(Kategorie.Hauptspeise);
+    }
+
+    public long getRandomNachspeiseId() {
+        return getRandomSpeiseId(Kategorie.Nachspeise);
+    }
+
+    private long getRandomSpeiseId(Kategorie kategorie) {
+        List<RezeptForm> rezepte = getSpeise(kategorie);
+        int random = (int) (Math.random() * rezepte.size());
+        return rezepte.get(random).getId();
+    }
 }
