@@ -1,4 +1,13 @@
 # Rezept Welt
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white" />
+</p>
+
 ## Full-stack web application to manage your own recipe ideas.
 
 Rezept Welt brings structure to cooking ideas. Users can add their own recipes with ingredients, categories, preparation instructions, and images, and later search and filter them to quickly find exactly what they are looking for — whether by name or ingredients.
@@ -31,43 +40,23 @@ http://localhost:8080
 
 ---
 
-## Demo & Screenshots
-
-<table>
-  <tr>
-    <td align="center"><b>Main page & Categories</b></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/mainPage.png" width="400px" alt="Main Page View"></td>
-   
-  </tr>
-  <tr>
-    <td align="center"><b>Random-Inspiration</b></td>
-    <td align="center"><b>Add recipes</b></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/random_feature.gif" width="400px" alt="Random Recipe Generator"></td>
-    <td><img src="screenshots/add_recipe.gif" width="400px" alt="Add Recipe Workflow"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Change recipes</b></td>
-    <td align="center"><b>Search and filter recipes</b></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/change_recipe.gif" width="400px" alt="Change Recipe Workflow"></td>
-    <td><img src="screenshots/search_filter.gif" width="400px" alt="Filter Functionality"></td>
-  </tr> 
-</table>
-
---- 
-
-## Features 
+## Features & Demo
 ### User Features
+- Categorization: Recipes are sorted into `Vorspeisen`, `Hauptspeisen`, and `Nachspeisen` for quick access.
+ <img src="screenshots/mainPage.png" width="600px" alt="Main Page View">
+
 - Recipe Management: Create, view, and organize your favorite recipes.
-- Categorization: Recipes are sorted into Starters, Main Courses, and Desserts for quick access.
-- Smart Search: Real-time filtering to find specific recipes by name or ingredients.
-- Random Recipe Generator: Get inspired! Use the category-specific random buttons to pick your next meal.
+  <img src="screenshots/add_recipe.gif" width="600px" alt="Add Recipe Workflow">
+
 - Visual Appeal: Upload and display images for every recipe.
+  <img src="screenshots/change_recipe.gif" width="600px" alt="Change Recipe Workflow">
+
+- Smart Search: Filtering to find specific recipes by name or ingredients.
+  <img src="screenshots/search_filter.gif" width="600px" alt="Filter Functionality">
+
+- Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick your next meal.
+  <img src="screenshots/random_feature.gif" width="600px" alt="Random Recipe Generator">
+
 
 ### Technical Highlights
 - Clean Code: Focused on readability, maintainability, and SOLID principles.
@@ -79,21 +68,22 @@ http://localhost:8080
 ---
 
 ## Tech Stack 
+
 ### Backend
-- Java 21
-- Spring Boot
-- JDBC
-- Flyway
-- Gradle
-- JUnit
+<img src="https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" /> <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" /> <img src="https://img.shields.io/badge/Flyway-CC0202?style=for-the-badge&logo=flyway&logoColor=white" /> <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white" /> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" /> <img src="https://img.shields.io/badge/JDBC-007396?style=for-the-badge&logo=oracle&logoColor=white" />
 
-### Frontend 
-- Thymeleaf
-- HTML
-- CSS
+### Frontend
+<img src="https://img.shields.io/badge/Thymeleaf-005C0F?style=for-the-badge&logo=Thymeleaf&logoColor=white" /> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
 
-### Database 
-- Relational SQL database (PostgreSQL)
+### Database
+<p align="left">
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+</p>
+
+### Testing Strategy
+<p align="left">
+  <img src="https://img.shields.io/badge/JUnit%205-25A162?style=for-the-badge&logo=junit5&logoColor=white" />
+</p>
 
 --- 
 
