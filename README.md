@@ -43,10 +43,8 @@ http://localhost:8080
 ## Features & Demo
 ### User Features
 - Categorization: Recipes are sorted into `Vorspeisen`, `Hauptspeisen`, and `Nachspeisen` for quick access.
-<p align="left">
- <img src="screenshots/mainPage.png" width="600px" alt="Main Page View">
-</p>
-
+  <img src="screenshots/mainPage.png" width="600px" alt="Main Page View">
+  
 - Recipe Management: Create, view, and organize your favorite recipes.
   <img src="screenshots/add_recipe.gif" width="600px" alt="Add Recipe Workflow">
 
