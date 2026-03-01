@@ -54,7 +54,7 @@ http://localhost:8080
 - Smart Search: Filtering to find specific recipes by name or ingredients.
   <img src="screenshots/search_filter.gif" width="600px" alt="Filter Functionality">
 
-- Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick your next meal.
+- Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick a next meal.
   <img src="screenshots/random_feature.gif" width="600px" alt="Random Recipe Generator">
 
 
