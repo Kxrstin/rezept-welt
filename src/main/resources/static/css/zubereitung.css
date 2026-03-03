@@ -100,3 +100,76 @@ footer {
     color: #888;
     opacity: 0.6;
 }
+
+/* Media Query für mobile Geräte */
+@media (max-width: 768px) {
+
+    /* 1. Header & Schriften */
+    h1 {
+        font-size: 27px;
+        margin-bottom: 20px;
+    }
+
+    h2, h3 {
+        font-size: 24px; /* Überschriften auf dem Handy etwas markanter */
+        text-align: center;
+    }
+
+    /* 2. Rezept-Container (Zutaten und Bild) */
+    .recipe-container {
+        flex-direction: column; /* Alles schön untereinander */
+        align-items: center;
+    }
+
+    .zutaten, .zubereitung {
+        width: 100%; /* Boxen nutzen die volle Breite */
+        min-width: 0; /* Verhindert Überlaufen */
+        box-sizing: border-box; /* Padding wird in Breite eingerechnet */
+    }
+
+    /* 3. Das Bild optimieren */
+    .essens-bild {
+        order: -1; /* Das Bild rückt auf dem Handy nach GANZ oben (optional) */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .speisenbild {
+        float: none; /* Float ausschalten, damit das Bild nicht am Rand klebt */
+        width: 200px; /* Auf dem Handy darf das Bild ruhig etwas größer sein */
+        height: 200px;
+        object-fit: cover; /* Verhindert Verzerrung bei 1:1 Format */
+        margin: 0 auto 20px auto;
+    }
+
+    /* 4. Texte besser lesbar machen */
+    .rezept_text {
+        font-size: 20px; /* Zutaten-Text vergrößern */
+        line-height: 1.5;
+    }
+
+    p.zubereitung {
+        font-size: 18px; /* Zubereitungstext lesefreundlich */
+        text-align: left; /* Text bleibt linksbündig für besseren Lesefluss */
+    }
+
+    /* 5. Interaktive Elemente (Checkboxen & Links) */
+    .checkbox-input {
+        width: 25px; /* Größere Checkboxen für dicke Finger */
+    }
+
+    .links {
+        flex-direction: column; /* Löschen & Bearbeiten untereinander */
+        gap: 20px;
+    }
+
+    .link_in_middle {
+        font-size: 22px;
+        padding: 10px;
+        background-color: white; /* Optional: Macht die Links wie Buttons */
+        border-radius: 8px;
+        width: 95%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+}
