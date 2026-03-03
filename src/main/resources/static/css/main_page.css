@@ -235,3 +235,63 @@ body {
     filter: brightness(0.95) saturate(1.2);
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
+
+/* Media Query für mobile Geräte (Bildschirme kleiner als 768px) */
+@media (max-width: 768px) {
+
+    /* 1. Beschreibung anpassen: Bild und Text untereinander */
+    .beschreibung {
+        width: 90%; /* Nimmt fast die ganze Breite ein */
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* 2. Speisen (Vorspeise, etc.) untereinander stapeln */
+    .speisen-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .get_speise {
+        width: 80%; /* Boxen breiter machen für mobile Ansicht */
+        margin-bottom: 20px;
+    }
+
+    /* 3. Schriften vergrößern für bessere Lesbarkeit */
+    h1 {
+        font-size: 32px;
+        margin: 30px 10px;
+    }
+
+    .beschreibung p {
+        font-size: 14px;
+    }
+
+    .speisen_link {
+        font-size: 24px; /* Links in den Boxen deutlicher machen */
+    }
+
+    .add_rezept {
+        width: 90%;
+        font-size: 22px;
+        padding: 15px;
+    }
+
+    /* 4. Buttons im Zufallsbereich untereinander */
+    .random-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-random {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .rezeptbild {
+        width: 100px;
+        height: auto;
+        margin-top: 5px;
+        object-fit: contain;
+    }
+}
