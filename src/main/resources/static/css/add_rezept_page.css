@@ -88,3 +88,65 @@ input.input-text,
 textarea.input-text {
     font-family: sans-serif;
 }
+
+/* Media Query für mobile Geräte */
+@media (max-width: 768px) {
+
+    /* 1. Den weißen Hintergrund-Container anpassen */
+    div {
+        width: 95%; /* Fast volle Breite auf dem Handy */
+        max-width: none; /* Aufhebung der 500px Begrenzung */
+        padding: 20px; /* Weniger Innenabstand für mehr Platz zum Tippen */
+        box-sizing: border-box;
+    }
+
+    /* 2. Überschrift vergrößern */
+    p {
+        font-size: 32px; /* Dein 'text-size' im Original war etwas klein definiert */
+        margin: 20px 0;
+    }
+
+    /* 3. Labels und Inputs vergrößern */
+    label {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+        font-size: 18px; /* Verhindert automatisches Zoomen bei iOS */
+        padding: 15px; /* Größere Klickfläche */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 4. Spezielle Anpassung für Dateiupload */
+    input[type="file"] {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    /* 5. Der Button muss richtig knallen */
+    button[type="submit"] {
+        padding: 18px;
+        font-size: 22px;
+        margin-top: 40px;
+        width: 100%; /* Volle Breite für einfaches Klicken */
+    }
+
+    /* 6. Fehlermeldungen deutlicher machen */
+    .danger {
+        font-size: 16px;
+        display: block;
+        margin-top: 5px;
+    }
+
+    /* 7. Zurück-Link als Button stylen für bessere Bedienbarkeit */
+    .link_in_middle {
+        font-size: 20px;
+        padding: 15px;
+        color: #7474e4;
+        text-decoration: underline;
+    }
+}
