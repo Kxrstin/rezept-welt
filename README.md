@@ -43,10 +43,8 @@ http://localhost:8080
 ## Features & Demo
 ### User Features
 - Categorization: Recipes are sorted into `Vorspeisen`, `Hauptspeisen`, and `Nachspeisen` for quick access.
-<p align="left">
- <img src="screenshots/mainPage.png" width="600px" alt="Main Page View">
-</p>
-
+  <img src="screenshots/mainPage.png" width="600px" alt="Main Page View">
+  
 - Recipe Management: Create, view, and organize your favorite recipes.
   <img src="screenshots/add_recipe.gif" width="600px" alt="Add Recipe Workflow">
 
@@ -56,7 +54,7 @@ http://localhost:8080
 - Smart Search: Filtering to find specific recipes by name or ingredients.
   <img src="screenshots/search_filter.gif" width="600px" alt="Filter Functionality">
 
-- Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick your next meal.
+- Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick a next meal.
   <img src="screenshots/random_feature.gif" width="600px" alt="Random Recipe Generator">
 
 
