@@ -114,3 +114,50 @@ body {
     border-bottom-color: #6a5acd;
 }
 
+/* Media Query für mobile Geräte */
+@media (max-width: 768px) {
+
+    /* 1. Überschrift etwas anpassen */
+    h1 {
+        font-size: 34px;
+        margin: 20px 10px;
+    }
+
+    /* 2. "Zurück"-Button Box breiter machen */
+    .speise {
+        width: 80%;
+        padding: 15px;
+    }
+
+    .link_in_middle {
+        font-size: 22px; /* Größere Schrift zum Tippen */
+    }
+
+    /* 3. Rezept-Karten optimieren */
+    .rezept-karte {
+        flex-direction: column; /* Bild oben, Text unten */
+        width: 90%;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .rezept-karte img {
+        width: 100%; /* Bild nutzt die volle Breite der Karte */
+        max-width: 250px; /* Aber nicht zu riesig werden */
+        height: auto;
+    }
+
+    .rezept-karte a.link {
+        font-size: 24px; /* Rezeptname deutlich größer */
+        display: block;
+        padding: 10px 0;
+    }
+
+    /* 4. Das "float: right" bei .bild entfernen, damit es nicht das Layout zerschießt */
+    .bild {
+        float: none;
+        display: block;
+        margin: 10px auto;
+        width: 120px;
+    }
+}
