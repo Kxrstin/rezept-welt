@@ -53,3 +53,48 @@ button:hover {
     box-shadow: 0 10px 24px rgba(0,0,0,0.2);
     background: linear-gradient(135deg, #4338ca, #2563eb);
 }
+
+/* Media Query für mobile Geräte */
+@media (max-width: 768px) {
+
+    /* 1. Überschrift verkleinern, damit sie nicht bricht */
+    h1 {
+        font-size: 30px;
+        margin-bottom: 30px;
+        padding: 0 10px;
+    }
+
+    /* 2. Den Hinweistext anpassen */
+    p {
+        font-size: 20px; /* Etwas kleiner für das Handy */
+        width: 90%;      /* Nimmt fast die ganze Breite ein */
+        display: block;  /* "table" auf dem Handy durch "block" ersetzen */
+        box-sizing: border-box;
+        line-height: 1.4;
+    }
+
+    /* 3. Den Rezeptnamen hervorheben */
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #b91c1c; /* Ein dezentes Rot signalisiert Gefahr/Löschen */
+        display: block;
+        width: 90%;
+        margin-top: 10px;
+    }
+
+    /* 4. Der Lösch-Button */
+    button {
+        width: 90%;      /* Volle Breite für einfaches Tippen */
+        font-size: 20px;
+        padding: 20px;   /* Größere Klickfläche */
+        display: block;
+        margin-top: 50px;
+        border-radius: 15px; /* Etwas eckiger wirkt auf dem Handy oft moderner als Pillenform */
+        background: rgba(246, 64, 64, 0.69); /* Rot für "Löschen" ist intuitiver */
+    }
+
+    button:hover {
+        background: #b71c1c;
+    }
+}
