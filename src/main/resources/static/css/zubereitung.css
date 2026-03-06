@@ -164,10 +164,19 @@ footer {
         gap: 20px;
     }
 
-    .link_in_middle {
+    .link_bearbeiten {
         font-size: 22px;
         padding: 10px;
-        background-color: white; /* Optional: Macht die Links wie Buttons */
+        background-color: rgba(126, 213, 121, 0.51); /* Optional: Macht die Links wie Buttons */
+        border-radius: 8px;
+        width: 95%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .link_loeschen {
+        font-size: 22px;
+        padding: 10px;
+        background-color: rgba(239, 89, 117, 0.33);
         border-radius: 8px;
         width: 95%;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);

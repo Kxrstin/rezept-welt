@@ -36,8 +36,8 @@
             <p class="zubereitung" th:text="${rezeptForm.zubereitung}">Zuerst macht man ...</p>
         </section>
         <nav class="links">
-            <a th:href="@{/get/zubereitung/{id}/remove(id = ${rezeptForm.id})}" class="link_in_middle">Löschen</a>
-            <a th:href="@{/get/zubereitung/{id}/edit(id = ${rezeptForm.id})}" class="link_in_middle">Bearbeiten</a>
+            <a th:href="@{/get/zubereitung/{id}/remove(id = ${rezeptForm.id})}" class="link_loeschen">Löschen</a>
+            <a th:href="@{/get/zubereitung/{id}/edit(id = ${rezeptForm.id})}" class="link_bearbeiten">Bearbeiten</a>
         </nav>
     </footer>
 </body>
