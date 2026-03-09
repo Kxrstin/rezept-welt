@@ -88,7 +88,7 @@ http://localhost:8080
 --- 
 
 ### What I learned 
-- I had an idea that I implemented independently and in a test-driven manner. In doing so, I consolidated the knowledge I had gained during my studies and practiced solving problems.
+- Independetly implementing a webapplication in a test-driven manner. In doing so, I consolidated the knowledge I had gained during my studies and practiced solving problems.
 - Database Migrations: I implemented Flyway to manage database schema changes version by version, avoiding the "it works on my machine" problem with manual SQL scripts.
 - Binary Data (BLOBs): Dealing with BYTEA in PostgreSQL taught me how to efficiently handle image uploads and convert binary data to Base64 for display in the frontend.
 - Testing Strategies: By using Spring Profiles (@Profile("!test")), I learned how to isolate production code (like data loaders) from the test environment to ensure reliable and repeatable tests.
