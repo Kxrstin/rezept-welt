@@ -1,184 +1,149 @@
-h1 {
-    font-size: 38px;
-    font-style: normal;
-    color: #272626;
-    text-align: center;
-    margin-top: 15px;
+:root {
+    --primary-color: #4a3ca3;
+    --bg-color: #f3f0ff;
+    --text-dark: #272626;
+    --text-muted: #888;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-h2 {
-    font-size: 20px;
-    color: #4a3ca3;
+* {
+    box-sizing: border-box;
 }
 
-h3 {
-    font-size: 20px;
-    color: #4a3ca3;
-}
-
-.speisenbild {
-    width: 100px;
-    height: auto;
-    float: right;
-    border-radius: 50%;
-}
-
-/* Body */
 body {
-    font-family: sans-serif;
-    background-color: lavender;
-    max-width: 1200px;
-    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: var(--bg-color);
     margin: 0 auto;
+    max-width: 1200px; /* Etwas breiter für Laptop */
+    padding: 40px 20px;
 }
 
-.rezept_text {
-    white-space: pre-line;
+/* Header */
+h1 {
+    margin: 15px;
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+h2, h3 {
+    color: darkslateblue;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 21px;
 }
 
 .link_in_middle {
     display: block;
     text-align: center;
-    color: #39444e;
-    font-family: sans-serif;
+    color: var(--primary-color);
     text-decoration: none;
-    transition: all 0.3s ease;
+    margin-bottom: 30px;
 }
 
-.link_in_middle:hover {
-    transform: scale(1.05);
-    color: #052c55;
-}
-
+/* --- Layout: Bild & Zutaten nebeneinander --- */
 .recipe-container {
-    margin-top: 25px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row; /* Laptop: Reihe */
+    align-items: stretch; /* Gleiche Höhe für beide Boxen */
     gap: 30px;
-    justify-content: center;
+    margin-bottom: 40px;
 }
 
-.zutaten, .zubereitung {
+.essens-bild, .zutaten {
+    flex: 1; /* Beide nehmen 50% Platz ein */
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    min-width: 300px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
 }
 
-footer {
-    text-align: center;
-    margin-top: 40px;
-}
-
-
-.links{
+.essens-bild {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-    margin: 1rem 0;
+    align-items: center;
+}
+
+.speisenbild {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 4 / 3; /* Oder 1/1, je nach Wunsch */
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* --- Zutaten Liste --- */
+.zutaten h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 10px;
+}
+
+.zutaten-liste {
+    display: flex;
+    flex-direction: column; /* Zutaten IMMER untereinander */
+    gap: 10px;
 }
 
 .zutat-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 15px;
+    padding: 12px;
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .checkbox-input {
-    margin-right: 15px;
     width: 20px;
     height: 20px;
-    cursor: pointer;
+    accent-color: var(--primary-color);
 }
 
 .checkbox-input:checked + .rezept_text {
     text-decoration: line-through;
-    color: #888;
     opacity: 0.6;
 }
 
-/* Media Query für mobile Geräte */
-@media (max-width: 768px) {
+/* --- Zubereitung & Buttons --- */
+.zubereitung-section {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
 
-    /* 1. Header & Schriften */
-    h1 {
-        font-size: 27px;
-        margin-bottom: 20px;
-    }
+.zubereitung-box {
+    background: #f9f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary-color);
+    margin-top: 15px;
+}
 
-    h2, h3 {
-        font-size: 24px; /* Überschriften auf dem Handy etwas markanter */
-        text-align: center;
-    }
+.links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+}
 
-    /* 2. Rezept-Container (Zutaten und Bild) */
+.link_bearbeiten, .link_loeschen {
+    padding: 12px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+.link_bearbeiten { background: #5cb85c; }
+.link_loeschen { background: #d9534f; }
+
+/* --- Mobile Ansicht --- */
+@media (max-width: 900px) {
     .recipe-container {
-        flex-direction: column; /* Alles schön untereinander */
-        align-items: center;
-    }
-
-    .zutaten, .zubereitung {
-        width: 100%; /* Boxen nutzen die volle Breite */
-        min-width: 0; /* Verhindert Überlaufen */
-        box-sizing: border-box; /* Padding wird in Breite eingerechnet */
-    }
-
-    /* 3. Das Bild optimieren */
-    .essens-bild {
-        order: -1; /* Das Bild rückt auf dem Handy nach GANZ oben (optional) */
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .speisenbild {
-        float: none; /* Float ausschalten, damit das Bild nicht am Rand klebt */
-        width: 200px; /* Auf dem Handy darf das Bild ruhig etwas größer sein */
-        height: 200px;
-        object-fit: cover; /* Verhindert Verzerrung bei 1:1 Format */
-        margin: 0 auto 20px auto;
-    }
-
-    /* 4. Texte besser lesbar machen */
-    .rezept_text {
-        font-size: 20px; /* Zutaten-Text vergrößern */
-        line-height: 1.5;
-    }
-
-    p.zubereitung {
-        font-size: 18px; /* Zubereitungstext lesefreundlich */
-        text-align: left; /* Text bleibt linksbündig für besseren Lesefluss */
-    }
-
-    /* 5. Interaktive Elemente (Checkboxen & Links) */
-    .checkbox-input {
-        width: 25px; /* Größere Checkboxen für dicke Finger */
-    }
-
-    .links {
-        flex-direction: column; /* Löschen & Bearbeiten untereinander */
-        gap: 20px;
-    }
-
-    .link_bearbeiten {
-        font-size: 22px;
-        padding: 10px;
-        background-color: rgba(126, 213, 121, 0.51); /* Optional: Macht die Links wie Buttons */
-        border-radius: 8px;
-        width: 95%;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .link_loeschen {
-        font-size: 22px;
-        padding: 10px;
-        background-color: rgba(239, 89, 117, 0.33);
-        border-radius: 8px;
-        width: 95%;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        flex-direction: column; /* Tablet/Mobile: Untereinander */
     }
 }

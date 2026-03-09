@@ -15,7 +15,6 @@ import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.management.ManageRecipeService;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Controller
 public class ManageRecipeController {
