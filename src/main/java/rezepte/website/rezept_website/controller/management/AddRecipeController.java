@@ -11,20 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
-import rezepte.website.rezept_website.service.RezeptService;
+import rezepte.website.rezept_website.service.management.AddRecipeService;
+
+import java.io.IOException;
 
 @Controller
 public class AddRecipeController {
-    final private RezeptService service;
+    final private AddRecipeService service;
 
     @Autowired
-    public AddRecipeController(RezeptService s) {
+    public AddRecipeController(AddRecipeService s) {
         service = s;
-    }
-
-    @GetMapping("/")
-    public String mainPage(Model model) {
-        return "main_page";
     }
 
     @GetMapping("/add/rezept")
@@ -46,9 +43,15 @@ public class AddRecipeController {
             model.addAttribute("kategorien", Kategorie.values());
             return "add_rezept";
         }
-        service.addRezept(rezept);
-        redirectAttributes.addFlashAttribute("success", true);
 
+        try {
+            service.addRezept(rezept);
+        } catch(IOException e) {
+            redirectAttributes.addFlashAttribute("error_message", true);
+            return "redirect:/";
+        }
+
+        redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/";
     }
 }

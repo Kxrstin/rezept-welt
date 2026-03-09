@@ -3,14 +3,14 @@ package rezepte.website.rezept_website.controller.selection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import rezepte.website.rezept_website.service.RezeptService;
+import rezepte.website.rezept_website.service.selection.RandomRecipeService;
 
 @Controller
 public class RandomRecipeController {
-    final private RezeptService service;
+    final private RandomRecipeService service;
 
     @Autowired
-    public RandomRecipeController(RezeptService service) {
+    public RandomRecipeController(RandomRecipeService service) {
         this.service = service;
     }
 

@@ -12,17 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
-import rezepte.website.rezept_website.service.RezeptService;
+import rezepte.website.rezept_website.service.management.ManageRecipeService;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 public class ManageRecipeController {
-    private final RezeptService service;
+    private final ManageRecipeService service;
 
     @Autowired
-    public ManageRecipeController(RezeptService service) {
+    public ManageRecipeController(ManageRecipeService service) {
         this.service = service;
+    }
+
+    @GetMapping("/")
+    public String mainPage(Model model) {
+        return "main_page";
     }
 
     @GetMapping("/get/zubereitung/{id}")

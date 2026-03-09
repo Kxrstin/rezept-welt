@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import rezepte.website.rezept_website.service.RezeptService;
+import rezepte.website.rezept_website.service.selection.FilterRecipeService;
 
 @Controller
 public class FilterRecipeController {
-    final private RezeptService service;
+    final private FilterRecipeService service;
 
     @Autowired
-    public FilterRecipeController(RezeptService service) {
+    public FilterRecipeController(FilterRecipeService service) {
         this.service = service;
     }
 

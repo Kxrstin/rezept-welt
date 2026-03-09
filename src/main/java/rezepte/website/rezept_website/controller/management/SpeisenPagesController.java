@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import rezepte.website.rezept_website.service.RezeptService;
+import rezepte.website.rezept_website.service.management.SpeisenPagesService;
 
 @Controller
 public class SpeisenPagesController {
 
-    final private RezeptService service;
+    final private SpeisenPagesService service;
 
     @Autowired
-    public SpeisenPagesController(RezeptService s) {
+    public SpeisenPagesController(SpeisenPagesService s) {
         service = s;
     }
 
