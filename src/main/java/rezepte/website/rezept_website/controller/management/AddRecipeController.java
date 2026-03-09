@@ -1,4 +1,4 @@
-package rezepte.website.rezept_website.controller;
+package rezepte.website.rezept_website.controller.management;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

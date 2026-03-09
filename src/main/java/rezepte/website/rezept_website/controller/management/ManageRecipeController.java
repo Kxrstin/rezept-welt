@@ -1,4 +1,4 @@
-package rezepte.website.rezept_website.controller;
+package rezepte.website.rezept_website.controller.management;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ import rezepte.website.rezept_website.service.RezeptService;
 import java.io.IOException;
 
 @Controller
-public class ZubereitungController {
+public class ManageRecipeController {
     private final RezeptService service;
 
     @Autowired
-    public ZubereitungController(RezeptService service) {
+    public ManageRecipeController(RezeptService service) {
         this.service = service;
     }
 

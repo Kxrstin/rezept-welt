@@ -1,4 +1,4 @@
-package rezepte.website.rezept_website.controller;
+package rezepte.website.rezept_website.controller.selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import rezepte.website.rezept_website.service.RezeptService;
 
 @Controller
-public class FilterController {
+public class FilterRecipeController {
     final private RezeptService service;
 
     @Autowired
-    public FilterController(RezeptService service) {
+    public FilterRecipeController(RezeptService service) {
         this.service = service;
     }
 

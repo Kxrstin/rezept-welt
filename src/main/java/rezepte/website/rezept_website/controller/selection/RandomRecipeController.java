@@ -1,4 +1,4 @@
-package rezepte.website.rezept_website.controller;
+package rezepte.website.rezept_website.controller.selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

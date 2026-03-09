@@ -10,6 +10,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
+import rezepte.website.rezept_website.controller.management.AddRecipeController;
 import rezepte.website.rezept_website.service.RezeptService;
 
 
