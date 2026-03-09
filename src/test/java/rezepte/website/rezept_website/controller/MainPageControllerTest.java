@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
-@WebMvcTest(MainPageController.class)
+@WebMvcTest(AddRecipeController.class)
 public class MainPageControllerTest {
 
     @Autowired

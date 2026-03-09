@@ -14,11 +14,11 @@ import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.RezeptService;
 
 @Controller
-public class MainPageController {
+public class AddRecipeController {
     final private RezeptService service;
 
     @Autowired
-    public MainPageController(RezeptService s) {
+    public AddRecipeController(RezeptService s) {
         service = s;
     }
 
@@ -50,23 +50,5 @@ public class MainPageController {
         redirectAttributes.addFlashAttribute("success", true);
 
         return "redirect:/";
-    }
-
-    @GetMapping("/rezept/random/Vorspeise")
-    public String getRandomVorspeise() {
-        long randomId = service.getRandomVorspeiseId();
-        return "redirect:/get/zubereitung/" + randomId;
-    }
-
-    @GetMapping("/rezept/random/Hauptspeise")
-    public String getRandomHauptspeise() {
-        long randomId = service.getRandomHauptspeiseId();
-        return "redirect:/get/zubereitung/" + randomId;
-    }
-
-    @GetMapping("/rezept/random/Nachspeise")
-    public String getRandomNachspeise() {
-        long randomId = service.getRandomNachspeiseId();
-        return "redirect:/get/zubereitung/" + randomId;
     }
 }
