@@ -60,7 +60,7 @@ public class ManageRecipeController {
         model.addAttribute("rezeptForm", service.getZubereitung(id));
         model.addAttribute("edit", true);
         model.addAttribute("kategorien", Kategorie.values());
-        return "add_rezept";
+        return "change/add_rezept";
     }
 
     @PostMapping("/get/zubereitung/{id}/edit")
@@ -71,7 +71,7 @@ public class ManageRecipeController {
         if(bindingResult.hasErrors()) {
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
-            return "add_rezept";
+            return "change/add_rezept";
         }
         if(service.getZubereitung(id) == null) return "redirect:/";
 

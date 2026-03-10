@@ -29,7 +29,7 @@ public class AddRecipeController {
         model.addAttribute("rezeptForm", new RezeptForm());
         model.addAttribute("kategorien", Kategorie.values());
         model.addAttribute("edit", false);
-        return "add_rezept";
+        return "change/add_rezept";
     }
 
     @PostMapping("/add/rezept")
@@ -41,7 +41,7 @@ public class AddRecipeController {
         if(bindingResult.hasErrors() || rezept.getBildMultiPart().isEmpty()) {
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
-            return "add_rezept";
+            return "change/add_rezept";
         }
 
         try {

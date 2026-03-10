@@ -66,7 +66,7 @@ public class ManageRecipeControllerTest {
 
         mvc.perform(get("/get/zubereitung/0/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("add_rezept"));
+                .andExpect(view().name("change/add_rezept"));
     }
 
     @Test

@@ -31,7 +31,7 @@ public class AddRecipeControllerTest {
     void test_add_rezept() throws Exception{
         mvc.perform(get("/add/rezept"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("add_rezept"));
+                .andExpect(view().name("change/add_rezept"));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class AddRecipeControllerTest {
         mvc.perform(multipart("/add/rezept")
                         .file(demoFile()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("add_rezept"));
+                .andExpect(view().name("change/add_rezept"));
     }
 
     @Test
