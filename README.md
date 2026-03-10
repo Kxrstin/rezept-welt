@@ -42,21 +42,47 @@ http://localhost:8080
 
 ## Features & Demo
 ### User Features
-- Categorization: Recipes are sorted into `Vorspeisen`, `Hauptspeisen`, and `Nachspeisen` for quick access.
-  <img src="screenshots/mainPage.png" width="600px" alt="Main Page View">
-  
-- Recipe Management: Create, view, and organize your favorite recipes.
-  <img src="screenshots/add_recipe.gif" width="600px" alt="Add Recipe Workflow">
 
-- Visual Appeal: Upload and display images for every recipe.
-  <img src="screenshots/change_recipe.gif" width="600px" alt="Change Recipe Workflow">
+<table>
+  <tr>
+    <td align="center"><b>Categorization: Recipes are sorted into `Vorspeisen`, `Hauptspeisen`, and `Nachspeisen` for quick access</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/startseite.png" width="600px" alt="Screenshot of the main page"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Recipe Management: Add, view, and organize your favorite recipes.</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/add_recipe.gif" width="600px" alt="Gif of adding a new recipe"></td>
+  </tr> 
+ <tr>
+    <td align="center"><b>Visual Appeal: Upload and display images for every recipe.</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/change_recipe.gif" width="600px" alt="Gif of updating an existing recipe"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Smart Search: Filtering to find specific recipes by name or ingredients.</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/filter_recipe.gif" width="600px" alt="Gif of testing the filter"></td>
+  </tr> 
+  <tr>
+    <td align="center"><b>Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick a next meal.</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/random_recipe.gif" width="600px" alt="Gif of getting inspired via the random recipe buttons"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>NEW FEATURE: Now optimized for mobile phones.</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/handy_ansicht.gif" width="600px" alt="Gif of the recipe application on a mobile phone"></td>
+  </tr> 
+</table>
 
-- Smart Search: Filtering to find specific recipes by name or ingredients.
-  <img src="screenshots/search_filter.gif" width="600px" alt="Filter Functionality">
-
-- Random Recipe Generator: Get inspired! Use the category-specific `random buttons` to pick a next meal.
-  <img src="screenshots/random_feature.gif" width="600px" alt="Random Recipe Generator">
-
+---
 
 ### Technical Highlights
 - Clean Code: Focused on readability, maintainability, and SOLID principles.
@@ -108,5 +134,4 @@ This project uses graphics from external providers. The rights belong to the res
 * **Salad**: [Eat.de](https://eat.de/wp-content/uploads/2023/04/caesar-salad-0369.jpg)
 * **Vanillepudding**: [Giallozafferano.de](https://www.google.com/imgres?q=vanillepudding&imgurl=https%3A%2F%2Fwww.giallozafferano.de%2Fimages%2F112-11286%2Fvanilla-pudding_1200x800.jpg&imgrefurl=https%3A%2F%2Fwww.giallozafferano.de%2Frezepte%2Fvanilla-pudding.html&docid=2BXIqCJv3cTuFM&tbnid=u-HisKfnYsKddM&vet=12ahUKEwjMy8T3iOaSAxUq9bsIHV2hALkQnPAOegQITxAB..i&w=1200&h=800&hcb=2&ved=2ahUKEwjMy8T3iOaSAxUq9bsIHV2hALkQnPAOegQITxAB)
 * **Salmon**: [Essen-wissen.de](https://www.google.com/imgres?q=gebratenes%20lachsfilte&imgurl=https%3A%2F%2Fessen-wissen.de%2Fwp-content%2Fuploads%2F2021%2F10%2Flachs-kartoffelbrei-adobestock-143854337-2-scaled.jpeg&imgrefurl=https%3A%2F%2Fessen-wissen.de%2Frezept%2Fgebratener-lachs-mit-pastinakenpueree-und-meerrettichschaum%2F&docid=Wk8cIPzP3OJnQM&tbnid=C6y35Ha293w8gM&vet=12ahUKEwi926nVieaSAxXT87sIHSeSDcYQnPAOegQIKBAB..i&w=2560&h=1440&hcb=2&ved=2ahUKEwi926nVieaSAxXT87sIHSeSDcYQnPAOegQIKBAB)
-* **Linsensalat**: [Feat.de](https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Feat.de%2Frezept%2Forientalischer-linsensalat%2F&ved=0CBYQjRxqFwoTCMCg-ezy5ZIDFQAAAAAdAAAAABAI&opi=89978449)
 
