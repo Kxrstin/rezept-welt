@@ -78,7 +78,7 @@ http://localhost:8080
     <td align="center"><b>NEW FEATURE: Now optimized for mobile phones.</b></td>
   </tr>
   <tr>
-    <td><img src="screenshots/handy_ansicht.gif" width="600px" alt="Gif of the recipe application on a mobile phone"></td>
+    <td><img src="screenshots/mobile_phone.gif" width="600px" alt="Gif of the recipe application on a mobile phone"></td>
   </tr> 
 </table>
 
