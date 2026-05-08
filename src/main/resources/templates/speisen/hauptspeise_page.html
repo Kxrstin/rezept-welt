@@ -13,7 +13,10 @@
 
     <form class="filter" method="get" th:action="@{/hauptspeise/filter}">
         <label for="filterId">Titel oder Zutaten filtern</label>
-        <input placeholder="z.B. Pasta, Paprika ..." id="filterId" type="text" name="filter">
+        <div class="search-container" style="position: relative;">
+            <input placeholder="z.B. Pasta..." id="filterId" data-category="HAUPTSPEISE" type="text" name="filter" autocomplete="off">
+            <ul id="suggestions"></ul>
+        </div>
         <button type="submit">Suchen</button>
     </form>
 
@@ -37,5 +40,6 @@
             </a>
         </div>
     </div>
+    <script src="/js/search.js"></script>
 </body>
 </html>

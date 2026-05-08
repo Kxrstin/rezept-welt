@@ -5,7 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.selection.FilterRecipeService;
+
+import java.util.List;
 
 @Controller
 public class FilterRecipeController {
@@ -32,5 +36,16 @@ public class FilterRecipeController {
     public String filtered_nachspeisen(@RequestParam String filter, Model model) {
         model.addAttribute("nachspeisen", service.getFilteredNachspeisen(filter));
         return "speisen/nachspeise_page";
+    }
+
+    @ResponseBody
+    @GetMapping("/api/search-suggestions")
+    public List<RezeptForm> get_search_suggestions(@RequestParam String query, @RequestParam String speise) {
+        return switch (speise) {
+            case "VORSPEISE" -> service.getFilteredVorspeisen(query);
+            case "HAUPTSPEISE" -> service.getFilteredHauptspeisen(query);
+            case "NACHSPEISE" -> service.getFilteredNachspeisen(query);
+            default -> List.of();
+        };
     }
 }
