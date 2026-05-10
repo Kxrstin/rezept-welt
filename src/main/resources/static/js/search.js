@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const suggestions = await response.json();
 
             suggestionsList.innerHTML = suggestions
-                .map(s => `<li onclick="select('${s.name}')">${s.name}</li>`)
+                .map(s => `<li onclick="select('${s}')">${s}</li>`)
                 .join("");
         } catch (error) {
             console.error("Da lief was schief:", error);

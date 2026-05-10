@@ -10,16 +10,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import rezepte.website.rezept_website.service.helper.Speisen;
 
 @Service
 public class FilterRecipeService {
     final private Speisen speisen;
+    private final RezeptRepository rezeptRepository;
 
     @Autowired
-    public FilterRecipeService(RezeptRepository repo) {
+    public FilterRecipeService(RezeptRepository repo, RezeptRepository rezeptRepository) {
         this.speisen = new Speisen(repo);
+        this.rezeptRepository = rezeptRepository;
     }
 
     private List<RezeptForm> getFilteredSpeise(Kategorie k, String filter) {
@@ -56,15 +60,42 @@ public class FilterRecipeService {
     }
 
     private List<RezeptForm> filteredRecipeZutaten(List<RezeptForm> rezepte, String filter) {
-        String[] zutaten = filter.split("[^a-zA-ZäöüÄÖÜ0-9]+");
-
         return rezepte.stream()
-                .filter(rezept -> {
-                    String alleZutaten = rezept.getZutaten().toLowerCase();
-                    return Arrays.stream(zutaten)
-                            .allMatch(zutat -> alleZutaten.contains(zutat.toLowerCase()));
-                })
+                .filter(r -> r.getZutaten().contains(filter))
                 .toList();
     }
 
+    public List<String> getFilteredSpeisenAPI(String query, String speise) {
+        Kategorie kat = getKategorie(speise);
+        if(kat == null) return List.of();
+
+        List<RezeptForm> rezepte = rezeptRepository.findAll();
+
+        List<String> filteredRezepte = new ArrayList<>(
+                rezepte.stream()
+                .filter(r -> r.getKategorie().equals(kat))
+                .map(RezeptForm::getName)
+                .filter(name -> name.contains(query))
+                .toList());
+
+        filteredRezepte.addAll(rezepte.stream()
+                .filter(r -> r.getKategorie().equals(kat))
+                .map(r -> r.getZutaten().split(", "))
+                .flatMap(Arrays::stream)
+                .filter(zutat -> zutat.contains(query))
+                .toList());
+
+        return filteredRezepte.stream()
+                .distinct()
+                .toList();
+    }
+
+    private Kategorie getKategorie(String kat) {
+        return switch (kat) {
+            case "VORSPEISE" -> Kategorie.Vorspeise;
+            case "HAUPTSPEISE" -> Kategorie.Hauptspeise;
+            case "NACHSPEISE" -> Kategorie.Nachspeise;
+            default -> null;
+        };
+    }
 }

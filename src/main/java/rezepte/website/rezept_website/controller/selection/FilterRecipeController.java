@@ -40,12 +40,7 @@ public class FilterRecipeController {
 
     @ResponseBody
     @GetMapping("/api/search-suggestions")
-    public List<RezeptForm> get_search_suggestions(@RequestParam String query, @RequestParam String speise) {
-        return switch (speise) {
-            case "VORSPEISE" -> service.getFilteredVorspeisen(query);
-            case "HAUPTSPEISE" -> service.getFilteredHauptspeisen(query);
-            case "NACHSPEISE" -> service.getFilteredNachspeisen(query);
-            default -> List.of();
-        };
+    public List<String> get_search_suggestions(@RequestParam String query, @RequestParam String speise) {
+        return service.getFilteredSpeisenAPI(query, speise);
     }
 }
