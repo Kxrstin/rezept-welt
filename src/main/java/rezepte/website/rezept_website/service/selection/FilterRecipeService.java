@@ -87,6 +87,7 @@ public class FilterRecipeService {
 
         return filteredRezepte.stream()
                 .distinct()
+                .sorted()
                 .toList();
     }
 
