@@ -6,10 +6,7 @@ import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.persistence.RezeptRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -21,9 +18,9 @@ public class FilterRecipeService {
     private final RezeptRepository rezeptRepository;
 
     @Autowired
-    public FilterRecipeService(RezeptRepository repo, RezeptRepository rezeptRepository) {
+    public FilterRecipeService(RezeptRepository repo) {
         this.speisen = new Speisen(repo);
-        this.rezeptRepository = rezeptRepository;
+        this.rezeptRepository = repo;
     }
 
     private List<RezeptForm> getFilteredSpeise(Kategorie k, String filter) {
@@ -60,8 +57,20 @@ public class FilterRecipeService {
     }
 
     private List<RezeptForm> filteredRecipeZutaten(List<RezeptForm> rezepte, String filter) {
+        List<String> gesuchteZutaten = Arrays.stream(filter.toLowerCase().split(" "))
+                .toList();
+
         return rezepte.stream()
-                .filter(r -> r.getZutaten().contains(filter))
+                .filter(r -> {
+                    List<String> zutaten = Arrays.stream(r.getZutaten().toLowerCase().split(","))
+                            .map(String::trim)
+                            .toList();
+
+                    return gesuchteZutaten.stream()
+                            .anyMatch(suche ->
+                                    zutaten.stream().anyMatch(z -> z.contains(suche))
+                            );
+                })
                 .toList();
     }
 

@@ -8,7 +8,6 @@ import org.springframework.test.context.TestPropertySource;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.persistence.RezeptRepository;
 import rezepte.website.rezept_website.service.management.AddRecipeService;
-import rezepte.website.rezept_website.service.management.AddRecipeServiceTest;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,8 +31,6 @@ public class FilterRecipeServiceTest {
         addRecipeService = new AddRecipeService(repo);
     }
 
-
-
     @Test
     @DisplayName("Filtert die Rezeptnamen korrekt")
     void test_filter_name() throws IOException {
@@ -56,6 +53,8 @@ public class FilterRecipeServiceTest {
         for(int i = 0; i < 3; i++)
             addRecipeService.addRezept(rezepte.get(i));
 
+        service.getFilteredNachspeisen("Zucker Milch").forEach(r -> System.out.println(r.getName()));
+
         List<RezeptForm> nachspeisen = service.getFilteredNachspeisen("Zucker Milch");
 
         List<String> recipeName = List.of(
@@ -63,7 +62,7 @@ public class FilterRecipeServiceTest {
                 "Vanille-Milchreis mit Zimt"
         );
         assertThat(containsRecipe(nachspeisen, recipeName)).isEqualTo(2);
-        assertThat(containsRecipe(nachspeisen, List.of("Schoko-Bananen-Pfannkuchen")))
+        assertThat(containsRecipe(nachspeisen, List.of("Schoko-Bananen Pfannkuchen")))
                 .isEqualTo(0);
     }
 

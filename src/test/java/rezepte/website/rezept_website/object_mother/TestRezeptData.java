@@ -105,7 +105,7 @@ public class TestRezeptData {
         nachspeisen.add(new RezeptForm(
                 Kategorie.Nachspeise,
                 "Zitronen-Joghurt-Creme",
-                "500g griechischer Joghurt, 2 Zitronen, 80g Zucker, Vanillezucker,, Milch",
+                "500g griechischer Joghurt, 2 Zitronen, 80g Zucker, Vanillezucker, Milch",
                 "Joghurt mit Zucker, Vanille und Zitronensaft glatt rühren. Mindestens 1 Stunde kalt stellen...",
                 demoFile()
         ));
