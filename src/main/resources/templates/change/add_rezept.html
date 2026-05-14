@@ -34,7 +34,7 @@
 
                 <label for="idbild">Bild hochladen</label>
                 <input th:field="*{bildMultiPart}" type="file" id="idbild" accept="image/*"><br>
-                <small class="danger" th:if="${#fields.hasErrors('bild')}" th:errors="*{bild}">Name Error</small>
+                <small class="danger" th:if="${#fields.hasErrors('bildMultiPart')}" th:errors="*{bildMultiPart}">Name Error</small>
 
                 <button type="submit">Hinzufügen</button>
             </form>

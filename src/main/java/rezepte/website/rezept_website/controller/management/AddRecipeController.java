@@ -48,7 +48,9 @@ public class AddRecipeController {
             service.addRezept(rezept);
         } catch(IOException e) {
             redirectAttributes.addFlashAttribute("error_message", true);
-            return "redirect:/";
+            model.addAttribute("rezeptForm", rezept);
+            model.addAttribute("kategorien", Kategorie.values());
+            return "redirect:/change/add_rezept";
         }
 
         redirectAttributes.addFlashAttribute("success", true);

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
 import org.springframework.web.multipart.MultipartFile;
+import rezepte.website.rezept_website.validation.ValidImage;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -27,6 +28,7 @@ public class RezeptForm {
     private String zubereitung;
 
     @NotNull(message="Bitte wählen Sie ein Bild")
+    @ValidImage(maxSize = 3 * 1024 * 1024) // Limit: 3 MB
     @Transient
     private MultipartFile bildMultiPart;
 
