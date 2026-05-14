@@ -27,7 +27,6 @@ public class RezeptForm {
     @NotBlank(message="Bitte wählen Sie eine Kategorie")
     private String zubereitung;
 
-    @NotNull(message="Bitte wählen Sie ein Bild")
     @ValidImage(maxSize = 3 * 1024 * 1024) // Limit: 3 MB
     @Transient
     private MultipartFile bildMultiPart;
@@ -83,7 +82,7 @@ public class RezeptForm {
         return bildMultiPart;
     }
 
-    private String base64Bild(MultipartFile file) throws IOException {
+    public String base64Bild(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
             return null;
         }

@@ -19,7 +19,11 @@ public class ValidImageValidator implements ConstraintValidator<ValidImage, Mult
     @Override
     public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
         if (file == null || file.isEmpty()) {
-            return true; // @NotNull übernimmt die Prüfung auf Vorhandensein
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(
+                            "Bitte wählen Sie ein Bild")
+                    .addConstraintViolation();
+            return false;
         }
 
         if (file.getSize() > maxSize) {
