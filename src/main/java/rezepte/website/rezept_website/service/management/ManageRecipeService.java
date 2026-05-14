@@ -28,15 +28,27 @@ public class ManageRecipeService {
     }
 
     public void edit(int id, RezeptForm rezeptForm) throws IOException {
+        RezeptForm newRezept = updateOld(id, rezeptForm);
+        if(newRezept == null) return;
+        newRezept.setBildMultiPart(rezeptForm.getBildMultiPart());
+        newRezept.setBild(rezeptForm.getBildMultiPart().getBytes());
+        repo.save(newRezept);
+    }
+
+    public void editWithoutImg(int id, RezeptForm rezeptForm) throws IOException {
+        RezeptForm newRezept = updateOld(id, rezeptForm);
+        if(newRezept == null) return;
+        repo.save(newRezept);
+    }
+
+    private RezeptForm updateOld(int id, RezeptForm rezeptForm) {
         RezeptForm old = getZubereitung(id);
-        if(old == null) return;
+        if(old == null) return null;
         old.setName(rezeptForm.getName());
         old.setKategorie(rezeptForm.getKategorie());
         old.setName(rezeptForm.getName());
         old.setZubereitung(rezeptForm.getZubereitung());
         old.setZutaten(rezeptForm.getZutaten());
-        old.setBildMultiPart(rezeptForm.getBildMultiPart());
-        old.setBild(rezeptForm.getBildMultiPart().getBytes());
-        repo.save(old);
+        return old;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
@@ -64,18 +65,38 @@ public class ManageRecipeController {
     }
 
     @PostMapping("/get/zubereitung/{id}/edit")
-    public String edit(RedirectAttributes redirectAttributes, @PathVariable int id, @Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
+    public String edit(RedirectAttributes redirectAttributes,
+                       @PathVariable int id,
+                       @Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
                        BindingResult bindingResult,
-                       Model model) throws IOException {
+                       Model model) {
 
-        if(bindingResult.hasErrors()) {
-            model.addAttribute("rezeptForm", rezept);
-            model.addAttribute("kategorien", Kategorie.values());
-            return "change/add_rezept";
-        }
+        boolean keepOldImg = false;
         if(service.getZubereitung(id) == null) return "redirect:/";
 
-        service.edit(id, rezept);
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.getErrorCount() == 1) {
+                if (rezept.getBildMultiPart() == null || rezept.getBildMultiPart().isEmpty()) {
+                    // Keep old image if no new image is set
+                    keepOldImg = true;
+                } else {
+                    model.addAttribute("rezeptForm", rezept);
+                    model.addAttribute("kategorien", Kategorie.values());
+                    return "change/add_rezept";
+                }
+            }
+        }
+
+        try {
+            if(keepOldImg) {
+                service.editWithoutImg(id, rezept);
+            } else {
+                service.edit(id, rezept);
+            }
+        } catch(Exception e) {
+            redirectAttributes.addFlashAttribute("error_message",
+                    "Das hat leider nicht geklappt.");
+        }
         redirectAttributes.addFlashAttribute("success_edit", true);
 
         return "redirect:/";
