@@ -2,6 +2,7 @@ package rezepte.website.rezept_website.controller.management;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,7 @@ public class AddRecipeController {
     public String addRezept(@Valid @ModelAttribute("rezeptForm") RezeptForm rezept,
                             BindingResult bindingResult,
                             Model model,
-                            RedirectAttributes redirectAttributes) {
+                            RedirectAttributes redirectAttributes) throws IOException {
 
         if(bindingResult.hasErrors() || rezept.getBildMultiPart().isEmpty()) {
             model.addAttribute("rezeptForm", rezept);
@@ -44,14 +45,15 @@ public class AddRecipeController {
             return "change/add_rezept";
         }
 
-        try {
-            service.addRezept(rezept);
-        } catch(IOException e) {
-            redirectAttributes.addFlashAttribute("error_message", true);
+        if(service.existsByName(rezept.getName())) {
+            bindingResult.rejectValue("name", "error.name",
+                    "Ein Rezept mit diesem Namen existiert bereits!");
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
-            return "redirect:/change/add_rezept";
+            return "change/add_rezept";
         }
+
+        service.addRezept(rezept);
 
         redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/";

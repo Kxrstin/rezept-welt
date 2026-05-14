@@ -24,4 +24,8 @@ public class AddRecipeService {
         rezept.setId(null);
         return repo.save(rezept);
     }
+
+    public boolean existsByName(String name) {
+        return repo.findRezeptFormByName(name) != null;
+    }
 }
