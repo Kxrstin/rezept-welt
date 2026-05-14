@@ -12,9 +12,9 @@ public class TestRezeptData {
     public static MockMultipartFile demoFile() {
         return new MockMultipartFile(
                 "bildMultiPart",
-                "demo.txt",
-                "text/plain",
-                "Hello World".getBytes()
+                "test-bild.png",
+                "image/png",
+                "hier-waeren-bild-daten".getBytes()
         );
     }
 
