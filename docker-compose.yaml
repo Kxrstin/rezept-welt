@@ -1,9 +1,25 @@
 services:
-  database:
-    image: postgres:14-alpine
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: rezept_welt # Passe das an deinen Datenbanknamen an
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
     environment:
-      - POSTGRES_DB=KxrstinDatenbank
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/rezept_welt
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
