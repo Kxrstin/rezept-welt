@@ -1,0 +1,22 @@
+name: Local CI/CD Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Start Database
+        run: |
+          docker compose up -d
+
+      - name: Build with Gradle
+        run: |
+          chmod +x ./gradlew
+          ./gradlew bootRun
