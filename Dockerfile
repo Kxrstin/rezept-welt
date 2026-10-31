@@ -1,14 +1,16 @@
-FROM gradle:8.5-jdk17 AS builder
+# 1. Build-Phase: Nutzt Gradle mit Java 21
+FROM gradle:8.11.0-jdk21 AS builder
 WORKDIR /app
 COPY . .
 
-# 1. Windows-Zeilenenden entfernen und Ausführungsrechte setzen
+# Windows-Zeilenenden entfernen und Ausführungsrechte setzen
 RUN sed -i -e 's/\r$//' gradlew && chmod +x gradlew
 
-# 2. Build ausführen
+# Build ausführen
 RUN ./gradlew bootJar --no-daemon
 
-FROM eclipse-temurin:17-jre-alpine
+# 2. Runtime-Phase: Läuft im schlanken Java 21 Runtime-Container
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
