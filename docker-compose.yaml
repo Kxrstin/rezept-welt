@@ -3,8 +3,8 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: rezept_welt # Passe das an deinen Datenbanknamen an
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: KxrstinDatenbank
     ports:
       - "5432:5432"
     volumes:
@@ -17,7 +17,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/rezept_welt
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
     depends_on:
       - postgres
 
