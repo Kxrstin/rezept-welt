@@ -12,14 +12,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Start Database
+      - name: Start Database and App via Docker Compose
         env:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          docker compose up -d
-
-      - name: Build with Gradle
-        run: |
-          chmod +x ./gradlew
-          ./gradlew bootRun
+          # Stoppt alte Container, baut die App neu und startet alles im Hintergrund
+          docker compose down
+          docker compose up -d --build
