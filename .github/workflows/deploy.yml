@@ -12,11 +12,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Start Database and App via Docker Compose
-        env:
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASS: ${{ secrets.DB_PASS }}
+      - name: Create .env file from Secrets
         run: |
-          # Stoppt alte Container, baut die App neu und startet alles im Hintergrund
+          echo "DB_USER=${{ secrets.DB_USER }}" > .env
+          echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+          echo "DB_NAME=KxrstinDatenbank" >> .env
+        shell: bash
+
+      - name: Start Database and App via Docker Compose
+        run: |
           docker compose down
           docker compose up -d --build
