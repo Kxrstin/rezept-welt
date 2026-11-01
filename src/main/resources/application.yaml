@@ -8,7 +8,7 @@ spring:
     locations:
       - classpath:db/migration
     ignore-migration-patterns:
-      - *:missing
+      - '*:missing'
 
   servlet:
     multipart:
