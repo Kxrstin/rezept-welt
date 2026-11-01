@@ -22,8 +22,10 @@ public class RezeptForm {
 
     @NotBlank(message="Bitte nennen Sie einen Namen für das Gericht")
     private String name;
+
     @NotBlank(message="Bitte wählen Sie eine Kategorie")
     private String zutaten;
+
     @NotBlank(message="Bitte wählen Sie eine Kategorie")
     private String zubereitung;
 

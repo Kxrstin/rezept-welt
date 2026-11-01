@@ -1,55 +1,280 @@
 <html lang="de">
-    <head>
-        <title> Rezept-Welt</title>
-        <meta charset="UTF-8">
-        <link rel="icon" type="image/png" href="../img/recipebook_icon.png" th:href="@{/img/recipebook_icon.png}">
-        <link rel="stylesheet" href="../static/css/main_page.css" th:href="@{css/main_page.css}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<head>
+    <title> Rezept-Welt</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../img/recipebook_icon.png" th:href="@{/img/recipebook_icon.png}">
+    <link rel="stylesheet" href="../static/css/main_page.css" th:href="@{css/main_page.css}">
+    <link rel="stylesheet" href="../static/css/user/user-comments.css" th:href="@{css/user/user-comments.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-    <body>
-        <h1>Willkommen in deiner digitalen Rezeptwelt!</h1>
-        <form method="get" action="/add/rezept">
-            <button class="add_rezept" type="submit">Neues Rezept hinzufügen</button>
+<body>
+<!-- Versteckte Container für Server-Meldungen nach einem Redirect -->
+<div th:if="${success_message}" id="serverSuccess" class="server-message" th:data-message="${success_message}"></div>
+<div th:if="${error_message}" id="serverError" class="server-error" th:data-message="${error_message}"></div>
+
+<h1>Willkommen in deiner digitalen Rezeptwelt!</h1>
+<form method="get" action="/add/rezept">
+    <button class="add_rezept" type="submit">Neues Rezept hinzufügen</button>
+</form>
+
+<div class="speisen-container">
+    <div class="get_speise">
+        <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
+        <img class="speisenbild" src="../img/vorspeise.png" th:src="@{img/vorspeise.png}" alt="Vorspeise">
+    </div>
+
+    <div class="get_speise">
+        <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
+        <img class="speisenbild" src="../img/hauptspeise.png" th:src="@{img/hauptspeise.png}" alt="Hauptspeise">
+    </div>
+
+    <div class="get_speise">
+        <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
+        <img class="speisenbild" src="../img/nachspeise.png" th:src="@{img/nachspeise.png}" alt="Nachspeise">
+    </div>
+</div>
+
+<div class="random-section">
+    <h2>Keine Idee? Probier's mal hiermit!</h2>
+    <div class="random-buttons">
+        <a class="btn-random vorspeise" th:href="@{/rezept/random/Vorspeise}">Zufällige Vorspeise</a>
+        <a class="btn-random hauptspeise" th:href="@{/rezept/random/Hauptspeise}">Zufällige Hauptspeise</a>
+        <a class="btn-random nachspeise" th:href="@{/rezept/random/Nachspeise}">Zufällige Nachspeise</a>
+    </div>
+</div>
+
+<!-- Kommentare & Bewertung -->
+<div class="comments-section">
+    <h3>Lass deine Bewertung da!</h3>
+
+    <!-- Eingeloggter Nutzer Anzeige -->
+    <div class="user-profile-bar">
+        <img id="displayUserPic" class="user-profile-pic" src="" alt="Profilbild" />
+        <div class="user-profile-info">
+            <span class="user-profile-label">Angemeldet als:</span>
+            <strong id="displayUserName">Gast</strong>
+        </div>
+        <button type="button" id="editProfileBtn" class="btn-edit-profile">Profil ändern</button>
+    </div>
+
+    <!-- Kommentar-Formular -->
+    <form id="commentForm" method="post" th:action="@{api/comments}" enctype="multipart/form-data">
+        <input type="hidden" id="authorUsernameInput" name="username" />
+        <label for="comment-id">Dein Kommentar:</label>
+        <textarea name="content" id="comment-id" required></textarea>
+
+        <button type="submit">Kommentar abschicken</button>
+    </form>
+
+    <!-- Liste der Kommentare -->
+    <div class="comments-list-wrapper">
+        <h4>Alle Kommentare</h4>
+
+        <div th:if="${comments != null}">
+            <div th:each="comment : ${comments}" class="comment-card">
+                <img th:if="${comment.author.base64Bild != null}" th:src="${comment.author.base64Bild}" alt="Bild" class="comment-avatar" />
+                <img th:unless="${comment.author.base64Bild != null}" th:src="@{/img/default-avatar.png}" alt="Standard" class="comment-avatar" />
+
+                <div class="comment-content-box">
+                    <div class="comment-header-row">
+                        <strong th:text="${comment.author.username}">Name</strong>
+                        <span class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd.MM.yyyy HH:mm')}">Datum</span>
+                    </div>
+                    <p class="comment-author-desc" th:text="${comment.author.description}">Beschreibung</p>
+                    <p class="comment-text" th:text="${comment.content}">Kommentartext...</p>
+                </div>
+            </div>
+        </div>
+        <p th:else class="no-comments">Noch keine Kommentare vorhanden. Sei der Erste!</p>
+    </div>
+</div>
+
+<!-- MODAL / POPUP FÜR NUTZER-SETUP -->
+<div id="userModal" class="modal-overlay">
+    <div class="modal-box">
+        <h3>Willkommen in der Rezept-Welt!</h3>
+        <p class="modal-subtitle">Bitte richte dein Profil kurz ein:</p>
+
+        <form id="modalForm" class="modal-form">
+            <div class="modal-field">
+                <label for="modalUsername">Dein Username:</label>
+                <input type="text" id="modalUsername" required />
+            </div>
+            <div class="modal-field">
+                <label for="modalDesc">Über dich:</label>
+                <input type="text" id="modalDesc" required placeholder="z.B. Genie, Waschbär, ..." />
+            </div>
+            <div class="modal-field">
+                <label>Dein Profilbild:</label>
+                <input type="file" id="modalPic" accept="image/*" />
+            </div>
+            <button type="submit" class="modal-submit-btn">Speichern</button>
         </form>
+    </div>
+</div>
 
-        <div class="success" th:if="${success}">
-            <p>Sie haben erfolgreich ein Rezept hinzugefügt.</p>
-        </div>
-        <div class="success" th:if="${success_remove}">
-            <p>Sie haben erfolgreich ein Rezept gelöscht.</p>
-        </div>
-        <div class="success" th:if="${success_edit}">
-            <p>Sie haben erfolgreich ein Rezept verändert.</p>
-        </div>
-        <div class="error" th:if="${error_message}">
-            <p th:text="${error_message}">Es gab einen Fehler mein Hochladen des Bildes.</p>
-        </div>
+<!-- SNACKBAR ELEMENT -->
+<div id="snackbar" class="snackbar"></div>
 
-        <div class="speisen-container">
-            <div class="get_speise">
-                <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
-                <img class="speisenbild" src="../img/vorspeise.png" th:src="@{img/vorspeise.png}" alt="Vorspeise">
-            </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const serverSuccess = document.getElementById("serverSuccess");
+        if (serverSuccess) {
+            showSnackbar(serverSuccess.getAttribute("data-message"), false);
+        }
 
-            <div class="get_speise">
-                <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
-                <img class="speisenbild" src="../img/hauptspeise.png" th:src="@{img/hauptspeise.png}" alt="Hauptspeise">
-            </div>
+        const serverError = document.getElementById("serverError");
+        if (serverError) {
+            showSnackbar(serverError.getAttribute("data-message"), true);
+        }
 
-            <div class="get_speise">
-                <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
-                <img class="speisenbild" src="../img/nachspeise.png" th:src="@{img/nachspeise.png}" alt="Nachspeise">
-            </div>
-        </div>
 
-        <div class="random-section">
-            <h2>Keine Idee? Probier's mal hiermit!</h2>
-            <div class="random-buttons">
-                <a class="btn-random vorspeise" th:href="@{/rezept/random/Vorspeise}">Zufällige Vorspeise</a>
-                <a class="btn-random hauptspeise" th:href="@{/rezept/random/Hauptspeise}">Zufällige Hauptspeise</a>
-                <a class="btn-random nachspeise" th:href="@{/rezept/random/Nachspeise}">Zufällige Nachspeise</a>
-            </div>
-        </div>
-    </body>
+        const modal = document.getElementById("userModal");
+        const displayUserName = document.getElementById("displayUserName");
+        const displayUserPic = document.getElementById("displayUserPic");
+        const editProfileBtn = document.getElementById("editProfileBtn");
+        const modalUsernameInput = document.getElementById("modalUsername");
+        const modalDescInput = document.getElementById("modalDesc");
+
+        const KEY_NAME = "familie_username";
+        const KEY_DESC = "familie_desc";
+        const KEY_PIC = "familie_pic";
+
+        // --- Hilfsfunktion für die Snackbar ---
+        function showSnackbar(message, isError = false) {
+            const snackbar = document.getElementById("snackbar");
+            snackbar.textContent = message;
+            snackbar.className = "snackbar show";
+
+            if (isError) {
+                snackbar.classList.add("error");
+            } else {
+                snackbar.classList.remove("error");
+            }
+
+            setTimeout(function () {
+                snackbar.className = "snackbar";
+            }, 3500); // Nach 3.5 Sekunden automatisch ausblenden
+        }
+
+        // --- 1. UI & User-Check ---
+        function checkUser() {
+            const username = localStorage.getItem(KEY_NAME);
+            if (!username) {
+                // Erster Besuch: Username-Feld freigeben
+                modalUsernameInput.disabled = false;
+                modalUsernameInput.value = "";
+                modal.classList.add("is-visible");
+            } else {
+                updateUI(username, localStorage.getItem(KEY_DESC), localStorage.getItem(KEY_PIC));
+            }
+        }
+
+        function updateUI(name, desc, pic) {
+            displayUserName.textContent = name;
+            document.getElementById("authorUsernameInput").value = name;
+            document.getElementById("authorDescInput").value = desc || "";
+
+            if (pic) {
+                displayUserPic.src = pic;
+                displayUserPic.classList.add("has-image");
+            } else {
+                displayUserPic.classList.remove("has-image");
+            }
+            modal.classList.remove("is-visible");
+        }
+
+        checkUser();
+
+        // Profil bearbeiten Button (Username wird hier GESPERRT)
+        editProfileBtn.addEventListener("click", function () {
+            const currentName = localStorage.getItem(KEY_NAME);
+            modalUsernameInput.value = currentName || "";
+            modalUsernameInput.disabled = true; // <--- HIER WIRD DER USERNAME GESPERRT
+            modalDescInput.value = localStorage.getItem(KEY_DESC) || "";
+            modal.classList.add("is-visible");
+        });
+
+        // --- 2. REST-API Call an Spring Boot (mit Snackbar statt Console) ---
+        function saveAuthorToBackend(username, description, base64Bild) {
+            const payload = {
+                username: username,
+                description: description,
+                base64Bild: base64Bild || null
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 409) {
+                            showSnackbar("Dieser Username ist schon vergeben.", true);
+                        } else {
+                            showSnackbar("Fehler beim Speichern des Profils.", true);
+                        }
+                    } else {
+                        showSnackbar("Profil erfolgreich gespeichert!");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    showSnackbar("Netzwerkfehler beim Speichern des Profils.", true);
+                });
+        }
+
+        // --- 3. Modal Formular Absenden ---
+        document.getElementById("modalForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            // Wenn das Feld disabled ist, nehmen wir zur Sicherheit den Wert aus dem LocalStorage
+            const name = modalUsernameInput.disabled ? localStorage.getItem(KEY_NAME) : modalUsernameInput.value.trim();
+            const desc = modalDescInput.value.trim();
+            const fileInput = document.getElementById("modalPic");
+            const url = modalUsernameInput.disabled ? '/api/author/update' : '/api/author/add';
+
+            if (!name) return;
+
+            localStorage.setItem(KEY_NAME, name);
+            localStorage.setItem(KEY_DESC, desc);
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const base64String = event.target.result;
+                    localStorage.setItem(KEY_PIC, base64String);
+
+                    updateUI(name, desc, base64String);
+                    saveAuthorToBackend(name, desc, base64String, url);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                const existingPic = localStorage.getItem(KEY_PIC);
+
+                updateUI(name, desc, existingPic);
+                saveAuthorToBackend(name, desc, existingPic, url);
+            }
+        });
+
+        // --- 4. Scroll-Position beim Absenden merken ---
+        const commentForm = document.getElementById("commentForm");
+
+        const scrollPosition = sessionStorage.getItem("scrollPosition");
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition));
+            sessionStorage.removeItem("scrollPosition");
+        }
+
+        commentForm.addEventListener("submit", function () {
+            sessionStorage.setItem("scrollPosition", window.scrollY);
+
+            document.getElementById("authorUsernameInput").value = localStorage.getItem(KEY_NAME);
+        });
+    });
+</script>
+</body>
 </html>

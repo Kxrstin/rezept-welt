@@ -9,7 +9,7 @@ import rezepte.website.rezept_website.service.management.SpeisenPagesService;
 @Controller
 public class SpeisenPagesController {
 
-    final private SpeisenPagesService service;
+    private final SpeisenPagesService service;
 
     @Autowired
     public SpeisenPagesController(SpeisenPagesService s) {
