@@ -2,7 +2,7 @@ spring:
   datasource:
     password: ${DB_PASS}
     username: ${DB_USER}
-    url: jdbc:postgresql://localhost:5432/KxrstinDatenbank
+    url: jdbc:postgresql://database:5432/KxrstinDatenbank
 
   flyway:
     locations:
