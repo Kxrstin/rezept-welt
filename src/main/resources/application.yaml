@@ -4,11 +4,11 @@ spring:
     username: ${DB_USER}
     url: jdbc:postgresql://localhost:5432/KxrstinDatenbank
 
-
   flyway:
     locations:
       - classpath:db/migration
-      - classpath:db/testdata
+    ignore-migration-patterns:
+      - missing
 
   servlet:
     multipart:
