@@ -52,7 +52,7 @@
     <!-- Eingeloggter Nutzer Anzeige -->
     <div class="user-profile-bar">
         <!-- Ein einziges Bild-Element mit fester ID und Thymeleaf-Fallback -->
-        <img id="userProfileImg2" class="user-profile-pic"
+        <img id="userProfileImg" class="user-profile-pic"
              th:src="@{/img/default-avatar.png}"
              alt="Profilbild"/>
 
@@ -206,14 +206,11 @@
 
             // Korrekter Zugriff über die ID des Bildes
             const profilePicImg = document.getElementById("userProfileImg");
-            const profilePicImg2 = document.getElementById("userProfileImg2");
             if (profilePicImg) {
                 if (pic) {
                     profilePicImg.src = pic; // Nimmt das Bild aus dem localStorage (Base64)
-                    profilePicImg2.src = pic;
                 } else {
                     profilePicImg.src = "/img/default-avatar.png"; // Fallback
-                    profilePicImg2.src = "/img/default-avatar.png"; // Fallback
                 }
             }
 
