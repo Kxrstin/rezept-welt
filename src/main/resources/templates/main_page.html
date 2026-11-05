@@ -51,7 +51,7 @@
 
     <!-- Eingeloggter Nutzer Anzeige -->
     <div class="user-profile-bar">
-        <img class="user-profile-pic"
+        <img id="displayUserPic2" class="user-profile-pic"
              th:if="${comment?.author != null and comment?.author?.base64Bild != null}"
              th:src="${comment.author.base64Bild}"
              alt="Profilbild"/>
@@ -208,13 +208,16 @@
             }
 
             // Profilbild in der Leiste oben dynamisch aktualisieren
-            const profilePicImg = document.querySelector(".user-profile-pic");
+            const profilePicImg = document.querySelector("displayUserPic");
+            const profilePicImg2 = document.querySelector("displayUserPic2");
             if (profilePicImg) {
                 if (pic) {
                     profilePicImg.src = pic;
+                    profilePicImg2.src = pic;
                 } else {
                     // Fallback auf das Standardbild, wenn kein Bild da ist
                     profilePicImg.src = "/img/default-avatar.png";
+                    profilePicImg2.src = "/img/default-avatar.png";
                 }
             }
 
