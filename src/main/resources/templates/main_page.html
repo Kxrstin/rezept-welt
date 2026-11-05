@@ -51,14 +51,11 @@
 
     <!-- Eingeloggter Nutzer Anzeige -->
     <div class="user-profile-bar">
-        <img id="displayUserPic2" class="user-profile-pic"
-             th:if="${comment?.author != null and comment?.author?.base64Bild != null}"
-             th:src="${comment.author.base64Bild}"
+        <!-- Ein einziges Bild-Element mit fester ID und Thymeleaf-Fallback -->
+        <img id="userProfileImg2" class="user-profile-pic"
+             th:src="${comment?.author?.base64Bild} != null ? ${comment.author.base64Bild} : @{/img/default-avatar.png}"
              alt="Profilbild"/>
 
-        <img th:unless="${comment?.author != null and comment?.author?.base64Bild != null}"
-             th:src="@{/img/default-avatar.png}"
-             alt="Standard" class="comment-avatar" />
         <div class="user-profile-info">
             <span class="user-profile-label">Angemeldet als:</span>
             <strong id="displayUserName">Gast</strong>
@@ -207,17 +204,16 @@
                 displayUserName.textContent = name;
             }
 
-            // Profilbild in der Leiste oben dynamisch aktualisieren
-            const profilePicImg = document.querySelector("displayUserPic");
-            const profilePicImg2 = document.querySelector("displayUserPic2");
+            // Korrekter Zugriff über die ID des Bildes
+            const profilePicImg = document.getElementById("userProfileImg");
+            const profilePicImg2 = document.getElementById("userProfileImg2");
             if (profilePicImg) {
                 if (pic) {
-                    profilePicImg.src = pic;
+                    profilePicImg.src = pic; // Nimmt das Bild aus dem localStorage (Base64)
                     profilePicImg2.src = pic;
                 } else {
-                    // Fallback auf das Standardbild, wenn kein Bild da ist
-                    profilePicImg.src = "/img/default-avatar.png";
-                    profilePicImg2.src = "/img/default-avatar.png";
+                    profilePicImg.src = "/img/default-avatar.png"; // Fallback
+                    profilePicImg2.src = "/img/default-avatar.png"; // Fallback
                 }
             }
 
