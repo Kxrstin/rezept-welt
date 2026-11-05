@@ -52,11 +52,11 @@
     <!-- Eingeloggter Nutzer Anzeige -->
     <div class="user-profile-bar">
         <img class="user-profile-pic"
-             th:if="${comment.author != null and comment.author.base64Bild != null}"
+             th:if="${comment?.author != null and comment?.author?.base64Bild != null}"
              th:src="${comment.author.base64Bild}"
              alt="Profilbild"/>
 
-        <img th:unless="${comment.author != null and comment.author.base64Bild != null}"
+        <img th:unless="${comment?.author != null and comment?.author?.base64Bild != null}"
              th:src="@{/img/default-avatar.png}"
              alt="Standard" class="comment-avatar" />
         <div class="user-profile-info">
