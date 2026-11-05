@@ -199,25 +199,37 @@
             }
         }
 
+
         function updateUI(name, pic) {
             if (displayUserName) {
                 displayUserName.textContent = name;
             }
 
-            // Korrekter Zugriff über die ID des Bildes
+            // Profilbild-Element auswählen
             const profilePicImg = document.getElementById("userProfileImg");
+
             if (profilePicImg) {
-                if (pic) {
-                    profilePicImg.src = pic; // Nimmt das Bild aus dem localStorage (Base64)
+                if (pic && pic.trim() !== "") {
+                    // Bildquelle setzen
+                    profilePicImg.src = pic;
+
+                    // WICHTIG: Bild sichtbar machen
+                    profilePicImg.classList.add("has-image");
                 } else {
-                    profilePicImg.src = "/img/default-avatar.png"; // Fallback
+                    // Standardbild setzen
+                    profilePicImg.src = "/img/default-avatar.png";
+
+                    // Auch das Standardbild sichtbar machen
+                    profilePicImg.classList.add("has-image");
                 }
             }
 
+            // Modal schließen
             if (modal) {
                 modal.classList.remove("is-visible");
             }
         }
+
 
         checkUser();
 
