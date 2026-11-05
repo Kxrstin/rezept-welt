@@ -53,7 +53,7 @@
     <div class="user-profile-bar">
         <!-- Ein einziges Bild-Element mit fester ID und Thymeleaf-Fallback -->
         <img id="userProfileImg2" class="user-profile-pic"
-             th:src="${comment?.author?.base64Bild} != null ? ${comment.author.base64Bild} : @{/img/default-avatar.png}"
+             th:src="@{/img/default-avatar.png}"
              alt="Profilbild"/>
 
         <div class="user-profile-info">
