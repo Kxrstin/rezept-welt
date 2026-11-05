@@ -296,3 +296,25 @@ body {
         object-fit: contain;
     }
 }
+
+.comments-scroll-container {
+    height: 400px;          /* Feste Höhe */
+    overflow-y: auto;       /* Vertikales Scrollen */
+    overflow-x: hidden;     /* Horizontales Scrollen verhindern */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.comments-scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.comments-scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.comments-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

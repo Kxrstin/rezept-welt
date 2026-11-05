@@ -3,47 +3,33 @@ package rezepte.website.rezept_website.controller.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Author;
-import rezepte.website.rezept_website.controller.formulare.Comment;
-import rezepte.website.rezept_website.persistence.AuthorRepository;
-import rezepte.website.rezept_website.persistence.CommentRepository;
-
-import java.util.Optional;
-import java.util.UUID;
-
-import static java.time.LocalDate.now;
+import rezepte.website.rezept_website.service.user.AuthorService;
+import rezepte.website.rezept_website.service.user.CommentService;
 
 @Controller
 public class CommentController {
-    private final AuthorRepository authorRepo;
-    private final CommentRepository commentRepo;
+    private final AuthorService authorService;
+    private final CommentService commentService;
 
     @Autowired
-    public CommentController(AuthorRepository authorR, CommentRepository commentR, CommentRepository commentRepository) {
-        authorRepo = authorR;
-        commentRepo = commentR;
+    public CommentController(AuthorService a, CommentService c) {
+        authorService = a;
+        commentService = c;
     }
 
-    @PostMapping("api/comments")
-    public String addComment(@RequestBody String username, @RequestBody String content, RedirectAttributes r) {
-        Optional<Author> author = authorRepo.findByUsername(username);
-        if(author.isEmpty()) {
+    @PostMapping("/api/comments")
+    public String addComment(@RequestParam String username, @RequestParam String content, RedirectAttributes r) {
+        Author author = authorService.findByUsername(username);
+        if(author == null) {
             r.addFlashAttribute("error_message", "Dein Username ist bei uns nicht hinterlegt.");
             return "redirect:/";
         }
 
-        Comment comment = new Comment(
-                UUID.randomUUID(),
-                author.get(),
-                content,
-                now()
-        );
-
-        commentRepo.save(comment);
+        commentService.add(author, content);
         r.addFlashAttribute("success_message", "Dein Kommentar wurde erfolgreich veröffentlicht!");
-
         return "redirect:/";
     }
 }

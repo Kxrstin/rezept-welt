@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <title> Rezept-Welt</title>
@@ -50,7 +51,14 @@
 
     <!-- Eingeloggter Nutzer Anzeige -->
     <div class="user-profile-bar">
-        <img id="displayUserPic" class="user-profile-pic" src="" alt="Profilbild" />
+        <img class="user-profile-pic"
+             th:if="${comment.author != null and comment.author.base64Bild != null}"
+             th:src="${comment.author.base64Bild}"
+             alt="Profilbild"/>
+
+        <img th:unless="${comment.author != null and comment.author.base64Bild != null}"
+             th:src="@{/img/default-avatar.png}"
+             alt="Standard" class="comment-avatar" />
         <div class="user-profile-info">
             <span class="user-profile-label">Angemeldet als:</span>
             <strong id="displayUserName">Gast</strong>
@@ -59,8 +67,9 @@
     </div>
 
     <!-- Kommentar-Formular -->
-    <form id="commentForm" method="post" th:action="@{api/comments}" enctype="multipart/form-data">
+    <form id="commentForm" method="post" th:action="@{/api/comments}" enctype="multipart/form-data">
         <input type="hidden" id="authorUsernameInput" name="username" />
+
         <label for="comment-id">Dein Kommentar:</label>
         <textarea name="content" id="comment-id" required></textarea>
 
@@ -68,25 +77,47 @@
     </form>
 
     <!-- Liste der Kommentare -->
-    <div class="comments-list-wrapper">
-        <h4>Alle Kommentare</h4>
-
-        <div th:if="${comments != null}">
+    <h4>Alle Kommentare</h4>
+    <div class="comments-scroll-container">
+        <div th:if="${comments != null and !comments.isEmpty()}">
             <div th:each="comment : ${comments}" class="comment-card">
-                <img th:if="${comment.author.base64Bild != null}" th:src="${comment.author.base64Bild}" alt="Bild" class="comment-avatar" />
-                <img th:unless="${comment.author.base64Bild != null}" th:src="@{/img/default-avatar.png}" alt="Standard" class="comment-avatar" />
+
+                <img th:if="${comment.author != null and comment.author.base64Bild != null}"
+                     th:src="${comment.author.base64Bild}"
+                     alt="Bild" class="comment-avatar" />
+
+                <img id="displayUserPic" th:unless="${comment.author != null and comment.author.base64Bild != null}"
+                     th:src="@{/img/default-avatar.png}"
+                     alt="Standard" class="comment-avatar" />
 
                 <div class="comment-content-box">
                     <div class="comment-header-row">
-                        <strong th:text="${comment.author.username}">Name</strong>
-                        <span class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd.MM.yyyy HH:mm')}">Datum</span>
+                        <strong th:text="${comment.author != null ? comment.author.username : comment.username}">
+                            Name
+                        </strong>
+
+                        <span class="comment-date"
+                              th:text="${#temporals.format(comment.created, 'HH:mm - dd.MM.yyyy')}">
+                            22:34 - 03.11.2026
+                        </span>
                     </div>
-                    <p class="comment-author-desc" th:text="${comment.author.description}">Beschreibung</p>
-                    <p class="comment-text" th:text="${comment.content}">Kommentartext...</p>
+
+                    <p class="comment-author-desc"
+                       th:text="${comment.author != null ? comment.author.description : ''}">
+                        Beschreibung
+                    </p>
+
+                    <p class="comment-text" th:text="${comment.content}">
+                        Kommentartext...
+                    </p>
                 </div>
             </div>
         </div>
-        <p th:else class="no-comments">Noch keine Kommentare vorhanden. Sei der Erste!</p>
+
+        <p th:if="${comments == null or comments.isEmpty()}"
+           class="no-comments">
+            Noch keine Kommentare vorhanden. Sei der Erste!
+        </p>
     </div>
 </div>
 
@@ -119,23 +150,12 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const serverSuccess = document.getElementById("serverSuccess");
-        if (serverSuccess) {
-            showSnackbar(serverSuccess.getAttribute("data-message"), false);
-        }
-
-        const serverError = document.getElementById("serverError");
-        if (serverError) {
-            showSnackbar(serverError.getAttribute("data-message"), true);
-        }
-
-
         const modal = document.getElementById("userModal");
         const displayUserName = document.getElementById("displayUserName");
-        const displayUserPic = document.getElementById("displayUserPic");
         const editProfileBtn = document.getElementById("editProfileBtn");
         const modalUsernameInput = document.getElementById("modalUsername");
         const modalDescInput = document.getElementById("modalDesc");
+        const snackbar = document.getElementById("snackbar");
 
         const KEY_NAME = "familie_username";
         const KEY_DESC = "familie_desc";
@@ -143,7 +163,7 @@
 
         // --- Hilfsfunktion für die Snackbar ---
         function showSnackbar(message, isError = false) {
-            const snackbar = document.getElementById("snackbar");
+            if (!snackbar) return;
             snackbar.textContent = message;
             snackbar.className = "snackbar show";
 
@@ -155,69 +175,96 @@
 
             setTimeout(function () {
                 snackbar.className = "snackbar";
-            }, 3500); // Nach 3.5 Sekunden automatisch ausblenden
+            }, 3500);
         }
 
-        // --- 1. UI & User-Check ---
+        // Server-Meldungen abfangen
+        const serverSuccess = document.getElementById("serverSuccess");
+        if (serverSuccess) {
+            showSnackbar(serverSuccess.getAttribute("data-message"), false);
+        }
+
+        const serverError = document.getElementById("serverError");
+        if (serverError) {
+            showSnackbar(serverError.getAttribute("data-message"), true);
+        }
+
         function checkUser() {
             const username = localStorage.getItem(KEY_NAME);
             if (!username) {
-                // Erster Besuch: Username-Feld freigeben
-                modalUsernameInput.disabled = false;
-                modalUsernameInput.value = "";
-                modal.classList.add("is-visible");
+                if (modalUsernameInput) {
+                    modalUsernameInput.disabled = false;
+                    modalUsernameInput.value = "";
+                }
+                if (modal) modal.classList.add("is-visible");
             } else {
-                updateUI(username, localStorage.getItem(KEY_DESC), localStorage.getItem(KEY_PIC));
+                updateUI(username, localStorage.getItem(KEY_PIC));
             }
         }
 
-        function updateUI(name, desc, pic) {
-            displayUserName.textContent = name;
-            document.getElementById("authorUsernameInput").value = name;
-            document.getElementById("authorDescInput").value = desc || "";
-
-            if (pic) {
-                displayUserPic.src = pic;
-                displayUserPic.classList.add("has-image");
-            } else {
-                displayUserPic.classList.remove("has-image");
+        function updateUI(name, pic) {
+            if (displayUserName) {
+                displayUserName.textContent = name;
             }
-            modal.classList.remove("is-visible");
+
+            // Profilbild in der Leiste oben dynamisch aktualisieren
+            const profilePicImg = document.querySelector(".user-profile-pic");
+            if (profilePicImg) {
+                if (pic) {
+                    profilePicImg.src = pic;
+                } else {
+                    // Fallback auf das Standardbild, wenn kein Bild da ist
+                    profilePicImg.src = "/img/default-avatar.png";
+                }
+            }
+
+            if (modal) {
+                modal.classList.remove("is-visible");
+            }
         }
 
         checkUser();
 
-        // Profil bearbeiten Button (Username wird hier GESPERRT)
-        editProfileBtn.addEventListener("click", function () {
-            const currentName = localStorage.getItem(KEY_NAME);
-            modalUsernameInput.value = currentName || "";
-            modalUsernameInput.disabled = true; // <--- HIER WIRD DER USERNAME GESPERRT
-            modalDescInput.value = localStorage.getItem(KEY_DESC) || "";
-            modal.classList.add("is-visible");
-        });
+        // --- 2. Profil bearbeiten Button ---
+        if (editProfileBtn) {
+            editProfileBtn.addEventListener("click", function () {
+                const currentName = localStorage.getItem(KEY_NAME);
 
-        // --- 2. REST-API Call an Spring Boot (mit Snackbar statt Console) ---
-        function saveAuthorToBackend(username, description, base64Bild) {
-            const payload = {
-                username: username,
-                description: description,
-                base64Bild: base64Bild || null
-            };
+                if (modalUsernameInput) {
+                    modalUsernameInput.value = currentName || "";
+                    modalUsernameInput.disabled = true;
+                }
+                if (modalDescInput) {
+                    modalDescInput.value = localStorage.getItem(KEY_DESC) || "";
+                }
+                if (modal) {
+                    modal.classList.add("is-visible");
+                }
+            });
+        }
 
-            fetch(url, {
+        // --- 3. REST-API Call an Spring Boot (mit FormData für das MultipartFile) ---
+        function saveAuthorToBackend(username, description, file, targetUrl) {
+            const formData = new FormData();
+            formData.append("username", username);
+            formData.append("description", description);
+            if (file) {
+                formData.append("bildMultiPart", file);
+            }
+
+            fetch(targetUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload)
+                body: formData
             })
                 .then(response => {
                     if (!response.ok) {
                         if (response.status === 409) {
-                            showSnackbar("Dieser Username ist schon vergeben.", true);
-                        } else {
-                            showSnackbar("Fehler beim Speichern des Profils.", true);
-                        }
+                            showSnackbar("Der Username '" + username + "' ist schon vergeben.", true);
+                        } else if (response.status === 404) {
+                                showSnackbar("Der User '" + username + "' ist nicht registriert.", true);
+                            } else {
+                                showSnackbar("Fehler beim Speichern des Profils.", true);
+                            }
                     } else {
                         showSnackbar("Profil erfolgreich gespeichert!");
                     }
@@ -228,39 +275,50 @@
                 });
         }
 
-        // --- 3. Modal Formular Absenden ---
-        document.getElementById("modalForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            // Wenn das Feld disabled ist, nehmen wir zur Sicherheit den Wert aus dem LocalStorage
-            const name = modalUsernameInput.disabled ? localStorage.getItem(KEY_NAME) : modalUsernameInput.value.trim();
-            const desc = modalDescInput.value.trim();
-            const fileInput = document.getElementById("modalPic");
-            const url = modalUsernameInput.disabled ? '/api/author/update' : '/api/author/add';
+        // --- 4. Modal Formular Absenden ---
+        const modalForm = document.getElementById("modalForm");
+        if (modalForm) {
+            modalForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const name = modalUsernameInput ? (modalUsernameInput.disabled ? localStorage.getItem(KEY_NAME) : modalUsernameInput.value.trim()) : "";
+                const desc = modalDescInput ? modalDescInput.value.trim() : "";
+                const fileInput = document.getElementById("modalPic");
+                const targetUrl = modalUsernameInput && modalUsernameInput.disabled ? '/api/author/update' : '/api/author/add';
 
-            if (!name) return;
+                if (!name) return;
 
-            localStorage.setItem(KEY_NAME, name);
-            localStorage.setItem(KEY_DESC, desc);
+                // 3 MB Größenprüfung korrigiert
+                if (fileInput && fileInput.files && fileInput.files[0]) {
+                    const file = fileInput.files[0];
+                    if (file.size > 3 * 1024 * 1024) {
+                        showSnackbar("Das Bild ist zu groß! Maximal 3 MB erlaubt.", true);
+                        return;
+                    }
+                }
 
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    const base64String = event.target.result;
-                    localStorage.setItem(KEY_PIC, base64String);
+                localStorage.setItem(KEY_NAME, name);
+                localStorage.setItem(KEY_DESC, desc);
 
-                    updateUI(name, desc, base64String);
-                    saveAuthorToBackend(name, desc, base64String, url);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                const existingPic = localStorage.getItem(KEY_PIC);
+                if (fileInput && fileInput.files && fileInput.files[0]) {
+                    const file = fileInput.files[0];
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        const base64String = event.target.result;
+                        localStorage.setItem(KEY_PIC, base64String);
 
-                updateUI(name, desc, existingPic);
-                saveAuthorToBackend(name, desc, existingPic, url);
-            }
-        });
+                        updateUI(name, base64String);
+                        saveAuthorToBackend(name, desc, file, targetUrl);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    const existingPic = localStorage.getItem(KEY_PIC);
+                    updateUI(name, existingPic);
+                    saveAuthorToBackend(name, desc, null, targetUrl);
+                }
+            });
+        }
 
-        // --- 4. Scroll-Position beim Absenden merken ---
+        // --- 5. Scroll-Position & Hidden Inputs beim Kommentar-Absenden befüllen ---
         const commentForm = document.getElementById("commentForm");
 
         const scrollPosition = sessionStorage.getItem("scrollPosition");
@@ -269,11 +327,14 @@
             sessionStorage.removeItem("scrollPosition");
         }
 
-        commentForm.addEventListener("submit", function () {
-            sessionStorage.setItem("scrollPosition", window.scrollY);
+        if (commentForm) {
+            commentForm.addEventListener("submit", function () {
+                sessionStorage.setItem("scrollPosition", window.scrollY);
 
-            document.getElementById("authorUsernameInput").value = localStorage.getItem(KEY_NAME);
-        });
+                const authorInput = document.getElementById("authorUsernameInput");
+                if (authorInput) authorInput.value = localStorage.getItem(KEY_NAME) || "";
+            });
+        }
     });
 </script>
 </body>

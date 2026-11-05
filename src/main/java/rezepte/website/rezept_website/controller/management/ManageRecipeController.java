@@ -11,23 +11,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import rezepte.website.rezept_website.controller.formulare.Comment;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.management.ManageRecipeService;
+import rezepte.website.rezept_website.service.user.CommentService;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class ManageRecipeController {
     private final ManageRecipeService service;
+    private final CommentService commentService;
 
     @Autowired
-    public ManageRecipeController(ManageRecipeService service) {
+    public ManageRecipeController(ManageRecipeService service, CommentService commentService) {
         this.service = service;
+        this.commentService = commentService;
     }
 
     @GetMapping("/")
     public String mainPage(Model model) {
+        List<Comment> comments = commentService.getAll();
+        model.addAttribute("comments", comments);
         return "main_page";
     }
 

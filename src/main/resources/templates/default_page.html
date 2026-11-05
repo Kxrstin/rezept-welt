@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Rezept-Welt - Fehler</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../img/recipebook_icon.png" th:href="@{/img/recipebook_icon.png}">
+    <link rel="stylesheet" href="../static/css/default.css" th:href="@{css/default.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="error-page">
+<div class="default-container">
+    <!-- Richtig großes Bild -->
+    <img class="default-image"
+         th:src="@{../../screenshots/default.png}"
+         src="../../../../screenshots/default.png"
+         alt="404 Not Found"/>
+
+    <h1 class="default-title">Huch, da ist etwas schiefgelaufen!</h1>
+
+    <p class="default-text">
+        Die gesuchte Seite konnte leider nicht gefunden werden.
+        Geh am besten direkt zurück zur Hauptseite.
+    </p>
+
+    <a class="default-link" th:href="@{/}" href="/">Zurück zur Hauptseite</a>
+</div>
+</body>
+</html>
