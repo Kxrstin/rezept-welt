@@ -25,37 +25,37 @@
 
 .Pink {
     background-color: #ffe6ea;
-    border: 1px solid pink;
+    border: 1px solid #af6f7a;
     color: #381340;
 }
 
 .Blau {
-    background-color: rgba(169, 236, 227, 0.64);
-    border: 1px solid #6ed1e8;
+    background-color: rgba(193, 231, 255, 0.64);
+    border: 1px solid rgba(88, 143, 184, 0.88);
     color: #0f2d39;
 }
 
 .Lila {
     background-color: rgba(181, 165, 228, 0.63);
-    border: 1px solid #745faa;
+    border: 1px solid #6c56a5;
     color: #170a30;
 }
 
 .Orange {
     background-color: #edd1a5;
-    border: 1px solid #d38459;
+    border: 1px solid rgba(230, 140, 91, 0.93);
     color: #775533;
 }
 
 .Gelb {
-    background-color: rgba(255, 221, 0, 0.3);
-    border: 1px solid #ccc57b;
+    background-color: rgba(248, 237, 158, 0.3);
+    border: 1px solid rgba(216, 206, 109, 0.91);
     color: #333009;
 }
 
 .Gruen {
-    background-color: #cbe8bc;
-    border: 1px solid #8fdf8d;
+    background-color: rgba(203, 232, 188, 0.73);
+    border: 1px solid rgba(102, 172, 100, 0.87);
     color: #133a0e;
 }
 
@@ -186,8 +186,6 @@
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 2px solid var(--primary-orange);
-    background-color: var(--white);
 }
 
 .comment-content-box {

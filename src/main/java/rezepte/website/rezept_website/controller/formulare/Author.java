@@ -35,7 +35,7 @@ public class Author {
                   String color) {
         username = u;
         description = d;
-        color = color;
+        this.color = color;
         try {
             if (multipartFile != null && !multipartFile.isEmpty()) {
                 base64Bild = base64Bild(multipartFile);

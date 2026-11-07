@@ -43,19 +43,20 @@ function showSnackbar(message, isError = false) {
     function checkUser() {
         const username = localStorage.getItem(KEY_NAME);
         if (!username || username === "null" || username.trim() === "") {
-        // Ungültige alte Daten entfernen
-        localStorage.removeItem(KEY_NAME);
-        localStorage.removeItem(KEY_DESC);
-        localStorage.removeItem(KEY_COL);
+            // Ungültige alte Daten entfernen
+            localStorage.removeItem(KEY_NAME);
+            localStorage.removeItem(KEY_DESC);
+            localStorage.removeItem(KEY_COL);
 
-        if (modalUsernameInput) {
-        modalUsernameInput.disabled = false;
-        modalUsernameInput.value = "";
-    }
-        if (modal) modal.classList.add("is-visible");
-    } else {
-        updateUI(username, localStorage.getItem(KEY_PIC));
-    }
+            if (modalUsernameInput) {
+                modalUsernameInput.disabled = false;
+                modalUsernameInput.value = "";
+            }
+
+            if (modal) modal.classList.add("is-visible");
+        } else {
+            updateUI(username, localStorage.getItem(KEY_PIC));
+        }
     }
 
     function updateUI(name, pic) {
@@ -85,11 +86,6 @@ function showSnackbar(message, isError = false) {
         const colors = ["Pink", "Blau", "Lila", "Orange", "Gelb", "Gruen"];
         const editButton = document.getElementById("editProfileBtn");
 
-        // Alle alten Farbklassen entfernen
-        userProfile.classList.remove(...colors);
-        profilePicImg.classList.remove(...colors);
-        editButton.classList.remove(...colors);
-
         // Gespeicherte Farbe auslesen
         let col = localStorage.getItem(KEY_COL);
 
@@ -98,10 +94,22 @@ function showSnackbar(message, isError = false) {
             col = "Pink";
         }
 
-        userProfile.classList.add(col);
-        profilePicImg.classList.add(col);
-        editButton.classList.add(col);
-}
+        // Alle alten Farbklassen entfernen
+        if (userProfile) {
+            userProfile.classList.remove(...colors);
+            userProfile.classList.add(col);
+        }
+
+        if (profilePicImg) {
+            profilePicImg.classList.remove(...colors);
+            profilePicImg.classList.add(col);
+        }
+
+        if (editButton) {
+            editButton.classList.remove(...colors);
+            editButton.classList.add(col);
+        }
+    }
 
     // Modal schließen
     if (modal) {
@@ -160,6 +168,7 @@ async function saveAuthorToBackend(username, description, col, file, targetUrl) 
 
     if (response.ok) {
         showSnackbar("Profil erfolgreich gespeichert!");
+        window.location.reload();
         return true;
     }
 

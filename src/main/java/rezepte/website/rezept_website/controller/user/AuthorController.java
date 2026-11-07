@@ -39,11 +39,13 @@ public class AuthorController {
     public ResponseEntity<String> updateUser(
             @RequestParam("username") String username,
             @RequestParam("description") String description,
+            @RequestParam("color") String color,
             @RequestParam(value = "bildMultiPart", required = false) MultipartFile bildMultiPart) {
         try {
             Author author = service.findByUsername(username);
             if(author != null) {
                 author.setDescription(description);
+                author.setColor(color);
                 if(bildMultiPart != null && !bildMultiPart.isEmpty()) {
                     author.setBildMultiPart(bildMultiPart);
                     author.setProfilePicture(bildMultiPart.getBytes());

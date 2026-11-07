@@ -82,17 +82,17 @@
         <div th:if="${comments != null and !comments.isEmpty()}">
             <div class="comment-card"
                  th:each="comment : ${comments}"
-                 th:classappend="${comment.author != null ? comment.author.color : ''}">
+                 th:classappend="${(comment.author != null and comment.author.color != null) ? comment.author.color : 'Pink'}">
 
                 <img th:if="${comment.author != null and comment.author.base64Bild != null}"
                      th:src="${comment.author.base64Bild}"
                      alt="Bild" class="comment-avatar"
-                     th:classappend="${comment.author != null ? comment.author.color : ''}"/>
+                     th:classappend="${(comment.author != null and comment.author.color != null) ? comment.author.color : 'Pink'}"/>
 
                 <img th:unless="${comment.author != null and comment.author.base64Bild != null}"
                      th:src="@{/img/default-avatar.png}"
                      alt="Standard" class="comment-avatar"
-                     th:classappend="${comment.author != null ? comment.author.color : ''}" />
+                     th:classappend="${(comment.author != null and comment.author.color != null) ? comment.author.color : 'Pink'}" />
 
                 <div class="comment-content-box">
                     <div class="comment-header-row">
@@ -106,7 +106,7 @@
                         </span>
                     </div>
 
-                    <p class="comment-author-desc" th:classappend="${comment.author != null ? comment.author.color : ''}"
+                    <p class="comment-author-desc"
                        th:text="${comment.author != null ? comment.author.description : ''}">
                         Beschreibung
                     </p>

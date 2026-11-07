@@ -33,7 +33,7 @@ public class AuthorService {
 
     public void insert(Author author) {
         jdbcTemplate.update(
-                "INSERT INTO author (username, description, profile_picture, color) VALUES (?, ?, ?)",
+                "INSERT INTO author (username, description, profile_picture, color) VALUES (?, ?, ?, ?)",
                 author.getUsername(),
                 author.getDescription(),
                 author.getProfilePicture(),

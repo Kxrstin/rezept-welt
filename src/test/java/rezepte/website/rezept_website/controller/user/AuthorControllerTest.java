@@ -25,8 +25,8 @@ class AuthorControllerTest {
     @MockitoBean
     private AuthorService service;
 
-    private final Author author = new Author("Kiki", "123", demoFile());
-    private final Author author2 = new Author("Kiki", "1234", demoFile2());
+    private final Author author = new Author("Kiki", "123", demoFile(), "Pink");
+    private final Author author2 = new Author("Kiki", "1234", demoFile2(), "Pink");
 
     @Test
     @DisplayName("Successfully add an author")

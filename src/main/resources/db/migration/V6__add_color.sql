@@ -1,2 +1,1 @@
-alter table author
-add column color varchar(20) default "Pink";
+ALTER TABLE author ADD COLUMN color VARCHAR(20) DEFAULT 'Pink';
