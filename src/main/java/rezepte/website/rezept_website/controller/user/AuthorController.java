@@ -20,12 +20,13 @@ public class AuthorController {
     public ResponseEntity<String> addUser(
             @RequestParam("username") String username,
             @RequestParam("description") String description,
+            @RequestParam("color") String color,
             @RequestParam(value = "bildMultiPart", required = false) MultipartFile bildMultiPart) {
         try {
             boolean exists = service.exists(username);
             if(exists) return ResponseEntity.status(409).body("User existiert bereits");
 
-            service.insert(new Author(username, description, bildMultiPart));
+            service.insert(new Author(username, description, bildMultiPart, color));
             return ResponseEntity.ok("Erfolgreich gespeichert");
 
         } catch (Exception e) {

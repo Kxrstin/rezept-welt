@@ -27,11 +27,15 @@ public class Author {
     @Transient
     private String base64Bild;
 
+    private String color;
+
     public Author(String u,
                   String d,
-                  MultipartFile multipartFile) {
+                  MultipartFile multipartFile,
+                  String color) {
         username = u;
         description = d;
+        color = color;
         try {
             if (multipartFile != null && !multipartFile.isEmpty()) {
                 base64Bild = base64Bild(multipartFile);
@@ -49,11 +53,13 @@ public class Author {
     public Author(
             String username,
             String description,
-            byte[] profilePicture
+            byte[] profilePicture,
+            String color
     ) {
         this.username = username;
         this.description = description;
         setProfilePicture(profilePicture);
+        this.color = color;
     }
 
     public String getUsername() {
@@ -117,4 +123,13 @@ public class Author {
     public Object getProfilePicture() {
         return profilePicture;
     }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }
+

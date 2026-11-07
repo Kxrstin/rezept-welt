@@ -1,0 +1,98 @@
+/* Container für die Listen-Kacheln */
+.color-picker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 1px;
+}
+
+/* Versteckt den echten Radio-Punkt */
+.color-tile input[type="radio"] {
+    display: none;
+}
+
+/* Die sichtbaren Listen-Einträge */
+.color-tile .tile-label {
+    display: block;
+    padding: 7px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+/* Hover-Zustand (Beim Überfahren mit der Maus) */
+.pink .tile-label:hover {
+    background-color: #ffe6ea;
+    border-color: pink;
+}
+
+.blau .tile-label:hover {
+    background-color: rgba(169, 236, 227, 0.64);
+    border-color: #6ed1e8;
+}
+
+.lila .tile-label:hover {
+    background-color: rgba(181, 165, 228, 0.63);
+    border-color: #745faa;
+}
+
+.orange .tile-label:hover {
+    background-color: #edd1a5;
+    border-color: #d38459;
+}
+
+.gelb .tile-label:hover {
+    background-color: rgba(255, 221, 0, 0.3);
+    border-color: #ccc57b;
+}
+
+.gruen .tile-label:hover {
+     background-color: #cbe8bc;
+     border-color: #41974b;
+ }
+
+
+/* AKTIV/SELECTED (Wenn der Eintrag angeklickt ist) */
+.pink input[type="radio"]:checked + .tile-label {
+    background-color: pink;
+    border-color: #ff69b4;
+    color: #332732;
+    font-weight: bold;
+}
+
+.blau input[type="radio"]:checked + .tile-label {
+    background-color: rgba(169, 236, 227, 0.64);
+    border-color: rgba(130, 206, 213, 0.75);
+    color: #283739;
+    font-weight: bold;
+}
+
+.lila input[type="radio"]:checked + .tile-label {
+    background-color: rgba(181, 165, 228, 0.63);
+    border-color: rgba(107, 123, 182, 0.63);
+    color: #19272e;
+    font-weight: bold;
+}
+
+.orange input[type="radio"]:checked + .tile-label {
+    background-color: #edd1a5;
+    border-color: rgba(189, 144, 60, 0.63);
+    color: #332732;
+    font-weight: bold;
+}
+
+.gelb input[type="radio"]:checked + .tile-label {
+    background-color: rgba(255, 221, 0, 0.3);
+    border-color: #c3af71;
+    color: #251e15;
+    font-weight: bold;
+}
+
+.gruen input[type="radio"]:checked + .tile-label {
+    background-color: #cbe8bc;
+    border-color: #5d9c50;
+    color: #332732;
+    font-weight: bold;
+}

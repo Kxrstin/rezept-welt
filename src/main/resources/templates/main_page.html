@@ -4,8 +4,9 @@
     <title> Rezept-Welt</title>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}">
-    <link rel="stylesheet" th:href="@{/css/main_page.css}">
-    <link rel="stylesheet" th:href="@{/css/user/user-comments.css}">
+    <link rel="stylesheet" href="../static/css/main_page.css" th:href="@{/css/main_page.css}">
+    <link rel="stylesheet" href="../static/css/user/user-comments.css" th:href="@{/css/user/user-comments.css}">
+    <link rel="stylesheet" href="../static/css/user/user-colors.css" th:href="@{/css/user/user-colors.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -22,17 +23,17 @@
 <div class="speisen-container">
     <div class="get_speise">
         <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
-        <img class="speisenbild" src="/img/vorspeise.png" th:src="@{/img/vorspeise.png}" alt="Vorspeise">
+        <img class="speisenbild" src="../img/vorspeise.png" th:src="@{/img/vorspeise.png}" alt="Vorspeise">
     </div>
 
     <div class="get_speise">
         <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
-        <img class="speisenbild" src="/img/hauptspeise.png" th:src="@{/img/hauptspeise.png}" alt="Hauptspeise">
+        <img class="speisenbild" src="../img/hauptspeise.png" th:src="@{/img/hauptspeise.png}" alt="Hauptspeise">
     </div>
 
     <div class="get_speise">
         <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
-        <img class="speisenbild" src="/img/nachspeise.png" th:src="@{/img/nachspeise.png}" alt="Nachspeise">
+        <img class="speisenbild" src="../img/nachspeise.png" th:src="@{/img/nachspeise.png}" alt="Nachspeise">
     </div>
 </div>
 
@@ -50,11 +51,13 @@
     <h3>Lass deine Bewertung da!</h3>
 
     <!-- Eingeloggter Nutzer Anzeige -->
-    <div class="user-profile-bar">
+    <div id="user-profile-bar" class="user-profile-bar">
         <!-- Ein einziges Bild-Element mit fester ID und Thymeleaf-Fallback -->
         <img id="userProfileImg" class="user-profile-pic"
+             src="../static/img/default-avatar.png"
              th:src="@{/img/default-avatar.png}"
-             alt="Profilbild"/>
+             alt="Profilbild"
+        />
 
         <div class="user-profile-info">
             <span class="user-profile-label">Angemeldet als:</span>
@@ -77,15 +80,19 @@
     <h4>Alle Kommentare</h4>
     <div class="comments-scroll-container">
         <div th:if="${comments != null and !comments.isEmpty()}">
-            <div th:each="comment : ${comments}" class="comment-card">
+            <div class="comment-card"
+                 th:each="comment : ${comments}"
+                 th:classappend="${comment.author != null ? comment.author.color : ''}">
 
                 <img th:if="${comment.author != null and comment.author.base64Bild != null}"
                      th:src="${comment.author.base64Bild}"
-                     alt="Bild" class="comment-avatar" />
+                     alt="Bild" class="comment-avatar"
+                     th:classappend="${comment.author != null ? comment.author.color : ''}"/>
 
-                <img id="displayUserPic" th:unless="${comment.author != null and comment.author.base64Bild != null}"
+                <img th:unless="${comment.author != null and comment.author.base64Bild != null}"
                      th:src="@{/img/default-avatar.png}"
-                     alt="Standard" class="comment-avatar" />
+                     alt="Standard" class="comment-avatar"
+                     th:classappend="${comment.author != null ? comment.author.color : ''}" />
 
                 <div class="comment-content-box">
                     <div class="comment-header-row">
@@ -99,7 +106,7 @@
                         </span>
                     </div>
 
-                    <p class="comment-author-desc"
+                    <p class="comment-author-desc" th:classappend="${comment.author != null ? comment.author.color : ''}"
                        th:text="${comment.author != null ? comment.author.description : ''}">
                         Beschreibung
                     </p>
@@ -137,6 +144,36 @@
                 <label>Dein Profilbild:</label>
                 <input type="file" id="modalPic" accept="image/*" />
             </div>
+
+            <div class="modal-field">
+                <label>Deine Profilfarbe:</label>
+                <div class="color-picker-container">
+                    <label class="color-tile pink">
+                        <input type="radio" name="modalColor" value="Pink" checked>
+                        <span class="tile-label">Pink</span>
+                    </label>
+                    <label class="color-tile blau">
+                        <input type="radio" name="modalColor" value="Blau">
+                        <span class="tile-label">Blau</span>
+                    </label>
+                    <label class="color-tile lila">
+                        <input type="radio" name="modalColor" value="Lila">
+                        <span class="tile-label">Lila</span>
+                    </label>
+                    <label class="color-tile orange">
+                        <input type="radio" name="modalColor" value="Orange">
+                        <span class="tile-label">Orange</span>
+                    </label>
+                    <label class="color-tile gelb">
+                        <input type="radio" name="modalColor" value="Gelb">
+                        <span class="tile-label">Gelb</span>
+                    </label>
+                    <label class="color-tile gruen">
+                        <input type="radio" name="modalColor" value="Gruen">
+                        <span class="tile-label">Grün</span>
+                    </label>
+                </div>
+            </div>
             <button type="submit" class="modal-submit-btn">Speichern</button>
         </form>
     </div>
@@ -145,237 +182,6 @@
 <!-- SNACKBAR ELEMENT -->
 <div id="snackbar" class="snackbar"></div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.getElementById("userModal");
-        const displayUserName = document.getElementById("displayUserName");
-        const editProfileBtn = document.getElementById("editProfileBtn");
-        const modalUsernameInput = document.getElementById("modalUsername");
-        const modalDescInput = document.getElementById("modalDesc");
-        const snackbar = document.getElementById("snackbar");
-
-        const KEY_NAME = "familie_username";
-        const KEY_DESC = "familie_desc";
-        const KEY_PIC = "familie_pic";
-
-        // --- Hilfsfunktion für die Snackbar ---
-        function showSnackbar(message, isError = false) {
-            if (!snackbar) return;
-            snackbar.textContent = message;
-            snackbar.className = "snackbar show";
-
-            if (isError) {
-                snackbar.classList.add("error");
-            } else {
-                snackbar.classList.remove("error");
-            }
-
-            setTimeout(function () {
-                snackbar.className = "snackbar";
-            }, 3500);
-        }
-
-        // Server-Meldungen abfangen
-        const serverSuccess = document.getElementById("serverSuccess");
-        if (serverSuccess) {
-            showSnackbar(serverSuccess.getAttribute("data-message"), false);
-        }
-
-        const serverError = document.getElementById("serverError");
-        if (serverError) {
-            showSnackbar(serverError.getAttribute("data-message"), true);
-        }
-
-        function checkUser() {
-            const username = localStorage.getItem(KEY_NAME);
-            if (!username || username === "null" || username.trim() === "") {
-                // Ungültige alte Daten entfernen
-                localStorage.removeItem(KEY_NAME);
-                localStorage.removeItem(KEY_DESC);
-
-                if (modalUsernameInput) {
-                    modalUsernameInput.disabled = false;
-                    modalUsernameInput.value = "";
-                }
-                if (modal) modal.classList.add("is-visible");
-            } else {
-                updateUI(username, localStorage.getItem(KEY_PIC));
-            }
-        }
-
-
-        function updateUI(name, pic) {
-            if (displayUserName) {
-                displayUserName.textContent = name;
-            }
-
-            // Profilbild-Element auswählen
-            const profilePicImg = document.getElementById("userProfileImg");
-
-            if (profilePicImg) {
-                if (pic && pic.trim() !== "") {
-                    // Bildquelle setzen
-                    profilePicImg.src = pic;
-
-                    // WICHTIG: Bild sichtbar machen
-                    profilePicImg.classList.add("has-image");
-                } else {
-                    // Standardbild setzen
-                    profilePicImg.src = "/img/default-avatar.png";
-
-                    // Auch das Standardbild sichtbar machen
-                    profilePicImg.classList.add("has-image");
-                }
-            }
-
-            // Modal schließen
-            if (modal) {
-                modal.classList.remove("is-visible");
-            }
-        }
-
-
-        checkUser();
-
-        // --- 2. Profil bearbeiten Button ---
-        if (editProfileBtn) {
-            editProfileBtn.addEventListener("click", function () {
-                const currentName = localStorage.getItem(KEY_NAME);
-
-                if (modalUsernameInput) {
-                    modalUsernameInput.value = currentName || "";
-                    modalUsernameInput.disabled = true;
-                }
-                if (modalDescInput) {
-                    modalDescInput.value = localStorage.getItem(KEY_DESC) || "";
-                }
-                if (modal) {
-                    modal.classList.add("is-visible");
-                }
-            });
-        }
-
-        // --- 3. REST-API Call an Spring Boot (mit FormData für das MultipartFile) ---
-        async function saveAuthorToBackend(username, description, file, targetUrl) {
-            const formData = new FormData();
-
-            formData.append("username", username);
-            formData.append("description", description);
-
-            if (file) {
-                formData.append("bildMultiPart", file);
-            }
-
-            try {
-                const response = await fetch(targetUrl, {
-                    method: "POST",
-                    body: formData
-                });
-
-                if (response.ok) {
-                    showSnackbar("Profil erfolgreich gespeichert!");
-                    return true;
-                }
-
-                if (response.status === 409) {
-                    showSnackbar(
-                        "Dieser Username ist bereits vergeben. Bitte wähle einen anderen.",
-                        true
-                    );
-                } else if (response.status === 404) {
-                    showSnackbar("Author nicht gefunden.", true);
-                } else if (response.status === 413) {
-                    showSnackbar("Das Profilbild ist zu groß.", true);
-                } else if (response.status === 429) {
-                    showSnackbar("Zu viele Anfragen. Bitte später erneut versuchen.", true);
-                } else {
-                    showSnackbar("Fehler beim Speichern des Profils.", true);
-                }
-
-                return false;
-
-            } catch (error) {
-                console.error(error);
-                showSnackbar("Netzwerkfehler beim Speichern.", true);
-                return false;
-            }
-        }
-
-
-        // --- 4. Modal Formular Absenden ---
-        const modalForm = document.getElementById("modalForm");
-        if (modalForm) {
-            modalForm.addEventListener("submit", async function (e) {
-                e.preventDefault();
-
-                const name = modalUsernameInput.disabled
-                    ? localStorage.getItem(KEY_NAME)
-                    : modalUsernameInput.value.trim();
-
-                const desc = modalDescInput.value.trim();
-
-                const fileInput = document.getElementById("modalPic");
-                const file = fileInput.files[0] || null;
-
-                const targetUrl = modalUsernameInput.disabled
-                    ? "/api/author/update"
-                    : "/api/author/add";
-
-                if (!name) return;
-
-                if (file && file.size > 3 * 1024 * 1024) {
-                    showSnackbar("Das Bild ist zu groß! Maximal 3 MB erlaubt.", true);
-                    return;
-                }
-
-                // Erst Backend-Anfrage durchführen
-                const success = await saveAuthorToBackend(
-                    name, desc, file, targetUrl
-                );
-
-                // Bei einem Fehler nichts lokal speichern
-                if (!success) return;
-
-                // Erst nach erfolgreicher Speicherung übernehmen
-                localStorage.setItem(KEY_NAME, name);
-                localStorage.setItem(KEY_DESC, desc);
-
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        const base64String = event.target.result;
-
-                        localStorage.setItem(KEY_PIC, base64String);
-                        updateUI(name, base64String);
-                    };
-
-                    reader.readAsDataURL(file);
-                } else {
-                    const existingPic = localStorage.getItem(KEY_PIC);
-                    updateUI(name, existingPic);
-                }
-            });
-        }
-
-        // --- 5. Scroll-Position & Hidden Inputs beim Kommentar-Absenden befüllen ---
-        const commentForm = document.getElementById("commentForm");
-
-        const scrollPosition = sessionStorage.getItem("scrollPosition");
-        if (scrollPosition) {
-            window.scrollTo(0, parseInt(scrollPosition));
-            sessionStorage.removeItem("scrollPosition");
-        }
-
-        if (commentForm) {
-            commentForm.addEventListener("submit", function () {
-                sessionStorage.setItem("scrollPosition", window.scrollY);
-
-                const authorInput = document.getElementById("authorUsernameInput");
-                if (authorInput) authorInput.value = localStorage.getItem(KEY_NAME) || "";
-            });
-        }
-    });
-</script>
+<script th:src="@{/js/mainPage.js}"></script>
 </body>
 </html>

@@ -23,13 +23,49 @@
     box-shadow: 0 2px 5px rgba(255, 179, 128, 0.15);
 }
 
+.Pink {
+    background-color: #ffe6ea;
+    border: 1px solid pink;
+    color: #381340;
+}
+
+.Blau {
+    background-color: rgba(169, 236, 227, 0.64);
+    border: 1px solid #6ed1e8;
+    color: #0f2d39;
+}
+
+.Lila {
+    background-color: rgba(181, 165, 228, 0.63);
+    border: 1px solid #745faa;
+    color: #170a30;
+}
+
+.Orange {
+    background-color: #edd1a5;
+    border: 1px solid #d38459;
+    color: #775533;
+}
+
+.Gelb {
+    background-color: rgba(255, 221, 0, 0.3);
+    border: 1px solid #ccc57b;
+    color: #333009;
+}
+
+.Gruen {
+    background-color: #cbe8bc;
+    border: 1px solid #8fdf8d;
+    color: #133a0e;
+}
+
+
 .user-profile-pic {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
     display: none;
-    border: 2px solid var(--primary-orange);
 }
 
 .user-profile-pic.has-image {
@@ -57,7 +93,6 @@
     margin-left: auto;
     background-color: var(--white);
     color: var(--text-dark);
-    border: 1px solid var(--primary-orange);
     padding: 6px 14px;
     font-size: 0.85rem;
     font-weight: 500;
@@ -136,8 +171,6 @@
     gap: 15px;
     margin-bottom: 15px;
     padding: 15px;
-    background-color: var(--card-orange-bg); /* Hier ist das Pastell-Orange für die Kärtchen */
-    border: 1px solid var(--border-orange);
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(255, 179, 128, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -178,7 +211,6 @@
 
 .comment-author-desc {
     font-size: 0.8rem;
-    color: #775533;
     margin: 2px 0 8px 0;
     font-style: italic;
 }
