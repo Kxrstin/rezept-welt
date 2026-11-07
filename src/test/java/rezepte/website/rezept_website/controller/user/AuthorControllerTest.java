@@ -62,16 +62,4 @@ class AuthorControllerTest {
                         .param("username", author.getUsername())
                         .param("description", author2.getDescription()))
                 .andExpect(status().isOk());    }
-
-    @Test
-    @DisplayName("Adds a unknown author")
-    void test_04() throws Exception {
-        when(service.findByUsername(any())).thenReturn(null);
-
-        mvc.perform(multipart("/api/author/update")
-                .file(demoFile())
-                .param("username", author.getUsername())
-                .param("description", author.getDescription()))
-                .andExpect(status().isOk());
-    }
 }

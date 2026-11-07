@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import rezepte.website.rezept_website.service.management.ManageRecipeService;
+import rezepte.website.rezept_website.service.user.CommentService;
 
 import java.io.IOException;
 
@@ -26,6 +27,9 @@ public class ManageRecipeControllerTest {
 
     @MockitoBean
     ManageRecipeService service;
+
+    @MockitoBean
+    CommentService commentService;
 
     @Test
     @DisplayName("Die Startseite ist unter / erreichbar.")
