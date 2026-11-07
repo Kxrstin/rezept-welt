@@ -48,7 +48,8 @@ class AuthorControllerTest {
         mvc.perform(multipart("/api/author/add")
                         .file(demoFile())
                         .param("username", "Kerstin")
-                        .param("description", "Toll"))
+                        .param("description", "Toll")
+                        .param("color", "Pink"))
                         .andExpect(status().is(409));
     }
 
