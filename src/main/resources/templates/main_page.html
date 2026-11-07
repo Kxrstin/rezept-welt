@@ -3,9 +3,9 @@
 <head>
     <title> Rezept-Welt</title>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="../img/recipebook_icon.png" th:href="@{/img/recipebook_icon.png}">
-    <link rel="stylesheet" href="../static/css/main_page.css" th:href="@{css/main_page.css}">
-    <link rel="stylesheet" href="../static/css/user/user-comments.css" th:href="@{css/user/user-comments.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}">
+    <link rel="stylesheet" th:href="@{/css/main_page.css}">
+    <link rel="stylesheet" th:href="@{/css/user/user-comments.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -22,17 +22,17 @@
 <div class="speisen-container">
     <div class="get_speise">
         <a class="speisen_link" th:href="@{/vorspeise}">Vorspeisen</a>
-        <img class="speisenbild" src="../img/vorspeise.png" th:src="@{img/vorspeise.png}" alt="Vorspeise">
+        <img class="speisenbild" src="/img/vorspeise.png" th:src="@{/img/vorspeise.png}" alt="Vorspeise">
     </div>
 
     <div class="get_speise">
         <a class="speisen_link" th:href="@{/hauptspeise}">Hauptspeisen</a>
-        <img class="speisenbild" src="../img/hauptspeise.png" th:src="@{img/hauptspeise.png}" alt="Hauptspeise">
+        <img class="speisenbild" src="/img/hauptspeise.png" th:src="@{/img/hauptspeise.png}" alt="Hauptspeise">
     </div>
 
     <div class="get_speise">
         <a class="speisen_link" th:href="@{/nachspeise}">Nachspeisen</a>
-        <img class="speisenbild" src="../img/nachspeise.png" th:src="@{img/nachspeise.png}" alt="Nachspeise">
+        <img class="speisenbild" src="/img/nachspeise.png" th:src="@{/img/nachspeise.png}" alt="Nachspeise">
     </div>
 </div>
 
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Kommentar-Formular -->
-    <form id="commentForm" method="post" th:action="@{/api/comments}" enctype="multipart/form-data">
+    <form id="commentForm" method="post" th:action="@{/api/comments}">
         <input type="hidden" id="authorUsernameInput" name="username" />
 
         <label for="comment-id">Dein Kommentar:</label>
@@ -188,7 +188,11 @@
 
         function checkUser() {
             const username = localStorage.getItem(KEY_NAME);
-            if (!username) {
+            if (!username || username === "null" || username.trim() === "") {
+                // Ungültige alte Daten entfernen
+                localStorage.removeItem(KEY_NAME);
+                localStorage.removeItem(KEY_DESC);
+
                 if (modalUsernameInput) {
                     modalUsernameInput.disabled = false;
                     modalUsernameInput.value = "";
@@ -252,76 +256,104 @@
         }
 
         // --- 3. REST-API Call an Spring Boot (mit FormData für das MultipartFile) ---
-        function saveAuthorToBackend(username, description, file, targetUrl) {
+        async function saveAuthorToBackend(username, description, file, targetUrl) {
             const formData = new FormData();
+
             formData.append("username", username);
             formData.append("description", description);
+
             if (file) {
                 formData.append("bildMultiPart", file);
             }
 
-            fetch(targetUrl, {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status === 409) {
-                            showSnackbar("Der Username '" + username + "' ist schon vergeben.", true);
-                        } else if (response.status === 404) {
-                                showSnackbar("Der User '" + username + "' ist nicht registriert.", true);
-                            } else {
-                                showSnackbar("Fehler beim Speichern des Profils.", true);
-                            }
-                    } else {
-                        showSnackbar("Profil erfolgreich gespeichert!");
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    showSnackbar("Netzwerkfehler beim Speichern des Profils.", true);
+            try {
+                const response = await fetch(targetUrl, {
+                    method: "POST",
+                    body: formData
                 });
+
+                if (response.ok) {
+                    showSnackbar("Profil erfolgreich gespeichert!");
+                    return true;
+                }
+
+                if (response.status === 409) {
+                    showSnackbar(
+                        "Dieser Username ist bereits vergeben. Bitte wähle einen anderen.",
+                        true
+                    );
+                } else if (response.status === 404) {
+                    showSnackbar("Author nicht gefunden.", true);
+                } else if (response.status === 413) {
+                    showSnackbar("Das Profilbild ist zu groß.", true);
+                } else if (response.status === 429) {
+                    showSnackbar("Zu viele Anfragen. Bitte später erneut versuchen.", true);
+                } else {
+                    showSnackbar("Fehler beim Speichern des Profils.", true);
+                }
+
+                return false;
+
+            } catch (error) {
+                console.error(error);
+                showSnackbar("Netzwerkfehler beim Speichern.", true);
+                return false;
+            }
         }
+
 
         // --- 4. Modal Formular Absenden ---
         const modalForm = document.getElementById("modalForm");
         if (modalForm) {
-            modalForm.addEventListener("submit", function (e) {
+            modalForm.addEventListener("submit", async function (e) {
                 e.preventDefault();
-                const name = modalUsernameInput ? (modalUsernameInput.disabled ? localStorage.getItem(KEY_NAME) : modalUsernameInput.value.trim()) : "";
-                const desc = modalDescInput ? modalDescInput.value.trim() : "";
+
+                const name = modalUsernameInput.disabled
+                    ? localStorage.getItem(KEY_NAME)
+                    : modalUsernameInput.value.trim();
+
+                const desc = modalDescInput.value.trim();
+
                 const fileInput = document.getElementById("modalPic");
-                const targetUrl = modalUsernameInput && modalUsernameInput.disabled ? '/api/author/update' : '/api/author/add';
+                const file = fileInput.files[0] || null;
+
+                const targetUrl = modalUsernameInput.disabled
+                    ? "/api/author/update"
+                    : "/api/author/add";
 
                 if (!name) return;
 
-                // 3 MB Größenprüfung korrigiert
-                if (fileInput && fileInput.files && fileInput.files[0]) {
-                    const file = fileInput.files[0];
-                    if (file.size > 3 * 1024 * 1024) {
-                        showSnackbar("Das Bild ist zu groß! Maximal 3 MB erlaubt.", true);
-                        return;
-                    }
+                if (file && file.size > 3 * 1024 * 1024) {
+                    showSnackbar("Das Bild ist zu groß! Maximal 3 MB erlaubt.", true);
+                    return;
                 }
 
+                // Erst Backend-Anfrage durchführen
+                const success = await saveAuthorToBackend(
+                    name, desc, file, targetUrl
+                );
+
+                // Bei einem Fehler nichts lokal speichern
+                if (!success) return;
+
+                // Erst nach erfolgreicher Speicherung übernehmen
                 localStorage.setItem(KEY_NAME, name);
                 localStorage.setItem(KEY_DESC, desc);
 
-                if (fileInput && fileInput.files && fileInput.files[0]) {
-                    const file = fileInput.files[0];
+                if (file) {
                     const reader = new FileReader();
+
                     reader.onload = function (event) {
                         const base64String = event.target.result;
-                        localStorage.setItem(KEY_PIC, base64String);
 
+                        localStorage.setItem(KEY_PIC, base64String);
                         updateUI(name, base64String);
-                        saveAuthorToBackend(name, desc, file, targetUrl);
                     };
+
                     reader.readAsDataURL(file);
                 } else {
                     const existingPic = localStorage.getItem(KEY_PIC);
                     updateUI(name, existingPic);
-                    saveAuthorToBackend(name, desc, null, targetUrl);
                 }
             });
         }

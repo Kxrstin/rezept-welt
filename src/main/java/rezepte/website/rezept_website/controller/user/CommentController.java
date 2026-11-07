@@ -21,15 +21,37 @@ public class CommentController {
     }
 
     @PostMapping("/api/comments")
-    public String addComment(@RequestParam String username, @RequestParam String content, RedirectAttributes r) {
-        Author author = authorService.findByUsername(username);
-        if(author == null) {
-            r.addFlashAttribute("error_message", "Dein Username ist bei uns nicht hinterlegt.");
-            return "redirect:/";
-        }
+    public String addComment(
+            @RequestParam String username,
+            @RequestParam String content,
+            RedirectAttributes r) {
 
-        commentService.add(author, content);
-        r.addFlashAttribute("success_message", "Dein Kommentar wurde erfolgreich veröffentlicht!");
+        try {
+            Author author = authorService.findByUsername(username);
+
+            if (author == null) {
+                r.addFlashAttribute(
+                        "error_message",
+                        "Dein Username ist bei uns nicht hinterlegt."
+                );
+                return "redirect:/";
+            }
+
+            commentService.add(author, content);
+
+            r.addFlashAttribute(
+                    "success_message",
+                    "Dein Kommentar wurde erfolgreich veröffentlicht!"
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            r.addFlashAttribute(
+                    "error_message",
+                    "Fehler beim Speichern des Kommentars: " + e.getMessage()
+            );
+        }
         return "redirect:/";
     }
 }
