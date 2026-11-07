@@ -24,39 +24,39 @@
 }
 
 .Pink {
-    background-color: #ffe6ea;
-    border: 1px solid #af6f7a;
+    background-color: rgba(255, 230, 234, 0.55);
+    border: 1px solid rgba(195, 125, 137, 0.73);
     color: #381340;
 }
 
 .Blau {
-    background-color: rgba(193, 231, 255, 0.64);
-    border: 1px solid rgba(88, 143, 184, 0.88);
+    background-color: rgba(193, 231, 255, 0.31);
+    border: 1px solid rgba(88, 143, 184, 0.56);
     color: #0f2d39;
 }
 
 .Lila {
-    background-color: rgba(181, 165, 228, 0.63);
-    border: 1px solid #6c56a5;
+    background-color: rgba(181, 165, 228, 0.29);
+    border: 1px solid rgba(108, 86, 165, 0.56);
     color: #170a30;
 }
 
 .Orange {
-    background-color: #edd1a5;
-    border: 1px solid rgba(230, 140, 91, 0.93);
+    background-color: rgba(237, 209, 165, 0.45);
+    border: 1px solid rgba(230, 140, 91, 0.6);
     color: #775533;
 }
 
 .Gelb {
-    background-color: rgba(248, 237, 158, 0.3);
-    border: 1px solid rgba(216, 206, 109, 0.91);
+    background-color: rgba(248, 237, 158, 0.18);
+    border: 1px solid rgba(216, 206, 109, 0.67);
     color: #333009;
 }
 
 .Gruen {
-    background-color: rgba(203, 232, 188, 0.73);
-    border: 1px solid rgba(102, 172, 100, 0.87);
-    color: #133a0e;
+    background-color: rgba(203, 232, 188, 0.37);
+    border: 1px solid rgba(102, 172, 100, 0.54);
+    color: rgba(19, 58, 14, 0.65);
 }
 
 
@@ -363,4 +363,18 @@
     visibility: visible;
     opacity: 1;
     bottom: 50px; /* Gleitet sanft nach oben beim Einblenden */
+}
+
+.comments-scroll-container {
+    max-height: 450px;       /* Höhe, ab der gescrollt werden soll (kannst du anpassen, z.B. in px oder vh) */
+    overflow-y: auto;        /* Aktiviert das vertikale Scrollen, sobald der Inhalt zu lang wird */
+    padding-right: 8px;      /* Schafft etwas Abstand, damit der Text nicht direkt an der Scrollbar klebt */
+}
+
+/* Optional: Damit die Scrollbar optisch zu deinem Design passt */
+.comments-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+.comments-scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
 }
