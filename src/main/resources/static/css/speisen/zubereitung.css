@@ -1,6 +1,6 @@
 :root {
     --primary-color: #4a3ca3;
-    --bg-color: #f3f0ff;
+    --bg-color: #ded9f4;
     --text-dark: #272626;
     --text-muted: #888;
     --shadow: 0 8px 20px rgba(0,0,0,0.08);
@@ -8,6 +8,10 @@
 
 * {
     box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
 }
 
 body {
@@ -33,11 +37,16 @@ h2, h3 {
 }
 
 .link_in_middle {
-    display: block;
-    text-align: center;
+    text-align: start;
     color: var(--primary-color);
     text-decoration: none;
-    margin-bottom: 30px;
+    font-size: 20px;
+    padding-left:20px;
+}
+
+.link_in_middle:hover {
+    color: #5d62bd;
+    transform: scale(1.8);
 }
 
 /* --- Layout: Bild & Zutaten nebeneinander --- */
@@ -148,3 +157,48 @@ h2, h3 {
         flex-direction: column; /* Tablet/Mobile: Untereinander */
     }
 }
+
+.average-rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin: 10px auto 40px auto;
+    width: 85%;
+    border-radius: 10px;
+    font-size: 20px;
+    font-style: italic;
+    border-left: 5px solid var(--primary-color);
+    background: #f9f9ff;
+}
+
+
+.carrot-display {
+    position: relative;
+    display: inline-block;
+    font-size: 1.2rem;
+    line-height: 1;
+    white-space: nowrap;
+    letter-spacing: 2px;
+}
+
+/* Hintergrund: Alle 5 Karotten ausgegraut */
+.carrots-bg {
+    filter: grayscale(100%) opacity(0.3);
+    white-space: nowrap;
+}
+
+/* Vordergrund: Farbige Karotten, die dynamisch beschnitten werden */
+.carrots-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    filter: grayscale(0%) opacity(1);
+}
+
+.carrots-bg:hover, .carrots-fill:hover {
+    transform: scale(1.003);
+}
+

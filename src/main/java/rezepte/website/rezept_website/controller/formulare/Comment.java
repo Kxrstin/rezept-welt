@@ -21,8 +21,6 @@ public class Comment {
 
     private LocalDateTime created;
 
-    public Comment() {}
-
     public Comment(
             String commentId,
             Author author,

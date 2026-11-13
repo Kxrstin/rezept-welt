@@ -1,0 +1,110 @@
+<html lang="de">
+<head>
+    <title> Bewertungen | Rezept-Welt</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" th:href="@{/img/recipebook_icon.png}" href="../../static/img/recipebook_icon.png">
+    <link rel="stylesheet" th:href="@{/css/stars/stars.css}" href="../../static/css/stars/stars.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<a class="link_in_middle" th:href="@{/get/zubereitung/{rezeptId}(rezeptId = ${rezeptId})}" href="/">← 🐇</a>
+<h1>Bewertungen</h1>
+
+<div class="comments-section">
+    <h3>Lass deine Bewertung da!</h3>
+
+    <div class="add-comment">
+    <!-- Kommentar-Formular -->
+    <form id="stars" method="post" th:action="@{/get/zubereitung/{rezeptId}/comments(rezeptId = ${rezeptId})}">
+        <label>Wie viele Möhren gibst du diesem Rezept?</label>
+        <input type="hidden" id="authorUsernameInput" value="" name="username" />
+        <div class="modal-field-colors">
+            <div class="carrot-rating">
+                <input type="radio" id="carrot5" name="ranking" value="5"><label for="carrot5">🥕</label>
+                <input type="radio" id="carrot4" name="ranking" value="4"><label for="carrot4">🥕</label>
+                <input type="radio" id="carrot3" name="ranking" value="3"><label for="carrot3">🥕</label>
+                <input type="radio" id="carrot2" name="ranking" value="2"><label for="carrot2">🥕</label>
+                <input type="radio" id="carrot1" name="ranking" value="1"><label for="carrot1">🥕</label>
+            </div>
+        </div>
+        <label for="comment-id">Gib gerne eine Begründung ab:</label>
+        <textarea name="content" id="comment-id" required></textarea>
+
+        <button type="submit">Kommentar abschicken</button>
+    </form>
+    </div>
+
+    <!-- Liste der Kommentare -->
+    <h3>Alle Bewertungen</h3>
+    <div class="average-rating-container" th:if="${avgRating != null}">
+        <span class="avg-label">Durchschnitt:</span>
+        <div class="carrot-display" th:title="${avgRating}">
+            <!-- Die 5 Karotten im Hintergrund (ausgegraut) -->
+            <div class="carrots-bg">🥕🥕🥕🥕🥕</div>
+            <!-- Die farbigen Karotten darüber, prozentual abgeschnitten -->
+            <div class="carrots-fill" th:style="'width:' + (${avgRating} * 20) + '%;'">🥕🥕🥕🥕🥕</div>
+        </div>
+    </div>
+    <div class="comments-scroll-container">
+        <div th:if="${comments != null and !comments.isEmpty()}">
+            <div class="comment-card"
+                 th:each="comment : ${comments}"
+                 th:classappend="${(comment.author != null and comment.author.color != null) ? comment.author.color : 'Pink'}">
+
+                <img th:if="${comment.author != null and comment.author.base64Bild != null}"
+                     th:src="${comment.author.base64Bild}"
+                     alt="Bild" class="comment-avatar"
+                     th:classappend="${(comment.author != null and comment.author.color != null) ? comment.author.color : 'Pink'}"/>
+
+                <img th:unless="${comment.author != null and comment.author.base64Bild != null}"
+                     th:src="@{/img/default-avatar.png}"
+                     alt="Standard" class="comment-avatar"
+                     th:classappend="${(comment.author != null and comment.author.color != null) ? comment.author.color : 'Pink'}" />
+
+                <div class="comment-content-box">
+                    <div class="comment-header-row">
+                        <strong th:text="${comment.author != null ? comment.author.username : comment.username}">
+                            Name
+                        </strong>
+                        <span class="comment-date"
+                              th:text="${#temporals.format(comment.createdAt, 'HH:mm - dd.MM.yyyy')}">
+                         22:34 - 03.11.2026
+                    </span>
+                    </div>
+
+                    <p class="comment-author-desc"
+                       th:text="${comment.author != null ? comment.author.description : ''}">
+                        Beschreibung
+                    </p>
+
+                    <div class="carrot-display">
+                        <div class="carrots-bg">🥕🥕🥕🥕🥕</div>
+
+                        <div class="carrots-fill"
+                             th:style="|width: ${comment.ranking * 20}%;|">
+                            🥕🥕🥕🥕🥕
+                        </div>
+                    </div>
+
+                    <p class="comment-text" th:text="${comment.content}">
+                        Kommentartext...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <p th:if="${comments == null or comments.isEmpty()}"
+           class="no-comments">
+            Noch keine Bewertungen vorhanden. Sei der Erste!
+        </p>
+    </div>
+</div>
+
+<script>
+    const username = localStorage.getItem("familie_username");
+    const input = document.getElementById("authorUsernameInput");
+
+    input.value = username ?? "Anonym";
+</script>
+</body>
+</html>

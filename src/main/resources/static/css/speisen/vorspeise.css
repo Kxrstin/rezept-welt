@@ -55,19 +55,16 @@ body {
 }
 
 .link_in_middle {
-    font-size: 20px;
-    color: #4b815b;
+    text-align: start;
+    color: var(--primary-color);
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    display: inline-block;;
+    font-size: 20px;
+    padding-left:20px;
 }
 
 .link_in_middle:hover {
-    color: #323733;
-    font-size: 21px;
+    color: #5d62bd;
+    transform: scale(1.8);
 }
 
 .speise:first-of-type {
@@ -125,10 +122,6 @@ body {
     .speise {
         width: 80%;
         padding: 15px;
-    }
-
-    .link_in_middle {
-        font-size: 22px; /* Größere Schrift zum Tippen */
     }
 
     /* 3. Rezept-Karten optimieren */

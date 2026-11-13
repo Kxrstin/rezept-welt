@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.web.multipart.MultipartFile;
 import rezepte.website.rezept_website.validation.ValidImage;
 
@@ -29,6 +30,12 @@ public class RezeptForm {
     @NotBlank(message="Bitte wählen Sie eine Kategorie")
     private String zubereitung;
 
+    @NotBlank(message="Bitte wähle einen gültigen Autoren")
+    private String username;
+
+    @Transient
+    private Author author;
+
     @ValidImage(maxSize = 3 * 1024 * 1024) // Limit: 3 MB
     @Transient
     private MultipartFile bildMultiPart;
@@ -44,12 +51,14 @@ public class RezeptForm {
                   String name,
                   String zutaten,
                   String zubereitung,
+                  String username,
                   MultipartFile multipartFile) {
         this.kategorie = kategorie;
         this.name = name;
         this.zutaten = zutaten;
         this.zubereitung = zubereitung;
         this.bildMultiPart = multipartFile;
+        this.username = username;
         try {
             base64Bild = base64Bild(multipartFile);
             this.bild = multipartFile.getBytes();
@@ -63,12 +72,14 @@ public class RezeptForm {
                       String name,
                       String zutaten,
                       String zubereitung,
+                      String username,
                       byte[] bild) {
         this.id = id;
         this.kategorie = kategorie;
         this.name = name;
         this.zutaten = zutaten;
         this.zubereitung = zubereitung;
+        this.username = username;
         setBild(bild);
     }
 
@@ -164,5 +175,21 @@ public class RezeptForm {
         if(this == o) return true;
         if(o.getClass() != RezeptForm.class) return false;
         return ((RezeptForm) o).getName().equals(this.getName());
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

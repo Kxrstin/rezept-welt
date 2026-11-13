@@ -1,5 +1,6 @@
 package rezepte.website.rezept_website.service.user;
 
+import org.springframework.data.util.Streamable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import rezepte.website.rezept_website.controller.formulare.Author;
@@ -43,5 +44,9 @@ public class AuthorService {
 
     public List<Author> findAllByUsernameIn(List<String> usernames) {
         return repo.findAllByUsernameIn(usernames);
+    }
+
+    public List<Author> findAll() {
+        return Streamable.of(repo.findAll()).toList();
     }
 }

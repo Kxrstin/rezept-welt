@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <a class="link_in_middle" th:href="@{/}" href="/">← 🐇</a>
     <h1>Hauptspeisen</h1>
-    <div class="speise"><a class="link_in_middle" th:href="@{/}" href="/">Zurück zur Startseite</a></div>
 
     <form class="filter" method="get" th:action="@{/hauptspeise/filter}">
         <label for="filterId">Titel oder Zutaten filtern</label>
@@ -30,13 +30,13 @@
         <div class="rezept-karte">
             <a class="link" href="#">
                 Burger
-                <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+                <img class="speisenbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
             </a>
         </div>
         <div class="rezept-karte">
             <a class="link" href="#">
                 Pasta
-                <img class="bild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
+                <img class="speisenbild" th:src="@{img/recipebook_icon.png}" src="../../static/img/recipebook_icon.png" alt="Rezeptbuch Logo">
             </a>
         </div>
     </div>

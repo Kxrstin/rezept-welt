@@ -10,19 +10,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import rezepte.website.rezept_website.controller.formulare.Author;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
+import rezepte.website.rezept_website.persistence.RezeptRepository;
 import rezepte.website.rezept_website.service.management.AddRecipeService;
+import rezepte.website.rezept_website.service.user.AuthorService;
 
 import java.io.IOException;
 
 @Controller
 public class AddRecipeController {
     final private AddRecipeService service;
+    final private AuthorService authorService;
 
     @Autowired
-    public AddRecipeController(AddRecipeService s) {
+    public AddRecipeController(AddRecipeService s, AuthorService a) {
         service = s;
+        authorService = a;
     }
 
     @GetMapping("/add/rezept")
@@ -30,6 +35,7 @@ public class AddRecipeController {
         model.addAttribute("rezeptForm", new RezeptForm());
         model.addAttribute("kategorien", Kategorie.values());
         model.addAttribute("edit", false);
+        model.addAttribute("users", authorService.findAll().stream().map(Author::getUsername));
         return "change/add_rezept";
     }
 
@@ -42,6 +48,7 @@ public class AddRecipeController {
         if(bindingResult.hasErrors() || rezept.getBildMultiPart().isEmpty()) {
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
+            model.addAttribute("users", authorService.findAll().stream().map(Author::getUsername));
             return "change/add_rezept";
         }
 
@@ -50,6 +57,7 @@ public class AddRecipeController {
                     "Ein Rezept mit diesem Namen existiert bereits!");
             model.addAttribute("rezeptForm", rezept);
             model.addAttribute("kategorien", Kategorie.values());
+            model.addAttribute("users", authorService.findAll().stream().map(Author::getUsername));
             return "change/add_rezept";
         }
 

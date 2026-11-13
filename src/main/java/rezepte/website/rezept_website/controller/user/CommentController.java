@@ -14,7 +14,6 @@ public class CommentController {
     private final AuthorService authorService;
     private final CommentService commentService;
 
-    @Autowired
     public CommentController(AuthorService a, CommentService c) {
         authorService = a;
         commentService = c;

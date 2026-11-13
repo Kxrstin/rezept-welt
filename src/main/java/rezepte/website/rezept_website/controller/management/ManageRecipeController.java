@@ -9,26 +9,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rezepte.website.rezept_website.controller.formulare.Comment;
+import rezepte.website.rezept_website.controller.formulare.Author;
 import rezepte.website.rezept_website.controller.formulare.Kategorie;
 import rezepte.website.rezept_website.controller.formulare.RezeptForm;
 import rezepte.website.rezept_website.service.management.ManageRecipeService;
+import rezepte.website.rezept_website.service.user.AuthorService;
 import rezepte.website.rezept_website.service.user.CommentService;
+import rezepte.website.rezept_website.service.user.StarsService;
 
-import java.io.IOException;
 import java.util.List;
+
 
 @Controller
 public class ManageRecipeController {
     private final ManageRecipeService service;
     private final CommentService commentService;
+    private final StarsService starsService;
+    private final AuthorService authorService;
 
     @Autowired
-    public ManageRecipeController(ManageRecipeService service, CommentService commentService) {
+    public ManageRecipeController(ManageRecipeService service, CommentService commentService, StarsService starsService, AuthorService authorService) {
         this.service = service;
         this.commentService = commentService;
+        this.starsService = starsService;
+        this.authorService = authorService;
     }
 
     @GetMapping("/")
@@ -41,7 +47,14 @@ public class ManageRecipeController {
     @GetMapping("/get/zubereitung/{id}")
     public String get_zubereitung(Model model, @PathVariable int id) {
         if (service.getZubereitung(id) == null) return "redirect:/";
-        model.addAttribute("rezeptForm", service.getZubereitung(id));
+
+        RezeptForm rezeptForm = service.getZubereitung(id);
+
+        String username = rezeptForm.getUsername();
+        rezeptForm.setUsername(username == null || username.isEmpty() ? "von Anonym" : "von " + username);
+
+        model.addAttribute("rezeptForm", rezeptForm);
+        model.addAttribute("avgRating", starsService.avgRanking(id));
         return "speisen/zubereitung";
     }
 
@@ -68,6 +81,7 @@ public class ManageRecipeController {
         model.addAttribute("rezeptForm", service.getZubereitung(id));
         model.addAttribute("edit", true);
         model.addAttribute("kategorien", Kategorie.values());
+        model.addAttribute("users", authorService.findAll().stream().map(Author::getUsername));
         return "change/add_rezept";
     }
 
@@ -89,6 +103,7 @@ public class ManageRecipeController {
                 } else {
                     model.addAttribute("rezeptForm", rezept);
                     model.addAttribute("kategorien", Kategorie.values());
+                    model.addAttribute("users", authorService.findAll().stream().map(Author::getUsername));
                     return "change/add_rezept";
                 }
             }

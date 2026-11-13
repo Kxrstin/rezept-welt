@@ -49,6 +49,7 @@ public class ManageRecipeService {
         old.setName(rezeptForm.getName());
         old.setZubereitung(rezeptForm.getZubereitung());
         old.setZutaten(rezeptForm.getZutaten());
+        old.setUsername(rezeptForm.getUsername());
         return old;
     }
 }

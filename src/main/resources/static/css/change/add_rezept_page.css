@@ -1,15 +1,16 @@
 body {
     font-family: sans-serif;
-    background-color: lavender;
+    background-color: #ccccf6;
     color: #333;
     padding: 0 20px;
 }
 
 p {
     text-align: center;
-    margin: 40px 0 30px 0;
-    text-size: 38px;
-    color: #2c3e50;
+    padding-bottom: 25px;
+    font-size: 38px;
+    font-weight: bolder;
+    color: #250c3e;
 }
 
 div {
@@ -61,16 +62,23 @@ button[type="submit"]:hover {
 }
 
 .danger {
-    color: #9c4d4d;
+    color: #9c2d2d;
     font-size: 15px;
+    margin-left: 5px;
+    font-style: italic;
 }
 
 .link_in_middle {
-    display: block;
-    width: fit-content;
-    margin: 10px auto;
-    padding-top: 20px;
-    text-align: center;
+    text-align: start;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 20px;
+    padding-left:20px;
+}
+
+.link_in_middle:hover {
+    color: #5d62bd;
+    transform: scale(1.8);
 }
 
 textarea {
@@ -141,12 +149,16 @@ textarea.input-text {
         display: block;
         margin-top: 5px;
     }
-
-    /* 7. Zurück-Link als Button stylen für bessere Bedienbarkeit */
-    .link_in_middle {
-        font-size: 20px;
-        padding: 15px;
-        color: #7474e4;
-        text-decoration: underline;
-    }
 }
+
+select {
+    background-color: rgba(178, 168, 237, 0.25);
+    font-family: Arial;
+    font-size: 16px;
+    color: #2a2a55;
+    padding: 18px;
+    margin-bottom: 8px;
+    width: 100%;
+    border-color: rgba(63, 49, 151, 0.11);
+}
+

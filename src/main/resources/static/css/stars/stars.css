@@ -1,0 +1,367 @@
+/* --- Globale Farbvariablen (Harmonisches Pastell-Design) --- */
+:root {
+    --primary-orange: #d5914e;
+    --primary-orange-hover: #b87a3b;
+    --light-bg: #fdfaf6;
+    --border-color: #ddb293;
+    --text-dark: #3a2e2b;
+    --text-muted: #8c7a70;
+}
+
+/* Header */
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: -0.5px;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-left: 8px;
+}
+
+/* Body */
+body {
+    font-family: Arial;
+    background-color: rgb(244, 198, 136); /* Ein sehr sanfter, warmer Hintergrund statt kaltem Lavendel */
+    color: var(--text-dark);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.link_in_middle {
+    text-align: start;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 20px;
+    padding-left:20px;
+}
+
+.link_in_middle:hover {
+    color: #5d62bd;
+    transform: scale(1.8);
+}
+
+.average-rating-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #fcf8f5;
+    border: 1px solid #f2e6dc;
+    padding: 14px 20px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.avg-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+/* Karotten-Anzeige – Durchschnitt und Kommentare */
+.carrot-display {
+    position: relative;
+    display: inline-block;
+    width: max-content;
+    font-size: 1.2rem;
+    line-height: 1;
+    white-space: nowrap;
+    letter-spacing: 2px;
+}
+
+/* Hintergrund: immer fünf graue Karotten */
+.carrots-bg {
+    filter: grayscale(100%) opacity(0.3);
+    white-space: nowrap;
+}
+
+/* Vordergrund: farbige Karotten */
+.carrots-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    filter: grayscale(0%) opacity(1);
+}
+
+/* Etwas kleinere Karotten in den Kommentaren */
+.comment-content-box .carrot-display {
+    font-size: 1.1rem;
+    margin: 6px 0;
+}
+
+.avg-number {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--primary-orange);
+}
+
+/* --- Hauptsektion (Bewertungs-Container) --- */
+.comments-section {
+    background-color: #f4e9db;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(140, 110, 90, 0.08);
+    border: 1px solid var(--border-color);
+    margin-top: 20px;
+}
+
+.comments-section h3 {
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Inneres Formular-Feld */
+.add-comment {
+    background-color: #fbfaf9;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
+    padding-bottom: 13px;
+    border-radius: 14px;
+    margin-bottom: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #ffd9ab;
+}
+
+/* Formular Elemente */
+.comments-section form label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.comments-section form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    resize: vertical;
+    font-family: Arial;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.comments-section form textarea:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 4px rgba(213, 145, 78, 0.15);
+}
+
+.comments-section form button[type="submit"] {
+    background-color: var(--primary-orange);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.comments-section form button[type="submit"]:hover {
+    background-color: var(--primary-orange-hover);
+    transform: translateY(-1px);
+}
+
+.comments-scroll-container {
+    max-height: 450px;       /* Höhe, ab der gescrollt werden soll (kannst du anpassen, z.B. in px oder vh) */
+    overflow-y: auto;        /* Aktiviert das vertikale Scrollen, sobald der Inhalt zu lang wird */
+    padding-right: 8px;      /* Schafft etwas Abstand, damit der Text nicht direkt an der Scrollbar klebt */
+}
+
+/* Optional: Damit die Scrollbar optisch zu deinem Design passt */
+.comments-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+.comments-scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+
+/* --- Karotten-Anzeige innerhalb der Kommentar-Karten anpassen --- */
+.comment-content-box .carrot-display {
+    font-size: 1.1rem; /* Kleinere Karotten für die Kommentare */
+    margin: 6px 0;     /* Etwas Abstand nach oben und unten */
+}
+
+/* Hauptkarte: Avatar links, Content rechts */
+.comment-card {
+    display: flex;
+    align-items: flex-start; /* Hält Avatar oben, auch bei langem Text */
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Avatar-Größe und Form */
+.comment-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Der rechte Inhaltsbereich */
+.comment-content-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kopfzeile: Username links, Datum rechts oben */
+.comment-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+
+.comment-header-row strong {
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.comment-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Beschreibung unter dem Username */
+.comment-author-desc {
+    font-size: 0.85rem;
+    margin: 2px 0 6px 0;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* Karotten-Ranking zwischen Beschreibung und Inhalt */
+.comment-carrot-display {
+    position: relative;
+    display: inline-block;
+    font-size: 1.1rem; /* Dezente Größe für die Kommentare */
+    line-height: 1;
+    letter-spacing: 1px;
+    margin: 4px 0 10px 0;
+}
+
+/* Der eigentliche Kommentartext ganz unten */
+.comment-text {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.no-comments {
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 30px;
+}
+
+/* --- Farbige Profil-Hintergründe (Die von deinen Usern gewählt werden) --- */
+.Pink {
+    background-color: #fff0f3;
+    border-left: 4px solid #ff758c;
+}
+
+.Blau {
+    background-color: #f0f7ff;
+    border-left: 4px solid #4a90e2;
+}
+
+.Lila {
+    background-color: #f5f0ff;
+    border-left: 4px solid #9b51e0;
+}
+
+.Orange {
+    background-color: #fff7f0;
+    border-left: 4px solid #f2994a;
+}
+
+.Gelb {
+    background-color: #fcf9e8;
+    border-left: 4px solid #f2c94c;
+}
+
+.Gruen {
+    background-color: #f2f9f2;
+    border-left: 4px solid #27ae60;
+}
+
+
+/* --- Karotten-Bewertung (Zentriert & Schön) --- */
+.carrot-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    cursor: pointer;
+    font-size: x-large;
+    margin: 15px 0 25px 10px;
+}
+
+.carrot-rating input {
+    display: none;
+}
+
+.carrot-rating label {
+    filter: grayscale(100%) opacity(0.3);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.carrot-rating input:checked ~ label,
+.carrot-rating label:hover,
+.carrot-rating label:hover ~ label {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.15);
+}
+
+/* Media Query für mobile Geräte */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .comments-section {
+        padding: 15px;
+    }
+
+    .comment-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .comment-header-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
